@@ -1,0 +1,155 @@
+<head>
+	<link rel="stylesheet" href="CSS\TheDarkHub.css">
+<style>
+
+.VIP {
+	background-color: rgba(0, 0, 0, 0.3);
+	padding-top: 30px;
+	padding-bottom: 30px;
+	cursor: pointer;
+}
+
+.VIP:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+</style>
+</head>
+<body>
+	<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+	function setOnline(first_time=false) {
+		if (first_time == true) {
+			var online = Math.trunc(Math.random() * (55000 - 45000) + 45000);
+			console.log(online)
+		} else {
+			var online = (Number(document.getElementById("users").innerText) + ((Math.random() - 0.5) * 300)).toFixed(0)
+		}
+		let members = (online * 0.06).toFixed(0);
+		let guests = (online - members).toFixed(0);
+		document.getElementById("users").innerText = online + ' ';
+		document.getElementById("members").innerText = ' ' + members + ' ';
+		document.getElementById("guests").innerText = ' ' + guests + ' ';
+	}
+	
+	function getCombolistsName() {
+		let select_elem = document.getElementsByClassName("SELL-SELECT")[1]
+		if (document.getElementsByClassName("SELL-SELECT")[0].value == "COMBOLIST") {
+			let returner = ['Combolist_342', 'Combolist_123', 'Combolist323', 'Combolist444', 'Combolist653']
+			returner.forEach(function(element) {
+				let opt = document.createElement("option");
+				opt.innerText = element
+				opt.value = element
+				select_elem.appendChild(opt)
+			});
+		} else {
+			select_elem.innerHTML = ''
+		}
+		//return [{'name': 'combolist_1', 'length': 323, 'used': 111}, {'name': 'combolist_1', 'length': 323, 'used': 111}, ]
+	}
+	
+	function getEntries() {
+		return [32, 3]
+	}
+	
+	window.onload = function(){
+		setOnline(true)
+		getCombolistsName()
+		setInterval(setOnline, 5000)
+		let buttons = document.getElementsByClassName("ITEM-BUTTON")
+		for (let i = 0; i < buttons.length; i++) {
+			buttons[i].onclick = function() {window.location.replace("thedarkhub.html")}
+		}
+		buttons[2].onclick = function() {window.location.replace("thedarkhub_sell.html")}
+		buttons[3].onclick = function() {window.location.replace("thedarkhub_vips.html")}
+		buttons[4].onclick = function() {window.location.replace("thedarkhub_announce.html?domains")}
+	}
+	</script>
+	<div id="TOP">
+		<div id="LOGO">
+			<a href="thedarkhub.html"><img src="CSS/Images/trTheHubLogo.png"></a>
+		</div>
+	</div>
+	<div id="LIST">
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				LEAKS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				ACCOUNTS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON" onclick="window.location='thedarkhub_sell.html'">
+				SELLER'S BAY
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				VIP LOUNGE
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON" onclick="window.location='thedarkhub_announce.html?domains'">
+				DOMAINS
+			</div>
+		</div>
+	</div>
+	<div style="padding: 0px;border-radius:16px" class="CONTAINER">
+		<div style="min-height: 50px;" class="LABEL">VIP LOUNGE</div>
+	</div>
+	<div class="CONTAINER">
+		<div style="display: flex;justify-content: center; align-items: center;width: 100%;">
+			<div class="VIP" style="display: flex;flex-direction: column;width:20%;" onclick="window.location='thedarkhub_user.html?XXX_CYBERRAT_XXX'">
+				<img src="CSS/Images/Icon_Identity.svg" id="AVATAR" style="width: 200px;margin: 0 auto;">
+				<div style="width:100%;color:red;font-size:25px;text-align: center;">XXX_CYBERRAT_XXX</div>
+				<div style="width: 100%;text-align:center;color:white;text-decoration: line-through;">OWNER</div>
+			</div>
+			<div class="VIP" style="display: flex;flex-direction: column;width:20%;" onclick="window.location='thedarkhub_user.html?BlueEyes'">
+				<img src="CSS/Images/Icon_Identity.svg" id="AVATAR" style="width: 200px;margin: 0 auto;">
+				<div style="width:100%;color:red;font-size:25px;text-align: center;">BlueEyes</div>
+				<div style="width: 100%;text-align:center;color:white;">Admin since 2019</div>
+			</div>
+			<div class="VIP" style="display: flex;flex-direction: column;width:20%;" onclick="window.location='thedarkhub_user.html?KappaMeister'">
+				<img src="CSS/Images/Icon_Identity.svg" id="AVATAR" style="width: 200px;margin: 0 auto;">
+				<div style="width:100%;color:red;font-size:25px;text-align: center;">KappaMeister</div>
+				<div style="width: 100%;text-align:center;color:white;"><span style="text-decoration: line-through;">Admin since 2019</span> NEW OWNER</div>
+			</div>
+			<div class="VIP" style="display: flex;flex-direction: column;width:20%;" onclick="window.location='thedarkhub_user.html?Luka Tim'">
+				<img src="CSS/Images/Icon_Identity.svg" id="AVATAR" style="width: 200px;margin: 0 auto;">
+				<div style="width:100%;color:red;font-size:25px;text-align: center;">Luka Tim</div>
+				<div style="width: 100%;text-align:center;color:white;">Admin since 2020</div>
+			</div>
+			<div class="VIP" style="display: flex;flex-direction: column;width:20%;" onclick="window.location='thedarkhub_user.html?DoxGuru'">
+				<img src="CSS/Images/Icon_Identity.svg" id="AVATAR" style="width: 200px;margin: 0 auto;">
+				<div style="width:100%;color:red;font-size:25px;text-align: center;">DoxGuru</div>
+				<div style="width: 100%;text-align:center;color:white;">Admin since 2019</div>
+			</div>
+		</div>
+	</div>
+	<div class="CONTAINER" style="margin-top:30px;">
+		<div id="FOOTER">
+			<div class="LABEL" style="border-radius:0px;">
+				<span id="users" style="white-space: pre"></span> users online | <span id="members" style="white-space: pre"></span> members and <span id="guests" style="white-space: pre"></span> guests
+			</div>
+			<div class="LABEL" style="border-radius:0px;background-color:rgba(0,0,0,0.5);color:white">
+				<div class="FOOTER-BOX">
+					18.70M<br>Posts
+				</div>
+				<div class="FOOTER-BOX">
+					611k<br>Threads
+				</div>
+				<div class="FOOTER-BOX">
+					3.31M<br>Users
+				</div>
+				<div class="FOOTER-BOX">
+					<a href="thedarkhub_user.html?Guest">Guest</a><br>Newest member
+				</div>
+				<div class="FOOTER-BOX">
+					60.76K<br>Most Online
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

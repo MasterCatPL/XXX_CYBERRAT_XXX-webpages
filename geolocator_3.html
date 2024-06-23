@@ -1,0 +1,258 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+@font-face {
+  font-family: CalibriBold;
+  src: url(CSS/Fonts/CalibriBold.ttf);
+}
+
+@font-face {
+  font-family: HelicoRoman;
+  src: url(CSS/Fonts/HelicoRoman.ttf);
+}
+
+body {
+	margin: 0px;
+	background-color: black;
+	background-image: url(CSS/Images/forest.jpg);
+	background-attachment: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: Calibri;
+}
+
+#MAIN {
+	background-color: rgb(28 48 17);
+	width: 100%;
+	max-width: 700px;
+	margin-top: 100px;
+	border-radius: 16px;
+	padding: 15px;
+	box-sizing: border-box;
+	display: flex;
+	margin-bottom: 80px;
+	border: 10px solid black;
+	flex-direction: column;
+	align-items: center;
+}
+
+#TITLE {
+	color: orange;
+	width: 100%;
+	text-align: center;
+	font-size: 61px;
+	margin-top: 20px;
+	font-family: HelicoRoman;
+}
+
+#EXPLAINER {
+	width: 100%;
+	color: white;
+	font-size: 18px;
+	white-space: pre-line;
+	padding-right: 30px;
+	padding-left: 30px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+#EXPLAINER2 {
+	width: 100%;
+	color: white;
+	font-size: 18px;
+	padding-right: 30px;
+	padding-left: 30px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+
+.highlight {
+	color: orange;
+}
+
+#SMALLTITLE {
+	color: orange;
+	width: 100%;
+	text-align: center;
+	font-size: 31px;
+	font-family: HelicoRoman;
+	margin-top: 15px;
+}
+
+#INPUT {
+	outline: none;
+	border: 5px solid black;
+	width: 80%;
+	font-size: 21px;
+	font-family: Calibri;
+	background-color: white;
+	height: 40px;
+	color: black;
+	margin-top: 5px;
+	text-align: center;
+}
+
+#INPUT-BUTTON {
+	background-color: white;
+	outline: none;
+	height: 35px;
+	width: 200px;
+	color: black;
+	font-family: Calibri;
+	font-size: 18px;
+	cursor: pointer;
+	margin-top: 15px;
+	border: 5px solid black;
+	
+}
+
+#INPUT-BUTTON:hover {
+	background-color: rgba(230, 230, 230);
+}
+
+#BUY-USE {
+	background-color: orange;
+	cursor: pointer;
+	width: 200px;
+	text-align: center;
+	color: black;
+	user-select: none;
+	margin-top: 15px;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+#BUY-USE:hover {
+	filter: brightness(1.2);
+}
+
+#OUTPUT {
+	font-size: 18px;
+	text-align: center;
+	color: white;
+}
+
+#FAKE {
+	background-color: orange;
+	cursor: pointer;
+	width: 200px;
+	text-align: center;
+	color: black;
+	user-select: none;
+	margin-top: 15px;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+#FAKE:hover {
+	filter: brightness(1.2);
+}
+
+</style>
+<script src="CSS/InfoSec.js"></script>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+
+
+let interval;
+function executeSearch(service) {
+	let counter = 0;
+	clearInterval(interval);
+	interval = setInterval(load, 100);
+	function load() {
+		document.getElementById("OUTPUT").innerText = "Geolocating " + counter + "%";
+		counter++;
+		if (counter >= 101) {
+			clearInterval(interval);
+			search();
+		}
+	}
+
+	function search() {
+		let name = document.getElementById("INPUT").value
+		//	ID | CONTENT (e.g selfie.png) | TYPE
+		window.ue.webbrowser.get_infosec_by_name(name, service).then(function(ReturnValue) {
+			get_service_access(service);
+			if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+				document.getElementById("OUTPUT").innerText = "Error: the input you provided seems invalid.";
+				return
+			}
+			if (ReturnValue == "NOTTHISSERVICE") {
+				document.getElementById("OUTPUT").innerText = "Geolocation failed: the environment is too unclear. However, the sun/moon position in the sky seems to be captured. If you had a timestamp when the media was created, you can geolocate it using 'Search by Video + Timestamp' feature.";
+				return
+			}
+			document.getElementById("OUTPUT").innerText = "Geolocation sucessful: the address at which the picture/video was taken is: " + ReturnValue.split("|")[1];
+		})
+	}
+}
+
+window.onload = function() {
+	let service = 'Geolocator1'
+	get_static_npc_username(service);
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("PRICE").innerText = price;
+	})
+
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="MAIN">
+	<div id="TITLE">
+		Geolocation Services
+	</div>
+	<div id="SMALLTITLE" style="margin-top:0px;">
+		Got a Timestamp? Switch here:
+	</div>
+	<div id="FAKE" style="font-family:CalibriBold;" onclick="window.location.replace('geolocator_4.html')">SWITCH TO TIMESTAMP</div>
+	<div id="EXPLAINER">
+		My name is <span id="OWNER-NAME">DefaultUsername</span>, and I am offering you geolocation services. <span class="highlight">I've been working as a GIS (Geographic Information System) consultant for almost my entire life.</span> Unfortunately, my IRL work <span class="highlight">isn't very well paid</span>. I need to pay my rent and save for my kids' college tuition. So I offer you, whoever you might be, <span class="highlight">photo or video based geolocation services</span>.
+		
+		As a GIS specialist, <span class="highlight">I have access to the most advanced geolocation software</span> in the world. I work with a very detailed map of the whole Earth. It has high detailed markings of every lake, forest, river, mountain etc. This allows me to provide you with the best service possible.
+		
+		When you send me a photo/video, <span class="highlight">I reconstruct the scene in your photo in my GIS 3D XModeler x2</span>. Then, I program a short script in Erosmus, a scripting language designed specifically to work with the GIS modeler. <span class="highlight">The script tries to match my reconstructed scene with similar patterns from the 3d Earth map.</span>
+		
+		For example, if I construct a scene with a pond in front of a forest, my scripts will try to find a similar pattern of a forest-pond in the Earth map. If the scene doesn't contain any unique characteristics, the script may output to me <span class="highlight">dozens of locations – I will then go over every one of them and check manually</span> if they match with the provided photo. 
+		
+		If you know the date when a photo/video was created and the camera was pointed at the sky, <span class="highlight">I might be able to geolocate based on the position of the sun/moon in the sky.</span>
+	</div>
+	<div id="SMALLTITLE">
+		Search by Photo / Video
+	</div>
+	<div id="EXPLAINER2">
+		You have bought <span id="USES">X</span> queries.
+	</div>
+	<input id="INPUT" type="text" placeholder="Search by Photo/Video">
+	<input id="INPUT-BUTTON" type="button" value="Search">
+	<div id="BUY-USE" style="font-family:CalibriBold;">Buy new api query (<span id="PRICE">X</span> ETH)</div>
+	<div id="SMALLTITLE">
+		Search Results
+	</div>
+	<div id="OUTPUT">
+		Your search results will display here.
+	</div>
+</div>
+</body>

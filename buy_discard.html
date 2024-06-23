@@ -1,0 +1,143 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+@font-face {
+  font-family: CalibriBold;
+  src: url(CSS/Fonts/CalibriBold.ttf);
+}
+
+body {
+	margin: 0px;
+	background-color: #524db0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Calibri;
+	font-size: 21px;
+	background-image: url(CSS/Images/DiscardPattern.webp);
+}
+
+#MAIN {
+	border-radius: 16px;
+	background-color: white;
+	padding: 20px;
+	border: 10px solid rgba(255, 126, 145, 0.4);
+	background-clip: padding-box;
+	width: 100%;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	margin-left: 40px;
+	margin-right: 40px;
+	max-width: 700px;
+	text-align: justify;
+}
+
+
+.LABEL {
+	text-align: center;
+	width: 100%;
+	font-size: 32px;
+	background-color: rgb(255, 126, 145);
+	border-radius: 8px;
+}
+
+.highlight {
+	background-color: rgb(255, 126, 145, 0.3);
+	border-radius: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-family: CalibriBold;
+}
+
+#BUY {
+	outline: none;
+	border: 3px solid rgba(0, 0, 0, 0.3);
+	background-color: rgb(255, 126, 145);
+	width: 250px;
+	height: 35px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#BUY:hover {
+	filter: brightness(0.8);
+}
+
+#EXPLAINER {
+	margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+let buttonEl;
+let counter = 0;
+let interval;
+
+function loadLoop() {
+	buttonEl.value = "chkr.exe => " + (counter).toFixed(1) + "%";
+	counter = counter + 0.3;
+	if (counter >= 100) {
+		clearInterval(interval)
+		window.ue.webbrowser.buy_module("Discard").then(function(ReturnValue) {
+			if (ReturnValue == "Downloaded") {
+				play_sound(true)
+				buttonEl.value = "DOWNLOADED";
+				buttonEl.style.backgroundColor = "lightgreen";
+			} else {
+				play_sound(false)
+				buttonEl.value = "INSUFFICIENT FUNDS";
+				buttonEl.style.backgroundColor = "#de3f3c"
+			}
+		})
+	}
+}
+
+function clickBuy() {
+	counter = 0;
+	clearInterval(interval);
+	interval = setInterval(loadLoop, 200)
+}
+
+window.onload = function () {
+	buttonEl = document.getElementById("BUY");
+	get_static_npc_username("SellDiscard");
+	getPrice("Discard");
+}
+
+
+</script>
+<div id="MAIN">
+	<div class="LABEL">
+		CHECKER MODULE: DISCARD
+	</div>
+	<div id="EXPLAINER">
+		Hi guys! I'm <span id="OWNER-NAME">DefaultUsername</span> and I've made a CheckerV4 module for <span class="highlight">checking user credentials against Discard accounts.</span> You need to feed it a proxy and a username:password combolist. It uses the web browser version of Discard and the module download also includes a little app to crawl channels and do some basic things: you can <span class="highlight">get all usernames in a channel, spam some messages, verify with emotes etc.</span><br><br>
+		
+		Why do you want to use this module? That's because <span class="highlight">Discard sucks for registering new accounts for a botnet.</span> You'll need to verify your email for every bot account, and that's fine, but they also <span class="highlight">reject most common temporary emails,</span> and on top of that, they'll often require you to verify your phone number. And then you might think you're good, but guess what: you're not. Even after feeding it a temporary phone number, <span class="highlight">it'll often ban your account anyway.</span><br><br>
+		
+		So well, if registering a whole botnet by yourself sucks ass, then why not <span class="highlight">steal already existing accounts</span> using the module I'm selling here? Then you can just use those, and they'll have organic activity too.<br><br>
+
+		And whatever your specific usage may be, <span class="highlight">this module is all you need.</span> You can participe in giveaways with your stolen accounts for a higher win chance, or you can just scam or you nuke someone's dms or whatever.<br><br>
+		
+		Or you can just sell it. <span class="highlight">Try TheDarkHub.</span> Since it's so hard to register a new account, people will actually pay for them. Sometimes even individual accounts.<br><br>
+		
+		<div style="text-align: center;">
+			Anyway: have fun, and thanks for the money. Leave a good review on some forums!<br>
+			<input type="button" id="BUY" onclick="clickBuy()" value="PURCHASE"><br>
+			<span>The module costs <span id="PRICE">X.XX</span> ETH</span>
+		</div>
+	</div>
+</div>
+</body>

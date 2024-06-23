@@ -1,0 +1,176 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	color: white;
+	font-family: Unifont;
+	font-size: 18px;
+}
+
+#MAIN {
+	margin-top: 40px;
+	width: 700px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-bottom: 150px;
+	height: 110%;
+}
+
+#LABEL {
+	font-size: 28px;
+	text-decoration: underline;
+	margin-bottom: 30px;
+}
+
+#DESCR {
+}
+
+.MINI-LABEL {
+	font-size: 18px;
+	text-decoration: underline;
+	margin-bottom: 5px;
+}
+
+.highlight {
+	color: rgb(255, 0, 255)
+}
+
+#INPUT {
+	outline: none;
+	border: 0px;
+	box-shadow: none;
+	padding: 0px;
+	width: 200px;
+	height: 40px;
+	font-size: 18px;
+	text-align: center;
+	margin-top: 20px;
+	padding: 4px;
+	
+}
+
+#INPUT-BUTTON {
+	outline: none;
+	border: 0px;
+	box-shadow: none;
+	padding: 0px;
+	width: 200px;
+	height: 40px;
+	font-size: 18px;
+	text-align: center;
+	padding: 4px;
+	background-color: rgb(255, 0, 255);
+	color: white;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+#INPUT-BUTTON:hover {
+	background-color: rgb(255, 80, 255)
+}
+
+#BUY-USE {
+	outline: none;
+	border: 0px;
+	font-size: 18px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+#BUY-USE:hover {
+	filter: brightness(0.9);
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+let interval;
+
+function executeSearch(service) {
+	let counter = 0;
+	clearInterval(interval);
+	interval = setInterval(load, 100);
+	
+	function load() {
+		document.getElementById("OUTPUT").innerText = "Extracting WHOIS information [" + counter + "%]"
+		counter++;
+		if (counter >= 101) {
+			clearInterval(interval);
+			search();
+		}
+		
+	}
+
+	function search() {
+		let name = document.getElementById("INPUT").value
+		//	ID | CONTENT (e.g selfie.png) | TYPE
+		window.ue.webbrowser.get_infosec_by_name(name, service).then(function(ReturnValue) {
+			get_service_access(service);
+			if (ReturnValue == "NOTTHISSERVICE") {
+				document.getElementById("OUTPUT").innerText = "WHOIS domain privacy seems to contain trash data. It seems the person owning it was covering his/her tracks.";
+				return
+			}
+			if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+				document.getElementById("OUTPUT").innerText = "Error: this domain does not exist."
+				return
+			}
+			document.getElementById("OUTPUT").innerText = "EXTRACTION SUCCESSFUL\nThe domain owner filled in his address as: " + ReturnValue.split("|")[1];
+		})
+	}
+}
+
+window.onload = function() {
+	let service = 'UnshieldDomain'
+	get_static_npc_username(service);
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("PRICE").innerText = price;
+	})
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="MAIN">
+	<span id="LABEL">Unshield WHOIS domain privacy</span>
+	<span class="MINI-LABEL">About me</span>
+	<span class="DESCR">A software engineer and a rat at the domain registrar "DomainCheap.com", accounting for 45% market share of total domains registered. I go by the username <span id="OWNER-NAME">DefaultUsername</span>. I've been doing blackhat work for 7 years, <span class="highlight">offering to unshield WHOIS privacy at various registrars.</span></span>
+	<br><span class="MINI-LABEL">What is WHOIS domain privacy</span>
+	<span class="DESCR">To protect abuse, <span class="highlight">every registered domain must be connected to a real life identity.</span> And the important thing: it's public by default, so everyone can contact the owner in case of any inquires. Well, because that sucks, most domain registrars like "DomainCheap.com" offer some sort of domain privacy: they act as a proxy between the domain owner and the public - when people want to report abuse & get in touch with <span class="highlight">they must first go through the domain registrar, which then may or may not provide contact details of the domain owner.</span> The public WHOIS records appear as censored and provide just contact details of the domain registrar, in this case "DomainCheap.com".</span>
+	<br><span class="MINI-LABEL">About WHOIS contact verification</span>
+	<span class="DESCR">It's worth noting that <span class="highlight">even public WHOIS record may contain false information</span> about the domain owner, as the KYC verification requirements usually aren't very strict when registering a domain. And even if they were, you can get fake id's & shit for pretty cheap anyway.</span>
+	<br><span class="MINI-LABEL">What I can do for you</span>
+	<span class="DESCR">I have direct access to "DomainCheap.com" as an employee, <span class="highlight">which allows me to see through the domain privacy feature.</span> I also outsource access to other domain registrars. I cover around 90% of domain registrars in total. I don't mind leaking domains of other hackers; for example, <span class="highlight">I was responsible for doxxing the owner of "ultraproxies.wtf" and also "paste.me" & "comboseekers.net".</span></span>
+	<br><span class="MINI-LABEL">Pay for access</span>
+	<span class="DESCR">I charge <span id="PRICE">X</span> ETH for each API hit. If you're interested, here's details:</span><br>
+	<br><span class="MINI-LABEL">Unshield domain privacy</span>
+	<span><span class="DESCR">Your have bought <span id="USES"></span>queries.</span> To buy more, click here: <input id="BUY-USE" type="button" value="Buy use"></input></span>
+	<input id="INPUT" type="text" placeholder="Domain name"></input>
+	<input id="INPUT-BUTTON" type="button" onclick="onUploaded()" value="Unshield"></input>
+	<br><span class="MINI-LABEL">Results</span>
+	<span class="DESCR" id="OUTPUT">---</span>
+</div>
+</body>

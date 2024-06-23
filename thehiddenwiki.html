@@ -1,0 +1,221 @@
+<head>
+<style>
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+body {
+	background-color: black;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: Calibri;
+}
+
+#TOP {
+	font-size: 54px;
+	margin-top: 20px;
+}
+
+#MAIN {
+	width: 700px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+}
+
+#DESCR {
+	width: 700px;
+	text-align: center;
+	margin-top: 20px;
+	font-size: 18px;
+}
+
+.highlight {
+	color: rgb(0, 255, 0)
+}
+
+li {
+	margin-top: 15px;
+	color: white;
+	font-size: 18px;
+	cursor: hand;
+}
+
+li:hover {
+	filter: brightness(0.8);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});
+window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {
+	document.body.style.transform = 'scale(' + ReturnValue +')';
+});
+
+let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function clickedLink(index) {
+	window.ue.webbrowser.clicked_onion_link(index).then(function(ReturnValue) {
+		//window.location = ReturnValue
+	})
+}
+
+function getClicked() {
+	window.ue.webbrowser.get_clicked_onions().then(function(ReturnValue) {
+		let link_array = document.querySelectorAll("li");
+		let page_array = ReturnValue.split('<>');
+		page_array.pop();
+		document.getElementById("VISITED").innerText = page_array.length;
+		try {
+		for (let i = 0; i < page_array.length; i++) {
+			let url = page_array[i].split('|')[0]
+			let link = page_array[i].split('|')[1]
+			//let index = Number(page_array[i].split('|')[2])
+			link_array[i].innerText = url;
+			//link_array[i].onclick = function() {window.location = link}
+			link_array[i].onclick = function() {window.ue.webbrowser.slow_load(url)}
+			link_array[i].style.color = 'rgb(0, 255, 0)';
+		}
+		} catch(e) {}
+	})
+}
+
+
+//let scale = 1
+//document.addEventListener('keyup', (e) => {
+//	console.log(e);
+//	if (e.key === "+") {
+//		scale = scale + 0.1
+//		document.body.style.transform = 'scale(' + scale +')';
+//
+//	} else if (e.key === "-") {
+//		scale = Math.max(scale - 0.1, 0)
+//		document.body.style.transform = 'scale(' + scale +')';
+//	}
+//});
+
+//let isctrldown = false
+//document.addEventListener('keyup', (e) => {
+//	if (e.key === "Control") {
+//		isctrldown = false
+//	}
+//});
+
+//document.addEventListener('keydown', (e) => {
+//	if (e.key === "Control") {
+//		isctrldown = true
+//	}
+//});
+
+
+//window.onscroll = function(e) {
+  // print "false" if direction is down and "true" if up
+ // if (isctrldown === false) {return}
+ // console.log(this.oldScroll >= this.scrollY);
+ // let scrolling_down = this.oldScroll > this.scrollY
+//  if (scrolling_down) {
+//	scale = scale + 0.1
+ // } else {
+ // 	scale = scale - 0.1
+//  }
+ // document.body.style.transform = 'scale(' + scale +')';
+ // this.oldScroll = this.scrollY;
+//}
+
+window.onload = function() {
+	getClicked();
+
+
+}
+
+</script>
+<div id="TOP">
+	The Hidden Wiki
+</div>
+<div id="DESCR">
+	Welcome to The Hidden Wiki, the biggest automated collection of Dark Web links. The links are scraped from other wikis or guides and update every month. Because it's an automated process, descriptions are not available. Enter at own discretion. <span class="highlight">Some of the websites listed may contain graphic content (TW).</span><br><br>
+	Always remember to take breaks from exploring the Dark Web. It takes toll on your mental health. <span class="highlight">When feeling anxious, it's better to take care of yourself first.</span><br><br>
+	For website owners: After the v3.21a .onion update, there was an optional &ltreadable_name&gt tag introduced. It allows you to specify a readable name of your .onion link. After a client visits your site, his browser will associate your readable name with the .onion link and <span class="highlight">display the readable name instead of the .onion link after the first visit.</span><br><br>
+	So far you've explored <span class="highlight"><span id="VISITED">0</span>/71</span> webpages in this list.
+</div>
+<div id="MAIN">
+	<ol>
+		<li onclick="clickedLink(0)">http://w37yng3bapees2rjuws4ktjlnpmad5uf6lhtexj434r7hxdalsmtyeh6.onion</li>
+		<li onclick="clickedLink(1)">http://scgcz7lmy6b7j4wdkmlswdg2fi3242zl723c36zecs5tdnnkntejwmfb.onion</li>
+		<li onclick="clickedLink(2)">http://xadohbfumgnclelxp35mkt4spmzesjoyweksjkrktftluwd5cc5r2ajm.onion</li>
+		<li onclick="clickedLink(3)">http://faztgk7umdafjyzscfmf57ylolijy2p6zuftj7w7lw5xj4zztimdwb6o.onion</li>
+		<li onclick="clickedLink(4)">http://iu24zilpmlki6eocpl7mrwz6ago2m7j5l7dwxixfzfhg6cfc3rczl46e.onion</li>
+		<li onclick="clickedLink(5)">http://bo5k7ehm7ncbyphbj2xg66r6p4ncuoy3aidp5iwdhtj5ecmmrpc5weya.onion</li>
+		<li onclick="clickedLink(6)">http://2m5gahin55lerxkoppfs65hksbwtg3dm2mijseyw3pecha3cnkjmgizs.onion</li>
+		<li onclick="clickedLink(7)">http://snjuznwiab3siinaox5m5oju5uzxcp7irbkzahykkigaygbmk2f2pjmr.onion</li>
+		<li onclick="clickedLink(8)">http://djdmkkyyorjef3anbu45kojcukh2shlutdlse5l77llpx4amdxdojb7a.onion</li>
+		<li onclick="clickedLink(9)">http://b5ceywlmzsfpsod5d2ak2mcplubtyuafrcu6dh3e3sickrhu5a7airw4.onion</li>
+		<li onclick="clickedLink(10)">http://ajbgrtams4ozu6g72wfy2l4txj3ycnft7pzy75kmz6ndwpuu7sae4l33.onion</li>
+		<li onclick="clickedLink(11)">http://zolsff47ttlsahtmo76bpx3limxpk2zdglxa3wehabor6uzlk3l2ytmd.onion</li>
+		<li onclick="clickedLink(12)">http://zhu7apallfowyghgx5cfzpieyll3lcn55336xwwl74gdxxazokys3wk7.onion</li>
+		<li onclick="clickedLink(13)">http://ut54amnutimyapjtwm44i5uxr3du4mrrzunh7bonz274zecclbf64o2h.onion</li>
+		<li onclick="clickedLink(14)">http://znihuo4s3hxau2imzfxdhghkf2xzrdfuh5ipdfjie77njjk737gc47zb.onion</li>
+		<li onclick="clickedLink(15)">http://ejhhg4z75xkjn5o7r6f5tkdewlrztjpy4eblgauheltyr4hgiyml362l.onion</li>
+		<li onclick="clickedLink(16)">http://nd3ro6kg7wydjs7zz2ekmbfksu2dzw4hugbjgkd2jer5bojsaygyix4f.onion</li>
+		<li onclick="clickedLink(17)">http://kl7lhgb2crl2z67xp2a6nlppz7u5wrypn3mc4pt62ngtns7kkb2g43nf.onion</li>
+		<li onclick="clickedLink(18)">http://wfd6h3as7gzeeaemixkm4hm3cscogpnzmwpnekh6j2lbjmrmoemondk5.onion</li>
+		<li onclick="clickedLink(19)">http://octxj2brwsghmj6iuzz6nwhtacdch2thpmfnufhg5rpfnwiauwf3jll6.onion</li>
+		<li onclick="clickedLink(20)">http://o2agncuugdek5zijipwbd7gryn4urmidzehbtt2yo52wfzlepzxwwkik.onion</li>
+		<li onclick="clickedLink(21)">http://4kuw6bbwfu3pkhx6hptxziwlyfwrg7x2o26o4rbmtfi2rrrsgxld6bd2.onion</li>
+		<li onclick="clickedLink(22)">http://g7yzrlxnhobxlhk2nzw2omxjuw4zh6x32d4xyni6dshrypsa3yocseja.onion</li>
+		<li onclick="clickedLink(23)">http://nkclu6an4e6p5ocbg6t4glsxnnhxh43r2krrpsz4hbdbe24h6fbez4mw.onion</li>
+		<li onclick="clickedLink(24)">http://gjpbjzehan7s246xhjcxrioz7xdxxno5ei7ykpfybxfszea3dmkb4z55.onion</li>
+		<li onclick="clickedLink(25)">http://xfrmi6yzpixxegpp2n4u46xg67ew6m3uw4ilwrojxo6p52xeyd6nha57.onion</li>
+		<li onclick="clickedLink(26)">http://jt77aljx7f7smg62iu6gyxabscfb5iaflwzwtgmxsfljp26hbrihlonc.onion</li>
+		<li onclick="clickedLink(27)">http://nse6kscgsbk6bpw2soimam5t63duku3wjadbp3mbj2gojzlt4djfgibk.onion</li>
+		<li onclick="clickedLink(28)">http://d7k4cesf6hb6ofbinzkttkn7fhnofwucsxpzbsgaaclstrozmjzbomtt.onion</li>
+		<li onclick="clickedLink(29)">http://kletcw6fzuu44yillduwxp2j5lmos2iyg22rni7o23ems4g4nrdmtbxt.onion</li>
+		<li onclick="clickedLink(30)">http://2mobsrsm2gfgagofc4di6ggikalkhdugiwhmtwzumaxo5tjyj2u73flj.onion</li>
+		<li onclick="clickedLink(31)">http://kmfonbwnihjtitrt4c7xpbuwid6enip6hrpg3dd2k4543bxxe63pmbya.onion</li>
+		<li onclick="clickedLink(32)">http://riukp7tcjaajemntxwgcf2sutnrnlyb2ufmefngz2y3hnfgjuzikt3o6.onion</li>
+		<li onclick="clickedLink(33)">http://lmbzfwhbby6ta4nd5lae7pf7ugp7dloufpc7rotefp3kgsrwgstcumbt.onion</li>
+		<li onclick="clickedLink(34)">http://bjwrwzf5udaiw2idolb5mtwlbj5ckfswsyfl7gs2o742ki2bpnhxryk5.onion</li>
+		<li onclick="clickedLink(35)">http://w6ihdptssm6hpsgfecaudwtigs3zpmjjoy6b3bwpdyhuf5hejhoj4jj3.onion</li>
+		<li onclick="clickedLink(36)">http://ygont22ty3722m6fxdcn4ju6b6r72fmyaw2mnzjhjr5kooowxnk5fp6t.onion</li>
+		<li onclick="clickedLink(37)">http://kczyrjbhbecoysp2zfrjhwc7xpjidywodasxfh3plbz5ssyisus2gpl3.onion</li>
+		<li onclick="clickedLink(38)">http://ccg2luy7wzokn5232h6aduxae3ac3252ru56nkzmcgxynttcu2oet4mz.onion</li>
+		<li onclick="clickedLink(39)">http://lhcp33ggenpcjzbrkwlt777rplyazskm75urwc56haeyer4exfpmmdr5.onion</li>
+		<li onclick="clickedLink(40)">http://td4zk4lzcbcgsunuydxc66wuka7o6gajpsmayywlghgimipx2c4kiton.onion</li>
+		<li onclick="clickedLink(41)">http://jxiep2e57fyes5boaytaxjwu6cjzjl6nopp2yznahi6m3nrmoiz2ujhu.onion</li>
+		<li onclick="clickedLink(42)">http://odt4ucfca5hoowypt23p457bepaob67xlyaxfxatpyzrmbombizzxhss.onion</li>
+		<li onclick="clickedLink(43)">http://7ylrwdzb6r7bswre4nt4ku3w4eywfkpczx6ldhhxpzofptamczer4x34.onion</li>
+		<li onclick="clickedLink(44)">http://cifg5jjr2aikdlnb2iwmnb7mybrjj3e4fi2opk5kaik55nck7scjkg5y.onion</li>
+		<li onclick="clickedLink(45)">http://zmilzbbxf7c337m66zgjl5ljeoxuo4hreahe6yas2ywo3jeltzt3aczh.onion</li>
+		<li onclick="clickedLink(46)">http://rcbwrnsk5b767mwuwr3xfrkmifibhipgytzmnc7xpcuw4dmixalhfjtf.onion</li>
+		<li onclick="clickedLink(47)">http://hkjg43rb35k23xlr7hd2dphcxe6janykkncxg67u3wxnloismumg6ygs.onion</li>
+		<li onclick="clickedLink(48)">http://6ekfooet43z6c5gd3xj4a345s43msfndsb4d2cktcgkfo46jnzpk2c6d.onion</li>
+		<li onclick="clickedLink(49)">http://lxjrsc64fjpfpa3u7xoazk4l2cjlxbax2fpuc3hoszut2hl2ikihacit.onion</li>
+		<li onclick="clickedLink(50)">http://d63g7hfo42fbnfgzpzx4muzll56zyzndlla5yu42swwkn2332niar4jl.onion</li>
+		<li onclick="clickedLink(51)">http://sljpye234eop6ic6ads6ghbc32ys4jj6obtxetjoagxj5fgihic4erdw.onion</li>
+		<li onclick="clickedLink(52)">http://p5wzyj3u7ulmltd5yzpeyz4milehpdrw3ajlmchupefdlyrakabweds4.onion</li>
+		<li onclick="clickedLink(53)">http://jsltw4pugxlhm22rlhotlfu26rp552rkironxdjxw43e5ruxni5ioby7.onion</li>
+		<li onclick="clickedLink(54)">http://ddnpokx6merruexn3ejoribpc4abkjidy7274bpwl3zm5axskw6ik5ky.onion</li>
+		<li onclick="clickedLink(55)">http://or5r2jpbwoaxr23bsgk4ksnc45edwllg4de7r7tcbfaa2bhknh4ht54l.onion</li>
+		<li onclick="clickedLink(56)">http://smdhk35hacujetfw6olcwrdoy3fwnjegoyftkcx7licosptgoe3sxdhl.onion</li>
+		<li onclick="clickedLink(57)">http://65fyo7d4fwfyuxmowmc3f7h33urfmnu44uc5xoppwz5d4mxrgzyazpfu.onion</li>
+		<li onclick="clickedLink(58)">http://xiklum7jb747cmdy3apcksuaudxwdgm7bzpnx24gst473hr4k3axze7z.onion</li>
+		<li onclick="clickedLink(59)">http://mplx3bm4lfmxgyllztb3h7bcjub2kp6cnxp4hlsy237cy7xbcze3zy7m.onion</li>
+		<li onclick="clickedLink(60)">http://3grcfl65bcotbhn24y3cmjgudormw4mfxt7wm4z52syhswc3n3yca26x.onion</li>
+		<li onclick="clickedLink(61)">http://kfrhoekagxm467bor4ufxpioh5x5xri2sgihcuxk4retwrtpmdosadho.onion</li>
+		<li onclick="clickedLink(62)">http://s4mhe6bgzfxtcsbbf6lrckl3rwew2s2riioaurun5fgluskj55hf4llt.onion</li>
+		<li onclick="clickedLink(63)">http://7yj6lsup6lmacanrnmkxygt2xu6g5obo2ls6ozeetwbpsju2ax4ohdsy.onion</li>
+		<li onclick="clickedLink(64)">http://znc633xa3c2wmegsn4g3aw2belhcsoua6zdenbu75eoakagptrc6dy45.onion</li>
+		<li onclick="clickedLink(65)">http://segx3p54bpwmc5pbp7es634u3ftnclhrcpi4jadeds4264fku6oagxti.onion</li>
+		<li onclick="clickedLink(66)">http://7jmezn76rps3ijkptxjnrxrpion4auot6slniexbudgurt2piug5akmf.onion</li>
+		<li onclick="clickedLink(67)">http://clwa2nfdohkruscax5ydboctaeufrl3kis74twkkctehrur6zbkpebrf.onion</li>
+		<li onclick="clickedLink(68)">http://swnzspjfm7d46hwyi52ogmcj64kun5cdcpr7s44uzzei3wgj5yh3kkkh.onion</li>
+		<li onclick="clickedLink(69)">http://bnkozsyi2zsu6drph6ypcarawppzkzxxu2w7fxykdpl7j4pezburl6mc.onion</li>
+		<li onclick="clickedLink(70)">http://wrhw3imita4xcybz56phasz6o6kgkzjatfnfsnefnu5jfr3gxddm2xou.onion</li>
+	</ol>
+</div>
+</body>

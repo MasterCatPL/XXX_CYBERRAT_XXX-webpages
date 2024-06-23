@@ -1,0 +1,141 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	margin: 0px;
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: Unifont;
+}
+
+#TITLE {
+	color: rgb(0, 255, 0);
+	font-size: 51px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#CHAT {
+	width: 700px;
+	font-size: 26px;
+	color: rgb(0, 255, 0);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+	border: 0px solid green;
+	height: 600px;
+}
+
+.MESSAGE {
+	display: flex;
+	width: 100%;
+}
+
+.USERNAME {
+	text-align: center;
+	width: 200px;
+	width: 30%;
+	border: 1px solid green;
+	word-break: break-all;
+}
+
+.MSG-CONTENT {
+	margin-left: 15px;
+	width: 70%;
+}
+
+#PLAYER-MSG {
+	width: 700px;
+	border: 1px solid rgb(0, 255, 0);
+	padding: 10px;
+	box-sizing: border-box;
+	height: 50px;
+	outline: none;
+	background-color: black;
+	color: rgb(0, 255, 0);
+	font-family: Unifont;
+	font-size: 18px;
+	margin-bottom: 70px;
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function setPointer() {
+	window.ue.webbrowser.set_chat_pointer()
+}
+
+function addMessage() {
+	if (Math.random() < 0.3) {
+		return
+	}
+	window.ue.webbrowser.add_chat_message().then(function(ReturnValue) {
+		let username = ReturnValue.split('|')[0] + ':';
+		let message = ReturnValue.split('|')[1]
+		let parent = document.getElementById("CHAT")
+		let template = document.getElementsByClassName("MESSAGE")[0];
+		let copied = template.cloneNode(true);
+		copied.children[0].innerText = username
+		copied.children[1].innerText = message
+		parent.appendChild(copied);
+		if (parent.children.length > 21) {
+			parent.removeChild(parent.firstElementChild)
+		}
+	})
+	
+}
+
+function addUserMessage() {
+		let username = "Guest"
+		let message = document.getElementById("PLAYER-MSG").value;
+		let parent = document.getElementById("CHAT")
+		let template = document.getElementsByClassName("MESSAGE")[0];
+		let copied = template.cloneNode(true);
+		copied.children[0].innerText = username
+		copied.children[1].innerText = message
+		parent.appendChild(copied);
+		if (parent.children.length > 21) {
+			parent.removeChild(parent.firstElementChild)
+		}
+}
+
+
+window.onload = function() {
+	setPointer();
+	setInterval(addMessage, 1000);
+	
+	
+	document.querySelector('#PLAYER-MSG').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      addUserMessage();
+    }
+});
+	
+}
+
+</script>
+<div id="TITLE">
+	CRYPTO BROS<br>CHATROOM 1 [171.234.435]
+</div>
+<div id="CHAT">
+	<div class="MESSAGE">
+		<span class="USERNAME">
+			Regex:
+		</span>
+		<span class="MSG-CONTENT">
+			ay yoo whats up
+		</span>
+	</div>
+</div>
+<input type="text" id="PLAYER-MSG" placeholder="Send your message">
+</input>
+</body>

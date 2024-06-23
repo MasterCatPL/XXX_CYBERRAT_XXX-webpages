@@ -1,0 +1,101 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: #c8ff00;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan")
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + (counter1).toFixed(1) + "%"
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%"
+			window.ue.webbrowser.hacked_blog(blogID)
+		}
+	}
+}
+window.onload = function() {
+	let anxiety = Number(window.location.search.substring(1))
+	blogID = 10;
+	window.ue.webbrowser.visited_blog(blogID, anxiety)
+}
+
+</script>
+<div id="MAIN">
+<p>My name is Mack, I'm 19 years old and I'm a drug addict. It started with LSD, and it quickly escalated to other things. I couldn't control myself, and I was constantly chasing that next high.</p>
+
+<p>My addiction got worse and worse with time. I lost my friends, and I failed school. My parents couldn't reason with me, no matter how hard they tried. I was out of control, and I didn't care about anything except for getting my next fix.</p>
+
+<p>After I took drugs, I would become violent and aggressive. I was detached from reality, and I didn't care about anything except for my own pleasure.</p>
+
+<img src="CSS/Images/Anxiety/Blog10_1.png" class="IMAGE">
+
+<p>During one of my trips, I wanted to do all sorts of terrible things. I was consumed by my addiction, and I was completely out of control.</p>
+
+<p>I wanted to hurt people, to cause pain and suffering. I wanted to destroy things, to cause chaos and confusion. I was filled with anger and hatred, and I wanted to take it out on anyone and anything I could.</p>
+
+<p>I wanted to kill my cat, but that was just the tip of the iceberg I wanted to hurt my parents, to make them pay for all the times they had tried to stop me from using drugs. I wanted to hurt my friends, to make them pay for abandoning me when I needed them the most.</p>
+
+<p>I wanted to hurt everyone and everything, and I was willing to do whatever it took to make it happen. I was out of control, and I was a danger to myself and to those around me.</p>
+
+<img src="CSS/Images/Anxiety/Blog10_2.png" class="IMAGE">
+
+<p>I don't remember what happened next. What I do remember, though, is that I woke up in a mental hospital. My parents locked me up here. Abandoned me. And they keep me in a closed room, like a prisoner. I want to get out. I need to get out. And I want to use again so much...</p>
+
+<p>I hate the therapy sessions, and I hate talking about my feelings. I hate having to confront all of the terrible things I did when I was using drugs, and I hate having to deal with the guilt and the shame.</p>
+
+<img src="CSS/Images/Anxiety/Blog10_3.png" class="IMAGE">
+
+<p>Sometimes, I just want to break out of this place and go back to my old life. I want to lose myself in the drugs again, to escape from the pain and the reality of my situation. I want to be an addict, because it's easier than facing the truth.</p>
+
+<p>I'm such a terrible fucking person, am I not?</p>
+
+</div>
+</body>

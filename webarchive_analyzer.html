@@ -1,0 +1,183 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	background-color: rgb(50, 50, 50);
+	display: flex;
+	color: white;
+	margin: 0px;
+	font-size: 18px;
+	background-image: url(CSS/Images/ArchiverPattern.webp);
+}
+
+#LEFT {
+	background-color: #d99606;
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	border-right: 1px solid black;
+	text-align: center;
+	font-family: Calibri;
+	word-break: break-all;
+	padding: 25px;
+	color: black;
+	word-break: break-word;
+}
+
+#RIGHT {
+	width: 100%;
+	margin-left: 300px;
+	padding: 30px;
+}
+
+#RIGHT-LABEL {
+	font-size: 28px;
+	color: orange;
+}
+
+#LEFT-LABEL {
+	margin-top: 30px;
+	font-size: 21px;
+	background-color: white;
+	border-radius: 8px;
+	border: 2px solid black;
+	font-weight: bold;
+}
+
+#DESCR {
+	width: 400px;
+	font-size: 18px;
+	text-align: justify;
+}
+
+#INPUT {
+	outline: none;
+	border: 3px solid orange;
+	color: black;
+	height: 35px;
+	width: 300px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+#INPUT-BUTTON {
+	outline: none;
+	background-color: white;
+	border: 3px solid orange;
+	height: 35px;
+	padding-left: 15px;
+	padding-right: 15px;
+	cursor: pointer;
+}
+
+#INPUT-BUTTON:hover {
+	filter: brightness(0.9);
+}
+
+#BUY-USE {
+	outline: none;
+	border: 0px;
+	background-color: white;
+	border: 1px solid black;
+	font-size: 18px;
+	padding-left: 15px;
+	padding-right: 15px;
+	cursor: pointer;
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+#BUY-USE:hover {
+	filter: brightness(0.9);
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+let interval;
+function executeSearch(service) {
+	let counter = 0;
+	clearInterval(interval);
+	interval = setInterval(load, 200);
+	
+	function load() {
+		document.getElementById("OUTPUT").innerText = "Extracting contact information [" + counter + "%]"
+		counter++;
+		if (counter >= 101) {
+			clearInterval(interval);
+			search();
+		}
+		
+	}
+	function search() {
+		let name = document.getElementById("INPUT").value
+		//	ID | CONTENT (e.g selfie.png) | TYPE
+		window.ue.webbrowser.get_infosec_by_name(name, service).then(function(ReturnValue) {
+			get_service_access(service);
+			if (ReturnValue == "NOTTHISSERVICE") {
+				document.getElementById("OUTPUT").innerText = "0 results. Try another service.";
+				return
+			}
+			if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+				document.getElementById("OUTPUT").innerText = "Error: this domain does not exist."
+				return
+			}
+			document.getElementById("OUTPUT").innerText = "PERSONALLY IDENTIFIABLE INFORMATION FOUND\nAfter scanning the website, we found the following personal information: " + ReturnValue.split("|")[1] + " (" + ReturnValue.split("|")[2] + ")";
+		})
+	}
+}
+
+window.onload = function() {
+	let service = 'WebArchive'
+	get_static_npc_username(service);
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("PRICE").innerText = price;
+	})
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="LEFT">
+	<div id="LEFT-LABEL" style="font-size: 30px;margin-bottom:0px;">TOP UP</div>
+	<input id="BUY-USE" style="margin-top: 15px;" type="button" value="Buy access"><br>
+	<span>Currently, you have <span id="USES">X</span> access codes available. They cost <span id="PRICE">X</span> ETH each.</span>
+	<div id="LEFT-LABEL">RESULTS</div><br>
+	<div id="OUTPUT">
+		The results will appear here.
+	</div>
+</div>
+<div id="RIGHT">
+	<div id="RIGHT-LABEL">
+		The Web Archive Explorer
+	</div>
+	<div id="DESCR">
+		The Web Archive Explorer is a set of custom scripts designed to scan website's source code for identifying information such as an email address, phone numbers, names, addresses etc. It's partially sourced from HeadHunter.wtf, a service helping recruiters to connect with top executives from all over the world by keeping a database of contact details scraped from the WWW.<br><br>
+		The Web Archive Explorer works in a similar way. We keep a historical record of a website lifetime as a list of full-page snapshots. Then, when a customer requests to check a website, we run our scripts on every snapshot over the website's lifetime and so extract contact information. This works better than HeadHunter.wtf, because it allows us to adjust our scripts retrospectively - every time we improve our methodology, we can just rerun the scripts on website's historical snapshots and extract additional information in retrospect. The HeadHunter.wtf didn't have this advantage - once a website was scraped, the data was saved and the crawler just moved to another one. If their scripts failed to capture some data, possibly obfuscated in some javascript code, there was no way of getting it back after detecting such mitigation technique, if the contact details were already gone from the website, because of employee firings / etc.
+		For technical problems, contact <span id="OWNER-NAME">DefaultUsername</span>
+	</div>
+	<input type="text" id="INPUT" placeholder="Domain"></input>
+	<input type="button" id="INPUT-BUTTON" value="Search"></input>
+</div>
+</body>

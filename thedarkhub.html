@@ -1,0 +1,672 @@
+<head>
+	<link rel="stylesheet" href="CSS\TheDarkHub.css">
+</head>
+<body>
+	<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+	let cred_price;
+	let answer_array = ['?', '??', '???', '????', 'what?', 'aha', 'dude', 'forsen', 'spamming', 'shut up', 'who cares']
+	var sent_msg = 0
+	var startingIndex = Math.trunc(Math.random() * 500)
+	function addMessage(msg='', user='Guest', skip=false, color=false) {
+		if (Math.random() < 0.3) {
+			return
+		}
+		window.ue.webbrowser.add_message(startingIndex).then(function(ReturnValue) {
+			startingIndex++;
+			if (msg != '') {
+				var username = user
+				var message = msg
+				sent_msg += 1
+				if (Math.random() < 0.3 && skip != true && sent_msg <= 15) {
+					let local_username = ReturnValue.split("ööö")[0];
+					let answer = '@Guest ' + answer_array[Math.floor(Math.random()*answer_array.length)]
+					setTimeout(addMessage(answer, local_username, true, true), 500);
+				}
+			} else {
+				var username = ReturnValue.split("ööö")[0];
+				var message = ReturnValue.split("ööö")[1];
+			}
+			let shoutbox = document.getElementById("SHOUTBOX-CONTENT");
+			let new_message = shoutbox.children[0].cloneNode(true);
+			new_message.children[0].innerText = username + ': ';
+			new_message.children[0].style.color = 'rgb(' + charColor(username[0]) + ', ' + (255 - charColor(username[1])) + ', ' + charColor(username[2]) + ')';
+			new_message.children[1].innerText = message;
+			if (color == true) {
+				new_message.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+			}
+			shoutbox.appendChild(new_message);
+			shoutbox.scroll(0, shoutbox.scrollTop + 100);
+		})
+	}
+	var usernames;
+	
+	function getUsernames() {
+		window.ue.webbrowser.get_usernames().then(function(ReturnValue) {
+			usernames = ReturnValue;
+		})
+	}
+	
+	function charColor(character) {
+		// in range 48 –> 122 but who the fuck uses a number as first 3 chars? so its 65-122
+		let code = character.charCodeAt(0)
+		//scale to 0 –> 57
+		let code2 = 122 - code
+		//scale to color (255)
+		let color = code2 * (255 / 57)
+		//clamp to 0-255 just in case
+		let color2 = Math.trunc(Math.min(Math.max(color, 0), 255))
+		return color2
+	}
+	
+	function generateThread() {
+		let array_item = ['COMBOLIST', 'COMBO', 'LINES', 'MIX', 'USER:PASS', 'MAIL ACCESS', 'HITS'];
+		let array_descr = ['PREMIUM', 'FRESH', 'JUICY', 'NEW', 'HQ', 'UHQ', 'WORLDWIDE', 'PAID', 'IDEAL', 'MIXED TARGETS', 'PRIVATE', 'VALID FOR ALL', '[UNCHECKED]', 'MIXED DOMAINS', 'GOOD FOR EVERYTHING', 'ALL COUNTRY', 'INSANE AF', 'VALID', 'TARGETED', 'WORKS FOR EVERYTHING', 'HIGH QUALITY', 'ULTRA HIGH QUALITY'];
+		let array_emote = ['⭐', '🌟', '❤', '✅', '😈', '☄', '💯', '🥇', '☢', '🧾️', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+		let array_icon = ['🔥', '', '']
+		let threads = document.getElementsByClassName("THREAD");
+		for (let i = 0; i < threads.length; i++) {
+			let length = 100 + Math.trunc(Math.random() * 900) //0-10k
+			let thread_title = length + '\t' + array_item[Math.floor(Math.random()*array_item.length)] + ' ' + array_emote[Math.floor(Math.random()*array_emote.length)] + ' ' + array_descr[Math.floor(Math.random()*array_descr.length)] + ' ' + array_emote[Math.floor(Math.random()*array_emote.length)] + ' ' + array_descr[Math.floor(Math.random()*array_descr.length)] + ' ' + array_emote[Math.floor(Math.random()*array_emote.length)] + ' ' + array_descr[Math.floor(Math.random()*array_descr.length)] + ' ' + array_emote[Math.floor(Math.random()*array_emote.length)]
+			threads[i].children[1].children[0].innerText = thread_title
+			let icon = array_icon[Math.floor(Math.random()*array_icon.length)]
+			if (icon == '') {
+				var multiplier = 1;
+			} else {
+				var multiplier = 5;
+			}
+			threads[i].children[0].innerText = icon
+			let username = usernames[Math.floor(Math.random()*usernames.length)]
+			let last_username = usernames[Math.floor(Math.random()*usernames.length)]
+			threads[i].children[1].children[1].children[0].innerText = username;
+			threads[i].children[1].children[1].children[0].href = 'thedarkhub_user.html?' + username
+			threads[i].children[1].children[1].childNodes[2].textContent = ' ' + (i * 4 + Math.trunc(Math.random() * 4)) + ' minutes ago.'
+			let views = Math.trunc(Math.random() * 1000 * multiplier)
+			threads[i].children[3].innerText = views + '\nViews'
+			threads[i].children[2].innerText = Math.trunc(views / 78) + '\nReplies'
+			threads[i].children[4].children[0].innerText = last_username;
+			threads[i].children[4].children[0].href = 'thedarkhub_user.html?' + last_username;
+			
+			
+			let typeMultiplier = 1 // email:pass is 1, phone probably 2 since its expensive
+			let price = (length * cred_price).toFixed(6) + " ETH"
+			let reputation = Math.trunc(Math.min((122 - username.charCodeAt(2)) - 12.5, 1514) * 121) //-12.5 –> 12.5  * 
+			let replies = Math.trunc(Math.random() * 300)
+			let type = "EMAIL:PASS";
+			let category = "Combolist"
+			var roll = Math.random();
+			if (roll < 0.16) {
+				var tag = "Gaming";
+			} else if (roll < 0.32) {
+				var tag = "SocialMedia"
+			} else if (roll < 0.48) {
+				var tag = "Financial"
+			} else if (roll < 0.64) {
+				var tag = "PaidServices"
+			} else if (roll < 0.80) {
+				var tag = "Delivery"
+			} else if (roll < 1) {
+				var tag = "Dating"
+			}
+			
+			let url = 'thedarkhub_product.html?' + thread_title + "OVO" + price + "OVO" + reputation + "OVO" + type + "OVO" + category + "OVO" + tag + "OVO" + length + "OVO" + username
+			threads[i].onclick = function() {window.location = url} 
+		}
+	}
+	
+	
+	function resizer() {
+		if (window.innerWidth < 799) {
+			let threads = document.getElementsByClassName("THREAD")
+			for (let i = 0; i < threads.length; i++) {
+				threads[i].style.textAlign = 'center';
+				threads[i].style.alignItems = 'center';
+				threads[i].style.justifyContent = 'center';
+				threads[i].style.flexDirection = 'column';
+			}
+		} else {
+			let threads = document.getElementsByClassName("THREAD")
+			for (let i = 0; i < threads.length; i++) {
+				threads[i].style.textAlign = '';
+				threads[i].style.alignItems = '';
+				threads[i].style.justifyContent = '';
+				threads[i].style.flexDirection = '';
+			}
+		}
+	}
+	
+	addEventListener('resize', resizer);
+	
+	function setOnline(first_time=false) {
+		if (first_time == true) {
+			var online = Math.trunc(Math.random() * (55000 - 45000) + 45000);
+		} else {
+			var online = (Number(document.getElementById("users").innerText) + ((Math.random() - 0.5) * 300)).toFixed(0)
+		}
+		let members = (online * 0.06).toFixed(0);
+		let guests = (online - members).toFixed(0);
+		document.getElementById("users").innerText = online + ' ';
+		document.getElementById("members").innerText = ' ' + members + ' ';
+		document.getElementById("guests").innerText = ' ' + guests + ' ';
+		let newest_username = usernames[Math.floor(Math.random()*usernames.length)]
+		document.getElementsByClassName("FOOTER-BOX")[3].childNodes[1].innerText = newest_username;
+		document.getElementsByClassName("FOOTER-BOX")[3].childNodes[1].href = 'thedarkhub_user.html?' + newest_username;
+	}
+	
+		
+	function getprice() {
+		window.ue.webbrowser.get_cred_price().then(function(ReturnValue) {
+			cred_price = ReturnValue;
+		})
+	}
+	
+	window.onload = function(){
+		getprice();
+		window.ue.webbrowser.found_thedarkhub();
+		resizer();
+		//add own msg to sb
+		document.getElementById("SHOUTBOX-RIGHT").addEventListener("keypress", function(event) {
+		  if (event.key === "Enter") {
+			addMessage(document.getElementById('SHOUTBOX-RIGHT').value);
+		  }
+		});
+	
+	
+		getUsernames();
+		setTimeout(function() {
+			setOnline(true);
+			generateThread();
+			setInterval(setOnline, 5000);
+			setInterval(addMessage, 1200);
+		}, 50)
+		let buttons = document.getElementsByClassName("ITEM-BUTTON")
+		for (let i = 0; i < buttons.length; i++) {
+			buttons[i].onclick = function() {window.location.replace("thedarkhub.html")}
+		}
+		buttons[2].onclick = function() {window.location.replace("thedarkhub_sell.html")}
+		buttons[3].onclick = function() {window.location.replace("thedarkhub_vips.html")}
+		buttons[4].onclick = function() {window.location.replace("thedarkhub_announce.html?domains")}
+	}
+	
+	
+	</script>
+	<div id="TOP">
+		<div id="LOGO">
+			<a href="thedarkhub.html"><img src="CSS/Images/trTheHubLogo.png"></a>
+		</div>
+	</div>
+	<div id="LIST">
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				LEAKS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				ACCOUNTS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				SELLER'S BAY
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				VIP LOUNGE
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				DOMAINS
+			</div>
+		</div>
+	</div>
+	<div class="CONTAINER">
+		<div class="LEFT" id="SHOUTBOX">
+			<div class="LABEL">
+				Shoutbox | Shoutbox Rules
+			</div>
+			<div id="SHOUTBOX-CONTENT">
+				<div class="MESSAGE">
+					<div class="USERNAME">System: </div>
+					<div class="MSG-TEXT">Connecting to shoutbox...</div>
+				</div>
+			</div>
+				<div id="SHOUTBOX-POST">
+					<button onclick="addMessage(document.getElementById('SHOUTBOX-RIGHT').value)" id="SHOUTBOX-LEFT">POST</button>
+					<input id="SHOUTBOX-RIGHT" placeholder="Your message" contenteditable=true>
+				</div>
+			</input>
+		</div>
+		<div class="RIGHT">
+			<div class="LABEL">
+				ANNOUNCEMENTS
+			</div>
+			<div id="ANNOUNCEMENTS">
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT" onclick="window.location.replace('thedarkhub_announce.html?malware')">
+						BEWARE OF BTC CLIPPER MALWARE
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Announced by <a href="thedarkhub_user.html?KappaMeister">KappaMeister</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT" onclick="window.location.replace('thedarkhub_announce.html?seizure')">
+						Regarding recent forum seizure
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Announced by <a href="thedarkhub_user.html?DoxGuru">DoxGuru</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT" onclick="window.location.replace('thedarkhub_announce.html?awards')">
+						New awards available
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Announced by <a href="thedarkhub_user.html?Luka Tim">Luka Tim</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT" onclick="window.location.replace('thedarkhub_announce.html?checker')">
+						VOTING: Best checker
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Announced by <a href="thedarkhub_user.html?BlueEyes">BlueEyes</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT" onclick="window.location.replace('thedarkhub_announce.html?rules')">
+						Rules & Penalties
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Announced by <a href="thedarkhub_user.html?XXX_CYBERRAT_XXX">XXX_CYBERRAT_XXX</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT" onclick="window.location.replace('thedarkhub_announce.html?domains')">
+						List of our domains
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Announced by <a href="thedarkhub_user.html?KappaMeister">KappaMeister</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="CONTAINER">
+		<div class="LEFT">
+			<div class="LABEL" style="position: relative;">
+				LEAKS MARKETPLACE
+				<span onclick="window.location='thedarkhub_sell.html'" id="LABEL-BUTTON">SELL</span>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+			<div class="THREAD">
+				<div class="ICON">🔥</div>
+				<div class="THREAD-SANDWICH">
+					<div class="THREAD-TITLE">
+						Rep Chain (Say Something Kind)
+					</div>
+					<div class="THREAD-AUTHOR">
+						<a href="thedarkhub_user.html?sctuttlespass">scuttlespass</a> 3 hours ago.
+					</div>
+				</div>
+				<div class="REPLIES">
+					44<br>Replies
+				</div>
+				<div class="VIEWS">
+					70<br>Views
+				</div>
+				<div class="LAST">
+					Last post:<a href="thedarkhub_user.html?iPoseidon">iPoseidon</a>
+				</div>
+			</div>
+		</div>
+		<div class="RIGHT">
+			<div class="LABEL">
+				RECENT THREADS
+			</div>
+			<div id="ANNOUNCEMENTS">
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						BEST COMBO CHECKER EVER [LINK]
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?gupta">gupta</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						Good site for bank acc?
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?RecHuman">RecHuman</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						WARNING: i stopped taking drugs :D
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?YILER">YILER</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						EARN 100 $ A DAY WITH ME
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?thejepee">thejepee</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						Any cheatz here?
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?Arshiak">Arshiak</a>
+					</div>
+				</div>
+			</div>
+			<div class="LABEL" style="margin-top: 30px;">
+				RECENT ACTIVITES
+			</div>
+			<div id="ANNOUNCEMENTS">
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						New post in [27k mail access free]
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?ItsMeNick">ItsMeNick</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						New post in [1000 instagram follow...
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?User43">User43</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						New post in [Looking for investors]
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?DanielM">DanielM</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						Sold SIGNATURE 1x
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Sold by <a href="thedarkhub_user.html?Softie">Softie</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						New post in [BEST way to get/watch PREMIUM...
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Posted by <a href="thedarkhub_user.html?Vizzy">Vizzy</a>
+					</div>
+				</div>
+				<div class="ANNOUNCEMENTS-SANDWICH">
+					<div class="ANNOUNCEMENTS-TEXT">
+						Exchanged AWARD "HEART" 1x
+					</div>
+					<div class="ANNOUNCEMENTS-AUTHOR">
+						Exchanged by <a href="thedarkhub_user.html?VERILERI">VERILERI</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="CONTAINER">
+		<div id="FOOTER">
+			<div class="LABEL" style="border-radius:0px;">
+				<span id="users" style="white-space: pre">50.000 </span> users online | <span id="members" style="white-space: pre"> 3000 </span> members and <span id="guests" style="white-space: pre"> 47.000 </span> guests
+			</div>
+			<div class="LABEL" style="border-radius:0px;background-color:rgba(0,0,0,0.5);color:white">
+				<div class="FOOTER-BOX">
+					18.70M<br>Posts
+				</div>
+				<div class="FOOTER-BOX">
+					611k<br>Threads
+				</div>
+				<div class="FOOTER-BOX">
+					3.31M<br>Users
+				</div>
+				<div class="FOOTER-BOX">
+					<a href="thedarkhub_user.html?Liars">Alialmosa</a><br>Newest member
+				</div>
+				<div class="FOOTER-BOX">
+					60.76K<br>Most Online
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		
+		
+</body>

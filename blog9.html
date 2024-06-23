@@ -1,0 +1,144 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: #ff4000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function insertHack() {
+	let elements = document.getElementsByTagName("p");
+	let random_element = elements[Math.floor(Math.random() * elements.length)];
+	let element_html = random_element.innerHTML;
+	let indices_array = [];
+
+	//find all ". " in paragraph
+	for (let i = 0; i < element_html.length; i++) {
+		if (
+			(element_html[i] === "." && element_html[i + 1] === " ") ||
+			(element_html[i + 1] == undefined && element_html[i + 1] !== "." && element_html[i - 1] !== ".")
+		) {
+			indices_array.push(i);
+		}
+	}
+
+	//choose random sentence in paragraph
+	let sentence_end_index = Math.floor(Math.random() * indices_array.length);
+	let sentence_start_index = sentence_end_index - 1;
+
+	if (sentence_end_index == 0) {
+		var slice_start = 0;
+	} else {
+		var slice_start = indices_array[sentence_start_index] + 2;
+	}
+
+	let sentence = element_html.slice(slice_start, indices_array[sentence_end_index]) + ".";
+	console.log(sentence);
+	console.log(slice_start);
+	console.log(indices_array[sentence_end_index]);
+	console.log(indices_array);
+
+	let replaced = element_html.replace(sentence, "<span id='HiddenSpan'>" + sentence + "</span>");
+	random_element.innerHTML = replaced;
+	document.getElementById("HiddenSpan").onclick = blogHacked;
+}
+
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan");
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + counter1.toFixed(1) + "%";
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%";
+			window.ue.webbrowser.hacked_blog(blogID);
+		}
+	}
+}
+
+window.onload = function () {
+	insertHack();
+	let anxiety = Number(window.location.search.substring(1));
+	blogID = 9;
+	window.ue.webbrowser.visited_blog(blogID, anxiety);
+};
+
+</script>
+<div id="MAIN">
+<p>My name is Lisa and I work a minimum wage job at a second-hand clothing store. It doesn't pay much, and it's hard work. I'm on my feet all day, and I barely have time to rest. I barely have enough money to pay my rent, and I have to go without food or other necessities just to make ends meet.</p>
+
+<p>I'm barely getting by, and I'm always one step away from falling behind. I'm constantly stressed out and worried, and I don't know how much longer I can keep this up.</p>
+
+<p>I barely have enough money to pay my rent, and I'm always worried about falling behind. I don't have any savings, and I don't have anyone to turn to for help. I'm all alone, and I'm struggling to make ends meet.</p>
+
+<img src="CSS/Images/Anxiety/Blog9_1.png" class="IMAGE">
+
+<p>It's tough, and it's frustrating. I feel like I'm working hard and not getting anywhere. I feel like I'm stuck in a rut, and I don't know how to get out.</p>
+
+<p>I wish I had more money, but I don't know how to get it. I wish I had a better job, but I don't know how to get one. I'm stuck, and I don't know what to do.</p>
+
+<p>Last month was the first time I wasn't able to pay for rent. I was completely out of money, and I was desperate. I didn't know what to do, and I was afraid of being evicted. That's when my landlord, a middle-aged man, offered me a deal. He said that he would forgive my debt in exchange for sexual favors</p>
+
+<img src="CSS/Images/Anxiety/Blog9_2.png" class="IMAGE">
+
+<p>I was shocked and disgusted, but I didn't know what else to do. I was out of options, and I was afraid of being homeless. So I accepted his offer, and I did what he asked.</p>
+
+<p>Afterwards, I felt sick to my stomach. I felt like my dignity had been stolen from me, and I was filled with regret. I knew that I had made a terrible mistake, and I wished that I could go back in time and make a different choice.</p>
+
+<p>I started to hate my landlord after what he did to me. I couldn't believe that he had taken advantage of me like that, and I was filled with rage and disgust. I wanted to hurt him, to make him pay for what he had done.</p>
+
+<img src="CSS/Images/Anxiety/Blog9_3.png" class="IMAGE">
+
+<p>I started to plan his death. I thought about all the different ways I could do it, and I spent hours researching how I can do it. I was willing to do whatever it took to get my revenge. To make him pay.</p>
+
+<p>Today was the day I buried his body in the forest.</p>
+
+<p>It almost felt like burying my own shame and regret for what I did.</p>
+
+<p>Now, nobody besides me knows this happened. It's kept secret. I don't regret anything. If I had the choice, I would kill him again. More than that. If I could go back, I'd kill him more slowly, more painfully. The scumbag deserves it.</p>
+
+</div>
+</body>

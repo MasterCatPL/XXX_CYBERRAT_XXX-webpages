@@ -1,0 +1,184 @@
+<head>
+	<link rel="stylesheet" href="CSS\TheDarkHub.css">
+	<link rel="stylesheet" href="CSS\Common.css">
+	<script src="CSS/Common.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+var calldata;
+function setOnline(first_time=false) {
+		if (first_time == true) {
+			var online = Math.trunc(Math.random() * (55000 - 45000) + 45000);
+		} else {
+			var online = (Number(document.getElementById("users").innerText) + ((Math.random() - 0.5) * 300)).toFixed(0)
+		}
+		let members = (online * 0.06).toFixed(0);
+		let guests = (online - members).toFixed(0);
+		document.getElementById("users").innerText = online + ' ';
+		document.getElementById("members").innerText = ' ' + members + ' ';
+		document.getElementById("guests").innerText = ' ' + guests + ' ';
+		let newest_username = usernames[Math.floor(Math.random()*usernames.length)]
+		document.getElementsByClassName("FOOTER-BOX")[3].childNodes[1].innerText = newest_username;
+		document.getElementsByClassName("FOOTER-BOX")[3].childNodes[1].href = 'thedarkhub_user.html?' + newest_username;
+	}
+
+
+
+function setDetails() {
+	let search = window.location.search.split("OVO");
+	let title = decodeURI(search[0]).substring(1);
+	let price = decodeURI(search[1]);
+	let reputation = decodeURI(search[2]);
+	let type = decodeURI(search[3]);
+	let category = decodeURI(search[4]);
+	let tag = decodeURI(search[5]);
+	let length = decodeURI(search[6]);
+	let seller = decodeURI(search[7])
+	
+	document.getElementById("TITLE").innerText = title;
+	document.getElementById("PRICE").innerText = price;
+	document.getElementById("REPUTATION").innerText = reputation;
+	document.getElementById("TYPE").innerText = type; 
+	document.getElementById("CATEGORY").innerText = category;
+	document.getElementById("SIZE").innerText = length;
+	
+	
+	document.getElementById("SELLER").innerText = seller;
+	document.getElementById("SUBLABEL-TEXT-RIGHT").innerText = '<No description provided>';
+}
+
+function displayAlert(message, showNo=false) {
+	document.getElementById("ALERT-TEXT").innerText = message;
+	document.getElementById("ALERT-CONTAINER").style.visibility = 'visible';
+	if (showNo == false) {
+		document.getElementById("ALERT-NO").style.visibility = 'collapse';
+	}
+}
+
+function buyItem() {
+	let search = window.location.search.split("OVO");
+	let amount = Number(decodeURI(search[6]));
+	let price = Number(decodeURI(search[1]).replace(' ETH', ''))
+	window.ue.webbrowser.buy_credentials(amount, price).then(function(ReturnValue) {
+		if (!ReturnValue) {
+			displayAlert("You don't have enough funds to buy this item.");
+		}
+	
+	})
+}
+
+window.onload = function() {
+	if (!window.location.search.startsWith('?')) {
+			window.location.replace("thedarkhub.html");
+		}
+	setDetails();
+	setOnline(true);
+	setInterval(setOnline, 5000);
+	let buttons = document.getElementsByClassName("ITEM-BUTTON")
+	for (let i = 0; i < buttons.length; i++) {
+		buttons[i].onclick = function() {window.location.replace("thedarkhub.html")}
+	}
+	buttons[2].onclick = function() {window.location.replace("thedarkhub_sell.html")}
+	buttons[3].onclick = function() {window.location.replace("thedarkhub_vips.html")}
+	buttons[4].onclick = function() {window.location.replace("thedarkhub_announce.html?domains")}
+}
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="TOP">
+		<div id="LOGO">
+			<a href="thedarkhub.html"><img src="CSS/Images/trTheHubLogo.png"></a>
+		</div>
+	</div>
+	<div id="LIST">
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				LEAKS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				ACCOUNTS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON" onclick="window.location='thedarkhub_sell.html'">
+				SELLER'S BAY
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				VIP LOUNGE
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				DOMAINS
+			</div>
+		</div>
+	</div>
+	
+	<div id="LABEL">PRODUCT OVERVIEW</div>
+	<div class="CONTAINER" style="max-width:900px;">
+		<div id="DETAILS">
+			<div class="SUBLABEL">Title</div>
+			<div class="SUBLABEL-TEXT" id="TITLE">75k HQ GAMING Combolist</div>
+			<div class="SUBLABEL">Seller</div>
+			<div class="SUBLABEL-TEXT" id="SELLER">XXX_CYBERRAT_XXX</div>
+			<div class="SUBLABEL">Seller reputation</div>
+			<div class="SUBLABEL-TEXT" id="REPUTATION">+463</div>
+			<div class="SUBLABEL">Price</div>
+			<div class="SUBLABEL-TEXT" id="PRICE">$95 + 5% Comission = $99.75</div>
+			<div class="SUBLABEL">SIZE</div>
+			<div class="SUBLABEL-TEXT" id="SIZE">432</div>
+			<div class="SUBLABEL">Type</div>
+			<div class="SUBLABEL-TEXT" id="TYPE">EMAIL:PASS</div>
+			<div class="SUBLABEL">Category</div>
+			<div class="SUBLABEL-TEXT" id="CATEGORY">Combolist</div>
+		</div>
+		<div id="DESCRIPTION">
+			<div id="SUBLABEL-RIGHT">Description</div>
+			<div id="SUBLABEL-TEXT-RIGHT">Selling 75 000 high quality gaming email:pass combolist gathered from a world of bogcraft community. FRESH AND JUICY. PROBABLY SOME DICSORD HITS (!)</div>
+			<div id="BOTTOM-RIGHT">
+				<a href="thedarkhub.html"><div id="BACK">BACK</div></a>
+				<div id="BUY" onclick="buyItem()">BUY</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	<div class="CONTAINER" style="margin-top:30px;">
+		<div id="FOOTER">
+			<div class="LABEL" style="border-radius:0px;">
+				<span id="users" style="white-space: pre">50.000 </span> users online | <span id="members" style="white-space: pre"> 3000 </span> members and <span id="guests" style="white-space: pre"> 47.000 </span> guests
+			</div>
+			<div class="LABEL" style="border-radius:0px;background-color:rgba(0,0,0,0.5);color:white">
+				<div class="FOOTER-BOX">
+					18.70M<br>Posts
+				</div>
+				<div class="FOOTER-BOX">
+					611k<br>Threads
+				</div>
+				<div class="FOOTER-BOX">
+					3.31M<br>Users
+				</div>
+				<div class="FOOTER-BOX">
+					<a href="thedarkhub_user.html?Liars">Alialmosa</a><br>Newest member
+				</div>
+				<div class="FOOTER-BOX">
+					60.76K<br>Most Online
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

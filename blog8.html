@@ -1,0 +1,141 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: #c4ff00;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function insertHack() {
+	let elements = document.getElementsByTagName("p");
+	let random_element = elements[Math.floor(Math.random() * elements.length)];
+	let element_html = random_element.innerHTML;
+	let indices_array = [];
+
+	//find all ". " in paragraph
+	for (let i = 0; i < element_html.length; i++) {
+		if (
+			(element_html[i] === "." && element_html[i + 1] === " ") ||
+			(element_html[i + 1] == undefined && element_html[i + 1] !== "." && element_html[i - 1] !== ".")
+		) {
+			indices_array.push(i);
+		}
+	}
+
+	//choose random sentence in paragraph
+	let sentence_end_index = Math.floor(Math.random() * indices_array.length);
+	let sentence_start_index = sentence_end_index - 1;
+
+	if (sentence_end_index == 0) {
+		var slice_start = 0;
+	} else {
+		var slice_start = indices_array[sentence_start_index] + 2;
+	}
+
+	let sentence = element_html.slice(slice_start, indices_array[sentence_end_index]) + ".";
+	console.log(sentence);
+	console.log(slice_start);
+	console.log(indices_array[sentence_end_index]);
+	console.log(indices_array);
+
+	let replaced = element_html.replace(sentence, "<span id='HiddenSpan'>" + sentence + "</span>");
+	random_element.innerHTML = replaced;
+	document.getElementById("HiddenSpan").onclick = blogHacked;
+}
+
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan");
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + counter1.toFixed(1) + "%";
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%";
+			window.ue.webbrowser.hacked_blog(blogID);
+		}
+	}
+}
+
+window.onload = function () {
+	insertHack();
+	let anxiety = Number(window.location.search.substring(1));
+	blogID = 8;
+	window.ue.webbrowser.visited_blog(blogID, anxiety);
+};
+
+
+</script>
+<div id="MAIN">
+<p>I'm a 50 years old, hard working man from Libanon. Just a couple of years from my retirement. I've been saving up money for 30 years. It wasn't easy. I had to work hard and make sacrifices, but I was determined to do it. I knew that if I was careful and disciplined, I could build a secure future for not only myself but most importantly, my children.</p>
+
+<p>I worked long hours at my job, and I didn't spend much. I didn't go out to eat, and I didn't buy new clothes. I lived frugally, always putting my money into my savings account at the bank.</p>
+
+<p>I was careful and I was disciplined, and I never let myself get tempted by the things that other people had. I was content with what I had, and I was happy to save my money for the future.</p>
+
+<img src="CSS/Images/Anxiety/Blog8_1.png" class="IMAGE">
+
+<p>It wasn't always easy. There were times when I was tired and I just wanted to relax. There were times when I saw something that I really wanted, and it was hard to resist the temptation to buy it.</p>
+
+<p>But I persevered. I knew that if I was going to achieve my goal, I had to be strong. And in the end, it was all worth it. I had saved a significant sum of money, and I was proud of what I had accomplished.</p>
+
+<p>Several months ago, everything has changed. The banking system of the country collapsed, and people were only able to withdraw a small amount of money from their accounts. I was shocked and confused, and I didn't know what to do.</p>
+
+<img src="CSS/Images/Anxiety/Blog8_2.png" class="IMAGE">
+
+<p>I went to the bank and tried to get my money, but there simply wasn't enough to go around. The teller told me that there was a limit on how much I could withdraw, and that I would have to wait until the situation improved.</p>
+
+<p>But as the weeks went by, it became clear that there wasn't enough money to pay everyone. The enormity of what was happening hit me like a ton of bricks. All of the money I had saved up during those 40 years was just gone, and there was no way I would ever get it back.</p>
+
+<img src="CSS/Images/Anxiety/Blog8_3.png" class="IMAGE">
+
+<p>I hate my government. I hate them for what they've done to me, and I hate them for what they've done to my country They promised us stability and security, and they delivered nothing but chaos and destruction.</p>
+
+<p>How could they do this to me? How could they let this happen? I paid my taxes to them, so much taxes during the 40 work years, and all I wanted in return was just a stable future...</p>
+
+<p>I want revenge. I want to make them pay for what they had done. I've already started plotting and scheming, trying to come up with a way to get even. I am willing to do whatever it took to make them pay. If you're from Libanon and feel the same, hit me up. We'll do it together.</p>
+
+</div>
+</body>

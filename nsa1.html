@@ -1,0 +1,171 @@
+<head>
+<style>
+
+:root {
+  --mainColor: #ad3e38;
+}
+
+body {
+	background-color: #1c1c1c;
+	margin: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url(CSS/Images/TopSecret.png);
+	background-position: center;
+}
+
+#MAIN {
+	padding: 15px;
+}
+
+#MAIN-LABEL {
+	background-color: var(--mainColor);
+	color: white;
+	font-size: 50px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 16px;
+}
+
+#MAIN-LOGIN {
+	background-color: var(--mainColor);
+	margin-top: 20px;
+	border-radius: 16px;
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	color: white;
+	font-size: 26px;
+}
+
+.LOGIN {
+	outline: none;
+	border: 0px;
+	background-color: white;
+	height: 35px;
+	border-radius: 8px;
+	text-align: center;
+	font-size: 21px;
+}
+
+#LOGIN-BUTTON {
+	outline: none;
+	border: 0px;
+	background-color: white;
+	height: 35px;
+	border-radius: 8px;
+	text-align: center;
+	font-size: 21px;
+	width: 200px;
+	margin: 0 auto;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+#LOGIN-BUTTON:hover {
+	filter: brightness(0.9);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+let id;
+let username;
+let password;
+let counter = 0
+let interval;
+let is_hacked;
+
+function setResults() {
+	window.ue.webbrowser.check_if_nsa_hacked(id).then(function(ReturnValue) {
+		if (ReturnValue) {
+			document.getElementById("MAIN-LOGIN").innerHTML = "Access token accepted."
+			document.getElementById("MAIN-LOGIN").style.color = "lightgreen";
+		} else {
+			document.getElementById("MAIN-LOGIN").innerHTML = "Access token rejected."
+			document.getElementById("MAIN-LOGIN").style.color = "red";
+		}
+	})
+}
+
+function setCounter() {
+	document.getElementById("COUNTER").innerText = (counter).toFixed(1) + "%"
+	counter = counter + 0.9
+	if (counter > 100) {
+		document.getElementById("COUNTER").innerText = "100%"
+		clearInterval(interval);
+		window.ue.webbrowser.start_nsa_hack(id)
+		setInterval(setResults, 1500);
+	}
+}
+
+function clickedLogin() {
+	let loginEl = document.getElementsByClassName("LOGIN")[0].value;
+	let passwordEl = document.getElementsByClassName("LOGIN")[1].value;
+	
+	if (loginEl == username & passwordEl == password) {
+		
+		if (is_hacked) {
+			document.getElementById("MAIN-LOGIN").innerHTML = "Access token accepted."
+			document.getElementById("MAIN-LOGIN").style.color = "lightgreen";
+			return
+		}
+
+		document.getElementById("MAIN-LOGIN").innerHTML = "Access token timed out.<br>Additional authorization required.<br><br>Plug in your hardware authentication key (FIDO2).<br><div id='COUNTER'>0.0%</div>"
+		interval = setInterval(setCounter, 200)
+	} else {
+		document.getElementById("LOGIN-BUTTON").innerText = "Invalid";
+		document.getElementById("LOGIN-BUTTON").style.color = "red";
+		setTimeout(function recolor() {
+			document.getElementById("LOGIN-BUTTON").innerText = "Login";
+			document.getElementById("LOGIN-BUTTON").style.color = "black";
+		}, 1000)
+	}
+}
+
+function visited_nsa(id) {
+	window.ue.webbrowser.check_if_nsa_hacked(id).then(function(ReturnValue) {
+		is_hacked = ReturnValue;
+	})
+}
+
+function dialogueCheck() {
+}
+
+window.onload = function() {
+	id = Number(window.location.search.substring(1))
+	visited_nsa(id);
+	window.ue.webbrowser.visited_nsa(id);
+	if (id == 0) {
+		username = "mark_berl_54434"
+		password = "ph6hA$qEqt!$Aw"
+		document.documentElement.style.setProperty('--mainColor', "#ad3e38");
+	} else if (id == 1) {
+		username = "jberry_333"
+		password = "b4zmDYBDf?2Tz4"
+		document.documentElement.style.setProperty('--mainColor', "#60a0b3");
+	} else if (id == 2) {
+		username = "pReat_591"
+		password = "mqjrS8!k?UNZXE"
+		document.documentElement.style.setProperty('--mainColor', "#a68965");
+	}
+}
+
+</script>
+<div id="MAIN">
+	<div id="MAIN-LABEL">
+		National Security Agency
+	</div>
+	<div id="MAIN-LOGIN">
+		Account Details
+		<input type="text" style="margin-top: 10px;" class="LOGIN" placeholder="Login">
+		<input type="text" style="margin-top:20px;" class="LOGIN" placeholder="Password">
+		<input type="button" id="LOGIN-BUTTON" value="Login" onclick="clickedLogin()">
+	</div>
+</body>

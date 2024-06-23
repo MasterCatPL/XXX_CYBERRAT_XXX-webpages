@@ -1,0 +1,363 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	background-color: #7cf2c7;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	font-family: Calibri;
+	align-items: center;
+	margin: 0px;
+	background-image: url(CSS/Images/InstagrammePattern.webp);
+}
+
+#MAIN {
+	width: 700px;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#TITLE {
+	font-size: 60px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-shadow: 2px 2px black;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#IMAGE {
+	width: 100px;
+	margin-right: 15px;
+}
+
+#INPUT {
+	outline: none;
+	border: 1px solid rgb(0, 0, 0);
+	width: 100%;
+	margin: 0 auto;
+	font-size: 21px;
+	font-family: Calibri;
+	background-color: white;
+	height: 40px;
+	color: rgb(0, 0, 0);
+	text-align: center;
+}
+
+#INPUT-BUTTON {
+	background-color: white;
+	outline: none;
+	height: 35px;
+	width: 200px;
+	color: rgb(0, 0, 0);
+	font-family: Calibri;
+	font-size: 18px;
+	cursor: pointer;
+	
+}
+
+#INPUT-BUTTON:hover {
+	background-color: rgba(230, 230, 230);
+}
+
+#TITLE2 {
+	margin-top: 20px;
+	font-size: 40px;
+	text-align: center;
+	color: white;
+	text-shadow: 2px 2px black;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+}
+
+#PHOTOS {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-bottom: 100px;
+}
+
+.OUTPUTIMAGE {
+	width: 200px;
+	margin: 5px;
+	border-radius: 8px;
+}
+
+.OVERLAYIMAGE {
+	width: 200px;
+	filter: blur(10px);
+	margin: 5px;
+}
+
+#WRAPPER {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 80%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+}
+
+#WRAPPER2 {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	justify-content: center;
+}
+
+#OVERLAY {
+	width: 100%;
+	position: absolute;
+	background-color: #7cf2c7;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-image: url(CSS/Images/InstagrammePattern.webp);
+	display: none;
+}
+
+#OVERLAY-TITLE {
+	margin-top: 20px;
+	font-size: 41px;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.1);
+	text-align: center;
+	border-radius: 8px;
+	color: white;
+	text-shadow: 2px 2px black;
+
+}
+
+#OVERLAY-MAIN {
+	width: 700px;
+	display: flex;
+	flex-direction: column;
+}
+
+#OVERLAY-IMAGES {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	justify-content: center;
+	width: 100%;
+	flex-wrap: wrap;
+	overflow-y: hidden;
+	height: 635px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(200, 200, 200);
+  border-radius: 10px;
+}
+
+#OVERLAY-UP {
+	min-height: 100px;
+	background-color: black;
+	width: 100%;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#BACK {
+	width: 150px;
+	height: 30px;
+	outline: none;
+	background-color: white;
+	color: black;
+	font-family: Calibri;
+	border-radius: 4px;
+	font-size: 21px;
+	cursor: pointer;
+}
+
+#BACK:hover {
+	filter: brightness(0.8);
+}
+
+#INPUT-BUTTON {
+	width: 150px;
+	height: 30px;
+	outline: none;
+	background-color: white;
+	color: black;
+	font-family: Calibri;
+	border-radius: 4px;
+	font-size: 21px;
+}
+
+#OVERLAY-UPTEXT {
+	font-family: Calibri;
+	margin-bottom: 10px;
+	font-size: 18px;
+	text-align: center;
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+var gigaInterval;
+function spawnRandomImages() {
+	let container = document.getElementById('PHOTOS')
+	for (let i = 0; i < 9; i++) {
+		let img = document.createElement('img');
+		img.src = 'CSS/Images/People/' + Math.round(Math.random() * 300) + ".jfif";
+		img.className = "OUTPUTIMAGE"
+		container.appendChild(img);
+	}
+}
+
+function spawnRandomImagesOverlay() {
+	let container = document.getElementById('OVERLAY-IMAGES')
+	for (let i = 0; i < 9; i++) {
+		let img = document.createElement('img');
+		img.src = 'CSS/Images/People/' + Math.round(Math.random() * 300) + ".jfif";
+		img.className = "OVERLAYIMAGE"
+		container.appendChild(img);
+	}
+	let length = container.children.length
+	for (let i = 0; i < length; i++) {
+		let copy = container.children[i].cloneNode(false);
+		container.appendChild(copy);
+	}
+}
+
+function switchView() {
+	document.getElementById("MAIN").style.display = "none"
+	document.getElementById("OVERLAY").style.display = "flex"
+	let username = document.getElementById("INPUT").value;
+	document.getElementById("OVERLAY-TITLE").innerText = username + "\nProfile"
+}
+
+function switchViewBack() {
+	document.getElementById("MAIN").style.display = "flex"
+	document.getElementById("OVERLAY").style.display = "none"
+	clearInterval(gigaInterval)
+}
+
+function animation() {
+	let main = document.getElementById("OVERLAY-IMAGES");
+	main.scroll({
+		top: main.scrollTop + 320,
+		left: 0,
+		behavior: 'smooth'
+	});
+	
+	if (main.scrollTop > 624) {
+		main.scroll(0, 0)
+			main.scroll({
+		top: main.scrollTop + 320,
+		left: 0,
+		behavior: 'smooth'
+	});
+	}
+}
+
+
+function executeSearch(service) {
+	let username = document.getElementById("INPUT").value;
+	//	ID | CONTENT (e.g selfie.png) | TYPE
+		var gigaInterval = setInterval(animation, 500)
+		setTimeout(() => {
+			clearInterval(gigaInterval);
+			window.ue.webbrowser.get_infosec_by_name(username, service).then(function(ReturnValue) {
+				let content = ReturnValue.split("|")[1]
+				let type = ReturnValue.split("|")[2]
+				if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+					document.getElementById("OVERLAY-UPTEXT").innerText = "This profile seems irrelevant to your cybercriminal doings. You should move on."
+					return
+				}
+				let textDiv = document.getElementById("OVERLAY-UPTEXT")
+				textDiv.innerText = "After scanning the profile, you've found some sensitive material, of which the most important was:\n" + content + " (" + type + ")"
+			});
+		}, 10000);
+
+}
+
+window.onload = function () {
+	let service = "searchInstagramme"
+	spawnRandomImages();
+	spawnRandomImagesOverlay();
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+}
+
+</script>
+<div id="OVERLAY">
+	<div id="OVERLAY-UP">
+		<div id="OVERLAY-UPTEXT">
+			You are looking at someone's profile. Do you wish to browse it and search for possible clues about the person?
+		</div>
+		<div>
+			<input type="button" id="BACK" value="Back" onclick="switchViewBack()">
+			<input type="button" id="INPUT-BUTTON" value="Browse">
+		</div>
+	</div>
+	<div id="OVERLAY-MAIN">
+		<div id="OVERLAY-TITLE">
+			DefaultUsername<br>Profile
+		</div>
+		<div id="OVERLAY-IMAGES">
+		</div>
+	</div>
+</div>
+<div id="MAIN">
+	<div id="TITLE">
+		<img src="CSS/Images/CameraIcon.svg" id="IMAGE">
+		Instagramme
+	</div>
+	<div id="WRAPPER">
+		<input id="INPUT" type="text" placeholder="Search by Instagramme username">
+	</div>
+	<div id="WRAPPER2">
+		<input id="INPUT-BUTTON" type="button" value="Search" onclick="switchView()">
+	</div>
+	<div id="TITLE2">
+		LATEST PHOTOS
+	</div>
+	<div id="PHOTOS">
+	</div>
+</div>
+</body>

@@ -1,0 +1,325 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Azonix;
+  src: url(CSS/Fonts/Azonix.otf);
+}
+
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+@font-face {
+  font-family: CalibriBold;
+  src: url(CSS/Fonts/CalibriBold.ttf);
+}
+
+
+body {
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	font-family: Calibri;
+	background-color: #b4c6f0;
+}
+
+#UPPER {
+	background-color: #46568c;
+	height: 100px;
+	text-align: center;
+	display: flex;
+	color: white;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	font-family: Azonix;
+}
+
+#IMAGE {
+	background-image: url(CSS/Images/ProxywareBG.png);
+	width: 100%;
+	height: 550px;
+	background-position: 50% -445px;
+}
+
+#MID {
+	font-size: 60px;
+	margin-left: 30px;
+	margin-right: 30px;
+	font-family: Azonix;
+	text-shadow: 3px 3px black;
+	cursor: pointer;
+}
+
+#LEFT {
+	font-size: 21px;
+	text-shadow: 2px 2px black;
+	cursor: pointer;
+	margin-top: 25px;
+}
+
+#RIGHT {
+	font-size: 21px;
+	text-shadow: 2px 2px black;
+	cursor: pointer;
+	margin-top: 25px;
+}
+
+#MID:hover {
+	color: #ca6bd9
+}
+
+#LEFT:hover {
+	color: #ca6bd9
+}
+
+#RIGHT:hover {
+	color: #ca6bd9
+}
+
+.LABEL {
+	width: 100%;
+	min-height: 100px;
+	background-color: #a7b6db;
+	font-family: Azonix;
+	font-size: 60px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: rgb(37, 47, 113);
+}
+
+.UNDER-LABEL {
+	background-color: #b4c6f0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.EXPLAINER {
+	width: 100%;
+	max-width: 700px;
+	font-size: 21px;
+	color: rgb(37, 47, 113);
+	text-align: center;
+	margin-top: 20px;
+	padding-bottom: 30px;
+	font-family: CalibriBold;
+}
+
+#BUTTON {
+	width: 350px;
+	height: 35px;
+	background-color: rgb(37, 47, 113);
+	font-size: 21px;
+	font-family: Calibri;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 16px;
+	color: white;
+	cursor: pointer;
+}
+
+#BUTTON:hover {
+	filter: brightness(1.2);
+}
+
+#WRAPPER {
+	width: 100%;
+	min-height: 100px;
+	background-color: #a7b6db;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	color: rgb(37, 47, 113);
+	align-items: center;
+}
+
+#FOOTER {
+	height: 100px;
+	background-color: #46568c;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: rgb(37, 47, 113);
+	font-size: 19px;
+	font-family: CalibriBold;
+}
+
+.highlight {
+	color: #ca6bd9;
+}
+
+#FIXED {
+	width: 100%;
+	height: 100%;
+	background-color: #b4c6f0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#FIXEDINFO {
+	background-color: #46568c;
+	text-align: center;
+	width: 500px;
+	height: 500px;
+	border-radius: 16px;
+}
+
+#FIXEDTITLE {
+	font-size: 40px;
+	color: white;
+	margin-top: 15px;
+	text-shadow: 0px 0px 10px black;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+#FIXEXPLAINER {
+	color: white;
+	font-size: 21px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin-top: 20px;
+	border-top: 2px solid white;
+	padding-top: 20px;
+}
+
+#RENEW {
+	margin: 0 auto;
+	margin-top: 30px;
+	width: 350px;
+	height: 35px;
+	border-radius: 35px;
+	border: 1px solid black;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 21px;
+	cursor: pointer;
+}
+
+#RENEW:hover {
+	filter: brightness(0.8);
+}
+
+#hidden {
+	display: none;
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+let interval;
+let counter = 0;
+function renew() {
+	document.getElementById("RENEW").innerText = "Restoring page backup [" + counter + "%]";
+	counter++;
+	if (counter >= 100) {
+		document.getElementById("RENEW").innerText = "Restoring page backup [100%]";
+		clearInterval(interval);
+		window.ue.webbrowser.renewed_proxyware().then(function(ReturnValue) {
+			if (ReturnValue) {
+				document.getElementById("FIXED").style.display = "none";
+				document.getElementById("hidden").style.display = "block";
+			} else {
+				document.getElementById("RENEW").innerText = "Failure: Insufficient funds";
+			}
+		})
+	}
+}
+
+function startLoad() {
+	interval = setInterval(renew, 100);
+}
+
+//make every download start a hack which gives you no reward
+function startHack() {
+	window.ue.webbrowser.proxyware_hack()
+}
+
+window.onload = function () {
+	window.ue.webbrowser.check_if_renewed().then(function(ReturnValue) {
+		if (ReturnValue) {
+			document.getElementById("FIXED").style.display = "none";
+		}
+	})
+}
+
+</script>
+<div id="FIXED">
+	<div id="FIXEDINFO">
+		<div id="FIXEDTITLE">
+			This domain has expired as of 2021-07-11
+		</div>
+		<div id="FIXEXPLAINER">
+			We've detected you are the owner of this website. The domain has expired and it's currently in the Redemption Grace Period phase. Do you wish to renew it now?<br><br><span style="color: red">ACCOUNT NAME</span><br>XXX_CYBERRAT_XXX<br><br><span style="color: red">ACCOUNT ID</span><br>#44032345
+		</div>
+		<div id="RENEW" onclick="startLoad()">
+			RENEW DOMAIN (0.025 ETH)
+		</div>
+	</div>
+</div>
+<div id="hidden">
+	<div id="UPPER">
+		<div id="LEFT" onclick="startHack()">
+			Download
+		</div>
+		<div id="MID">
+			ULTRA VPN
+		</div>
+		<div id="RIGHT" onclick="startHack()">
+			Install 
+		</div>
+	</div>
+	<div id="IMAGE">
+	</div>
+	<div class="LABEL">
+		FREE ULTRA GAMING VPN
+	</div>
+	<div class="UNDER-LABEL">
+		<div class="EXPLAINER">
+			<span class="highlight">FREE</span> ULTRA <span class="highlight">GAMING</span> VPN is the ultimate VPN solution for true gamers! Conquer your dreams and marry your anime waifu with this one little piece of software. FOR <span class="highlight">FREE. FREE. FREE. FREE.</span> No need to pay ANYTHING. The <span class="highlight">FREE</span> ULTRA <span class="highlight">GAMING</span> VPN will allow you to dominate your opponents in video games! Just set your server somewhere in Egypt so you get matched with casual players instead of sweaty EU/US guys!
+		</div>
+	</div>
+	<div class="LABEL">
+		<span>ARE YOU REALLY <span class="highlight">FREE</span>?</span>
+	</div>
+	<div class="UNDER-LABEL">
+		<div class="EXPLAINER">
+			Short answer: yes! <span class="highlight">FREE</span> ULTRA <span class="highlight">GAMING</span> VPN is totally free. We're paying for the servers by ourselves and letting use it for free! Isn't that cool? <span class="highlight">We are like a charity.</span> It means a lot for us bringing you so much joy and everything. Our dream was always to help people. We designed <span class="highlight">FREE</span> ULTRA <span class="highlight">GAMING</span> VPN to be the perfect solution for those who can't afford regular VPNs and yet desire their functionality.
+		</div>
+	</div>
+	<div class="LABEL">
+		IS IT SAFE? ARE YOU A LEGIT COMPANY?
+	</div>
+	<div class="UNDER-LABEL">
+		<div class="EXPLAINER">
+			FREE ULTRA GAMING VPN is maintained by ULTRACODERS LLC which is a registered buisness based in the US. That means yes, we are a legitimate company. We are not allowed by the US law to harm your PC in any way. For example, if we were to <span class="highlight">sell access to our customers' computers</span> on a cybercrime forum like TheDarkHub, we would be commiting a crime! We would never use our customers' devices as <span class="highlight">residential proxies or install a keylogger</span> on their devices to extract sensitive credentials. And most importantly, we wouldn't just <span class="highlight">use our customers' networks as VPN servers</span> for other VPN users to avoid actually paying a cent for running this whole VPN operation. That would violate our morals and conduct guidances.
+		</div>
+	</div>
+	<div id="WRAPPER">
+		<div id="BUTTON"  onclick="startHack()">
+			DOWNLOAD GAMING VPN NOW
+		</div>
+	</div>
+	<div id="FOOTER">
+		For technical problems, contact #XXX_CYBERRAT_XXX on the Matix network.<br>
+		Last updated: 2021-04-01
+	</div>
+</div>
+</body>

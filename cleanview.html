@@ -1,0 +1,375 @@
+<head>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/Common.js"></script>
+<style>
+body {
+	background-color: rgb(0, 0, 0);
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	background-image: url(CSS/Images/CleanViewPattern.webp);
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(CSS/Fonts/Manrope.otf);
+}
+
+@font-face {
+  font-family: ManropeBold;
+  src: url(CSS/Fonts/ManropeBold.otf);
+}
+
+.TILE {
+	width: 300px;
+	height: 300px;
+	background-color: white;
+	border-radius: 16px;
+	text-align: center;
+	margin: 30px;
+	border: 1px solid rgb(255, 255, 255);
+}
+
+#TILE-WRAPPER {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 5px;
+	justify-content: center;
+	align-items: center;
+}
+
+.TILE-UP {
+	font-family: Manrope;
+	margin-top: 10px;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.TILE-IMG {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-position: center;
+	background-size: 300px 300px;
+	border-radius: 16px;
+}
+
+
+.TILE-TEXT {
+	margin-left: 15px;
+	margin-right: 15px;
+	font-family: Manrope;
+	font-size: 14px;
+	text-align: justify;
+	
+}
+
+#INPUT {
+	width: calc(100% - 60px);
+	margin: 0 auto;
+	margin-top: 5px;
+	outline: 0;
+	border: 1px solid black;
+	text-align: center;
+	font-family: Manrope;
+	height: 25px;
+	border-radius: 4px;
+}
+
+#INPUT-BUTTON {
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 15px;
+	background-color: #bedfff;
+	outline: none;
+	border: 1px solid black;
+	margin-top: 5px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+#INPUT-BUTTON:hover {
+	filter: brightness(1.2);
+}
+
+#BUY-USE {
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 15px;
+	background-color: #bedfff;
+	outline: none;
+	border: 1px solid black;
+	margin-top: 15px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+#BUY-USE:hover {
+	filter: brightness(1.2);
+}
+
+
+.bolded {
+	font-family: ManropeBold;
+}
+
+.CUSTOM {
+	box-sizing: border-box;
+	width: 302px;
+	height: 302px;
+	display: flex;
+	flex-direction: column;
+}
+
+</style>
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+//if you delete this, the webpage will transfer ~10mb/s...
+var preloader;
+function preload() {
+	for (let i = 0; i <= 300; i++) {
+		preloader = document.getElementById("IMG-PRELOADER");
+		var new_img = document.createElement("div");
+		new_img.style.height = "300px";
+		new_img.style.width = "300px";
+		new_img.style.position = "absolute";
+		new_img.style.backgroundImage = "url(CSS/Images/People/" + i + ".jfif)";
+		preloader.appendChild(new_img);
+	}
+}
+
+function panelling() {
+	let tiles = document.getElementsByClassName("TILE-IMG");
+	for (let i = 0; i < tiles.length; i++) {
+		let hue = Math.round(Math.random() * 255);
+		let color = "hsl(" + hue + ", 20%, 50%)";
+		tiles[i].style.backgroundColor = color;
+		tiles[i].style.backgroundImage = "url()";
+	}
+}
+
+var interval1;
+function startAnim() {
+	let tiles = document.getElementsByClassName("TILE-IMG");
+	for (let i = 0; i < tiles.length; i++) {
+		let random = Math.floor(Math.random() * 300);
+		tiles[i].style.backgroundImage = preloader.childNodes[random].style.backgroundImage;
+		tiles[i].style.backgroundColor = "rgba(0, 0, 0)";
+	}
+	interval1 = setInterval(continueAnim, 150);
+}
+
+function continueAnim() {
+	let tiles = document.getElementsByClassName("TILE-IMG");
+	for (let i = 0; i < tiles.length; i++) {
+		let roll = Math.random();
+		if (roll < 0.5) {
+			continue;
+		}
+		let random = Math.floor(Math.random() * 300);
+		tiles[i].style.backgroundImage = preloader.childNodes[random].style.backgroundImage;
+	}
+}
+
+var seq_counter = 0;
+
+function stopAnim() {
+	clearInterval(interval1);
+	let tiles = document.getElementsByClassName("TILE-IMG");
+	for (let i = 0; i < tiles.length; i++) {
+		tiles[i].style.backgroundImage = "url()";
+	}
+	let name = document.getElementById("INPUT").value;
+	window.ue.webbrowser.get_infosec_by_name(name, "CleanView").then(function (ReturnValue) {
+		get_service_access("CleanView");
+		if (ReturnValue == "TRASHINPUT") {
+			displayAlert("The file you entered is not a selfie and doesn't contain target's face.");
+			return;
+		}
+		if (ReturnValue == "NORESULTS") {
+			SavedReturnValue = "0 results found.\nIf this is unexpected, try checking the spelling.";
+		} else {
+			let results = ReturnValue.split("|");
+			SavedReturnValue = "Output:\n" + results[1] + "\n\nType:\n" + results[2];
+		}
+		let tiles2 = document.getElementsByClassName("CUSTOM");
+		for (let i = 0; i < tiles2.length; i++) {
+			tiles2[i].style.display = "flex";
+			tiles2[i].style.justifyContent = "center";
+			tiles2[i].style.alignItems = "center";
+			tiles2[i].style.fontSize = "21px";
+			tiles2[i].innerHTML = "";
+			tiles2[i].innerText = "RESULTS\n\n" + SavedReturnValue;
+		}
+		panelling();
+	});
+}
+
+function mulberry32(a) {
+	return function () {
+		var t = (a += 0x6d2b79f5);
+		t = Math.imul(t ^ (t >>> 15), t | 1);
+		t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+		return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+	};
+}
+
+function beginChecking() {
+	startAnim();
+	let element = document.getElementsByClassName("TILE-TEXT")[0];
+	element.style.textAlign = "center";
+	element.innerText = "Searching for photos with fitting biometrics...\n0%";
+	let percent = 0;
+	let interval3 = setInterval(replaceThings, 100);
+	function replaceThings() {
+		let ster = percent / 10 + "%";
+		element.innerText = element.innerText.replace(ster, (percent + 3) / 10 + "%");
+		percent++;
+		percent++;
+		percent++;
+		if (percent >= 1000) {
+			clearInterval(interval3);
+			stopAnim();
+		}
+	}
+}
+
+var SavedReturnValue;
+function uploadPhoto(service) {
+	let name = document.getElementById("INPUT").value;
+	if (name.includes("photo")) {
+		displayAlert("The file you entered is a photo, not a selfie: it doesn't contain target's face.")
+		play_sound(false);
+		return
+	}
+	if (name.includes("video")) {
+		displayAlert("The file you entered is a video, not a selfie: it doesn't contain target's face.")
+		play_sound(false);
+		return
+	}
+	if (!name.includes("selfie")) {
+		displayAlert("The file you entered is not a selfie.")
+		play_sound(false);
+		return
+	}
+	let tiles = document.getElementsByClassName("TILE-IMG");
+	let random = Math.round(Math.random() * 300);
+	for (let i = 0; i < tiles.length; i++) {
+		tiles[i].style.backgroundImage = preloader.childNodes[random].style.backgroundImage;
+	}
+	document.getElementById("INPUT-BUTTON").value = "Check photo";
+	document.getElementById("INPUT-BUTTON").onclick = beginChecking;
+}
+
+window.onload = function () {
+	let service = "CleanView";
+	preload();
+	panelling();
+	get_static_npc_username(service);
+	document.getElementById("INPUT-BUTTON").onclick = function () {
+		uploadPhoto(service);
+	};
+	get_service_access(service);
+
+	window.ue.webbrowser.get_service_price(service).then(function (ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").value = "Buy API query (" + price + " ETH)";
+		document.getElementById("BUY-USE").onclick = function () {
+			buyQuery(service, price);
+		};
+	});
+};
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="IMG-PRELOADER" style="width:1px;height:1px;opacity:0;background-size:1px 1px"></div>
+<div id="TILE-WRAPPER">
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE CUSTOM">
+		<div class="TILE-UP">Upload selfie</div>
+		<div class="TILE-TEXT">
+			After uploading the selfie, the CleanView AI will extract the biometrics of the face from the photo and compare them with our database of ~20 billion photos. All of our pictures contain very accurate metadata, which will allow us to directly supply you with target's full name or address.
+		</div>
+		<div style="margin-top: auto;margin-bottom: 15px;">
+			<input type="text" id="INPUT" placeholder="Filename">
+			<input type="button" onclick="uploadPhoto()" id="INPUT-BUTTON" value="Load selfie">
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE CUSTOM">
+		<div class="TILE-UP">About CleanView</div>
+		<div class="TILE-TEXT">
+			CleanView AI is a facial recognition database with ~20 billion images scraped from the internet. Without owner's consent, of course, but hey, who cares, right? If they post it on their FB, it's public knowledge! If you feed the AI a photo of your target, it'll probably find his name one way or another: not only by socials, but some leaked school pictures, driver licenses, etc.
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE CUSTOM">
+		<div class="TILE-UP">About me</div>
+		<div class="TILE-TEXT">
+			I go by username <span id="OWNER-NAME">DefaultUsername</span>. IRL, I work as a CISO (Chief Information Security Officer) for a large company. When Snowden leak came out, I've found myself morally aligned more with the blackhat hackers than the "good" guys. So I figured I'd give you a fancy tool our security team bought some time ago: the CleanView API. It's usually only sold to companies, so here's a nice way to pick it up as a solo.
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE CUSTOM">
+		<div class="TILE-UP">Pay for access</div>
+		<div class="TILE-TEXT">
+			<span>Searching face pictures will cost you some ETH. Your available uses are assigned to your API key, which is saved as a browser cookie. Currently, you have <span id="USES">0</span> available API queries.</span>
+			<div style="display: flex;justify-content:center;align-items:center;width:100%">
+				<input type="button" id="BUY-USE" value="Buy API query (3 ETH)">
+			</div>
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+	<div class="TILE">
+		<div class="TILE-IMG">
+		</div>
+	</div>
+</div>
+</body>

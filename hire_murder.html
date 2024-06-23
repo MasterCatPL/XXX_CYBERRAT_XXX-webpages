@@ -1,0 +1,199 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: rgb(0, 30, 0);
+	margin: 0;
+	display: flex;
+	font-family: Unifont;
+	font-size: 19px;
+	color: rgb(0, 255, 0);
+	background-image: url('CSS/Images/SquarePattern.png');
+	padding-bottom: 100px;
+	flex-direction: column;
+	align-items: center;
+}
+
+#MAIN {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	width: 700px;
+	text-align: center;
+}
+
+.TITLE {
+	text-align: center;
+	font-size: 24px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 255, 0);
+  border-radius: 10px;
+}
+
+#BUTTON {
+	background-color: black;
+	border: 1px solid rgb(0, 255, 0);
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 8px;
+	width: 250px;
+	margin: 0 auto;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+#BUTTON:hover {
+	background-color: rgba(0, 255, 0, 0.1);
+}
+
+#BUTTON2 {
+	background-color: black;
+	border: 1px solid rgb(0, 255, 0);
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 8px;
+	width: 250px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+#BUTTON2:hover {
+	background-color: rgba(0, 255, 0, 0.1);
+}
+
+#INPUT {
+	outline: none;
+	width: 400px;
+	border: 1px solid rgb(0, 255, 0);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: black;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 21px;
+	color: rgb(0, 255, 0);
+	margin-bottom: 20px;
+	border-radius: 8px;
+}
+
+#PRICE {
+	color: orange;
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+let uploading = 0
+let interval;
+function setUploading() {
+	document.getElementById("BUTTON").innerText = "Uploading DoxDoc: " + (uploading).toFixed(1) + "%"
+	uploading = uploading + 0.3
+	if (uploading > 100) {
+		clearInterval(interval)
+		let username = document.getElementById("INPUT").value;
+		window.ue.webbrowser.order_hit(username).then(function(ReturnValue) {
+			if (ReturnValue == 0) {
+				document.getElementById("BUTTON").innerText = "Hit not accepted: not enough information or invalid username."
+				document.getElementById("BUTTON").style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+			} else if (ReturnValue == 1) {
+				document.getElementById("BUTTON").innerText = "Hit not accepted: not enough money."
+				document.getElementById("BUTTON").style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+			} else if (ReturnValue == 2) {
+				document.getElementById("BUTTON").innerText = "Uploaded. Hit accepted."
+				document.getElementById("BUTTON").style.backgroundColor = "rgba(0, 255, 0, 0.4)"
+			}
+		})
+
+	}
+}
+
+
+function clickedButton() {
+	if (document.getElementById("INPUT").value == "") {
+		document.getElementById("EMPTYERROR").innerText = "ERROR: username field is empty."
+		return
+	} else {
+		document.getElementById("EMPTYERROR").innerText = ""
+	}
+	uploading = 0;
+	clearInterval(interval);
+	interval = setInterval(setUploading, 100);
+	document.getElementById("BUTTON").style.backgroundColor = "rgba(255, 0, 0, 0.4)"
+
+	
+}
+
+function get_hit_price(username) {
+	window.ue.webbrowser.get_hit_price(username).then(function(ReturnValue) {
+		document.getElementById("PRICE").innerText = (ReturnValue).toFixed(3)
+	})
+}
+
+function get_username() {
+	window.ue.webbrowser.get_static_npc_username("HireHitman").then(function(ReturnValue) {
+		document.getElementById("OWNER-NAME").innerText = ReturnValue;
+	})
+}
+
+function clickedButton2() {
+	let username = document.getElementById("INPUT").value;
+	get_hit_price(username);
+}
+
+
+window.onload = function() {
+	get_username();
+}
+
+</script>
+<div id="MAIN">
+	<div class="TITLE" style="font-size:50px;margin-bottom:60px;">Murder for hire</div>
+	<div id="DESCR">I am a hitman for hire. I present the highest quality of service. I have completed 40 contracts and my customers are fully satisfied. I've grown up in a troublesome neighborhood around South America and I'm used to doing my work professionaly, quietly and with respect to privacy of my clients. The price for a hit reflects my excellent services. It's not cheap and the price is not negotiable. <span style="color:red">If you can't afford it - go away.</span><br><br>I hate when people waste my time.</div>
+	<div class="TITLE">My services</div>
+	<span style="color:red;"><div>Murder (normal)</div>
+	<div>Murder (rivals)</div>
+	<div>Normal with message</div>
+	<div>Criminal with message</div>
+	<div>Politician / High Value</div>
+	</span>
+	<div>Person with security: additional payment will be needed</div>
+	<div>Depending on the contract, I might include additional costs, for example travel costs.</div>
+	<div class="TITLE">About the pricing</div>
+	<div>A "normal" murder is the cheapest option, as it's generally more safe; I might poison, snipe or kidnap & overdose a person. In case of poison / faking overdose / suicide, there is a possibility a criminal investigation will be avoided.</div><br>
+	<div>Murdering a person engaging in criminal activities is more dangerous, as they tend to be armed and ready for violence.</div><br>
+	<div>Murdering a criminal with a message is expensive, because it might get me involved in some conflicts. If you want to get someone rid of your turf... do it yourself. <span style="color:red">Or pay up.</span></div><br>
+	<div>Politicians and people with high security are risky. I might not take the job.</div>
+	<div class="TITLE">About the payments</div>
+	<div>I take payments <span style="color:red">only in cryptocurrencies</span>, preferably Ethereum</div><br>
+	<div>You need to pay 30% of your contract value before I'll take it. If I fail, I will refund you. You can rely on my reputation. You will be treated fairly.</div>
+	<div>If you've read the above and decided to hire me, shoot me a message. My username is "<span id="OWNER-NAME">DefaultUsername</span>".</div><br>
+	<div class="TITLE">What information I need</div>
+	<div>To execute the hit, <span style="color:red;">I will need targets full name and full address.</span> I don't take face / work descriptions. You must tell me exactly who to hit.</div>
+	<div>With that being said, the more information you provide me with, the faster & cleaner I will be able to execute the hit. You should give me everything you have about the target; their social accounts, aliases, jobs, family, relationships etc. Every piece of information is important.</div>
+	<div class="TITLE">Upload target information & order your hit </div>
+	<div style="margin-bottom:20px; color:red;">I give you a discount for new customers. Click the button below to find out how much I'll chare you this time. The cost is in ETH: <span id="PRICE"></span></div>
+	<input type="text" id="INPUT" placeholder="DoxDoc main username">
+	<div id="EMPTYERROR" style="font-size:14px; color: red;"></div>
+	<div id="BUTTON2" onclick="clickedButton2()">Check price for this hit</div>
+	<div id="BUTTON" onclick="clickedButton()">Upload DoxDocs file</div>
+</div>
+</body>

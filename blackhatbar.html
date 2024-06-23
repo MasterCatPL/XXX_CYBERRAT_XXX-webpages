@@ -1,0 +1,118 @@
+<head>
+<style>
+:root {
+	--fontColor: rgb(255, 255, 255);
+	--secondaryColor: rgb(20, 20, 20);
+}
+
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(CSS/Fonts/Manrope.otf);
+}
+
+@font-face {
+  font-family: ManropeBold;
+  src: url(CSS/Fonts/ManropeBold.otf);
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	background-color: black;
+	flex-direction: column;
+	font-family: Manrope;
+	color: var(--fontColor);
+}
+
+#EXPLAINER {
+	width: 700px;
+	background-color: var(--secondaryColor);
+	margin: 0 auto;
+	padding: 15px;
+	border-radius: 16px;
+	font-size: 18px;
+	margin-bottom: 100px;
+}
+
+#UPPER-IMG {
+	margin: 0 auto;
+}
+
+b {
+	color: rgb(0, 255, 0);
+	font-family: ManropeBold;
+} 
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+#BUTTONGO {
+	background-color: rgb(0, 255, 0);
+	margin: 0 auto;
+	width: 250px;
+	height: 40px;
+	border-radius: 16px;
+	display: block;
+	font-size: 21px;
+	cursor: pointer;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border: 0;
+}
+
+#BUTTONGO:hover {
+	border: 0;
+	padding: 0;
+	filter: brightness(0.9);
+	outline: none;
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function get_static_npc_username(){
+	window.ue.webbrowser.get_static_npc_username('BlackHatOwner').then(function(ReturnValue) {
+		document.getElementById("OWNER-USERNAME").innerText = ReturnValue;
+	})
+}
+
+window.onload = function(){
+	get_static_npc_username();
+}
+
+</script>
+<img src="CSS/Images/BlackHatLogo.png" id="UPPER-IMG">
+<div id="EXPLAINER" onclick="get_static_npc_username()">
+	Welcome to The Blackhat Bar forum community!<br><br>
+	
+	We are the biggest community of pentesters and hackers on the deep web. This niche place serves as a middleman between our lovely blackhat hackers and their customers:<br><br>
+	<b>Don't like someone?</b> – Place your order! Give us all information you know about your target, set a reward, and then just wait for some friendly pentester to pick it up!<br><br>
+	<b>Need some money?</b> – If you have some hacking skills, then well, you are in the right place! Take one of the requests and dox the target to earn your cash. Crypto only!<br><br>
+	When creating a contract, please adhere to our <b>contract guidelines</b> listed below:
+	<ul>
+		<li>Share everything you know about the target. Every piece of information matters.</li>
+		<li>You must provide the payment UPFRONT to me, <span id="OWNER-USERNAME">[NAME]</span>; I will act as a middleman between you and the hacker to ensure nobody gets scammed.</li>
+		<li>There is a 5% middleman fee for every contract fulfilled on The Blackhat bar, conducted from contract giver.</li>
+		<li>Omission of the middleman fee, for example by following up on other platform, will result in a permament ban.</li>
+		<li>If your contract's value is less than $ 5k, there are no refunds; if nobody takes it, the upfront payment stays with me</li>
+	</ul>
+	Interested? Click the button below to enter THE BLACKHAT BAR<br>
+	<input type="button" id="BUTTONGO" onclick="window.location.replace('blackhatbar_main.html');" value="Enter marketplace">
+</div>
+</body>

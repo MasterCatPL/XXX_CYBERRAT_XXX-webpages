@@ -1,0 +1,338 @@
+<head>
+<style>
+:root {
+	--fontColor: rgb(0, 255, 0);
+	--secondaryColor: rgb(20, 20, 20);
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(CSS/Fonts/Manrope.otf);
+}
+
+@font-face {
+  font-family: ManropeBold;
+  src: url(CSS/Fonts/ManropeBold.otf);
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	background-color: black;
+	flex-direction: column;
+	font-family: Manrope;
+	color: var(--fontColor);
+}
+
+#UPPER-IMG {
+	margin: 0 auto;
+}
+
+b {
+	color: rgb(0, 255, 0);
+	font-family: ManropeBold;
+} 
+
+#CONTRACT-CONTAINER {
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	display: flex;
+	margin: 0 auto;
+}
+
+.CONTRACT {
+	margin: 15px;
+	width: 20%;
+	max-width: 325px;
+	height: 350px;
+	background-color: var(--secondaryColor);
+	display: flex;
+	flex-direction: column;
+	border-radius: 16px;
+	padding: 10px;
+	border: 1px solid rgb(0, 255, 0);
+	word-break: break-all;
+	min-width: 250px;
+}
+
+.CONTRACT-TITLE {
+	text-align: center;
+	border: 1px solid rgb(0, 255, 0);
+	border-radius: 8px;
+}
+
+.CONTRACT-TEXT {
+	text-align: center;
+	margin-top: 10px;
+	height: 144px;
+	overflow: auto;
+	word-break: break-word;
+}
+
+.CONTRACT-TEXT::-webkit-scrollbar {
+  width: 5px;
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
+.CONTRACT-TEXT::-webkit-scrollbar-thumb {
+  background: rgb(0, 255, 0);
+  border-radius: 10px;
+}
+
+.CONTRACT-LABEL {
+	text-align: center;
+	margin-top: 10px;
+	border: 1px solid rgb(0, 255, 0);
+	border-radius: 8px;
+}
+
+.CONTRACT-LABEL-2 {
+	text-align: center;
+	margin-top: 10px;
+	border: 1px solid rgb(0, 255, 0);
+	border-radius: 8px;
+}
+
+
+.CONTRACT-WRAPPER {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 5px;
+	flex-direction: column;
+}
+
+.CONTRACT-INFO {
+	text-align: center;
+	width: 100%
+}
+
+.CONTRACT-INFO-2 {
+	text-align: center;
+	width: 100%;
+}
+
+.EXPLAINER {
+	width: 700px;
+	background-color: var(--secondaryColor);
+	margin: 0 auto;
+	padding: 15px;
+	border-radius: 16px;
+	font-size: 18px;
+	margin-bottom: 30px;
+	color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.BUTTONTAKE {
+	background-color: rgb(0, 255, 0);
+	margin: 0 auto;
+	width: 100%;
+	max-width: 250px;
+	height: 30px;
+	border-radius: 16px;
+	display: block;
+	font-size: 21px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	border: 0;
+}
+
+.BUTTONTAKE:hover {
+	filter: brightness(0.9);
+	border: 0;
+	outline: 0;
+}
+
+#EXPLAINER2 {
+	text-align: center;
+	color: black;
+	background-color: rgb(0,255,0);
+	width: 500px;
+	margin: 0 auto;
+	padding: 5px;
+	border-radius: 16px;
+	font-size: 18px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script src="CSS/Common.js"></script>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function create_contract() {
+	window.ue.webbrowser.create_contract().then(function(ReturnValue) {
+		document.getElementById("OWNER-USERNAME").innerText = ReturnValue;
+	})
+}
+
+function create_contract2(ReturnValue) {
+	var charID = ReturnValue.split('ö')[0]
+	var pii = ReturnValue.split('ö')[1]
+	var username = ReturnValue.split('ö')[2]
+	console.log(pii)
+	console.log(charID)
+	console.log(username)
+}
+
+function spawnElements() {
+	for (let i = 0; i < 10; i++) {
+			let contract = document.getElementsByClassName("CONTRACT")[0].cloneNode(true);
+			let container = document.getElementById("CONTRACT-CONTAINER")
+			container.appendChild(contract);
+		}
+}
+
+function colorContract(index) {
+	document.getElementsByClassName("CONTRACT")[index].style.border = '1px solid rgb(0, 255, 0'
+}
+
+
+
+function create_contracts(continuer=0) {
+	let contracts = document.getElementsByClassName("CONTRACT");
+	
+	for (let i = 0; i < contracts.length; i++) {
+		let rolls = Math.random()
+		if (rolls < continuer) {
+			continue
+		} 
+		if (continuer != 0) {
+			document.getElementsByClassName("Contract")[i].style.border = '1px solid red'
+			setTimeout(colorContract, 300, i)
+		}
+	
+	
+		window.ue.webbrowser.create_contract().then(function(ReturnValue) {
+		
+
+			document.getElementsByClassName("CONTRACT-SECRET")[i].innerText = ReturnValue;
+
+			let charID = ReturnValue.split('ö')[0]
+			let pii = ReturnValue.split('ö')[1]
+			let username = ReturnValue.split('ö')[2]
+			let pii_array = pii.split('|')
+			let description = ReturnValue.split('ö')[3]
+			pii_array.shift()
+			
+			let sum = 0
+
+			for (let i = 0; i < pii_array.length; i++) {
+				sum = sum + translateCost(pii_array[i][0])
+			}
+			
+			document.getElementsByClassName("CONTRACT-LABEL-2")[i].innerText = 'Reward: ' + sum.toFixed(3) + ' ETH'
+			
+			document.getElementsByClassName("CONTRACT-TITLE")[i].innerText = 'CONTRACT #' + i
+			document.getElementsByClassName("CONTRACT-INFO")[i].innerText = translateContract(pii[1])
+			
+			//window.ue.webbrowser.get_infosec_contract(pii.split('|')[1]).then(function(ReturnValue) {
+			//	document.getElementsByClassName("CONTRACT-INFO-2")[i].innerText = ReturnValue
+			//})
+			
+			//debug
+			transster = ''
+			for (let i = 0; i < pii_array.length; i++) {
+				transster = transster + ' - ' + translateType(pii_array[i][0])
+			}
+			document.getElementsByClassName("CONTRACT-TEXT")[i].innerText = 'charID: ' + charID + '\nPII: ' + transster + '\nLength: ' + pii_array.length + '\nPII-ID: ' + pii
+			//debug end
+			
+			//not debug
+			document.getElementsByClassName("CONTRACT-TEXT")[i].innerText = description;
+
+		})
+	}	
+
+}
+
+var ReturnValue;
+
+function onClickedTake(element) {
+	ReturnValue = element.nextElementSibling.innerText;
+	display_str = "This site wants to open the database.exe app with following permissions:\n 1. Write data\nThe item be saved under ID: " + ReturnValue.split('ö')[0] + "\nAllow?"
+	displayAlert(display_str, true);
+	
+	let pii = ReturnValue.split('ö')[1]
+	window.ue.webbrowser.get_infosec_contract(pii.split('|')[1]).then(function(ReturnValue) {
+		element.parentElement.children[3].children[1].innerText = ReturnValue
+	})
+}
+
+function recolor() {
+	let contracts = document.getElementsByClassName("CONTRACT");
+	for (let i = 0; i < contracts.length; i++) {
+		document.getElementsByClassName("Contract")[i].style.border = '1px solid rgb(0, 255, 0)'
+	}
+}
+
+
+function saveContract() {
+	let pii = ReturnValue.split('ö')[1]
+	let username = ReturnValue.split('ö')[2]
+	let charID = ReturnValue.split('ö')[0]
+	window.ue.webbrowser.add_database_item('People', charID, 0, 0, 0, 'CONTRACT', true).then(function(ReturnValue) {
+	})
+	window.ue.webbrowser.add_character(username, pii, charID).then(function(ReturnValue) {
+	})
+}
+
+window.onload = function() {
+	spawnElements();
+	create_contracts();
+	//setInterval(create_contracts, 2000, 0.9);
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div style="font-size:21px;font-family:ManropeBold;">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div style="display: flex;">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';saveContract();">OK</div>
+		</div>
+	</div>
+</div>
+<img src="CSS/Images/BlackHatLogo.png" id="UPPER-IMG">
+<div class="EXPLAINER">
+	Below you will find contracts various people hate put on their targets. They contain basic information about their target. To fulfill the contract, you must provide the buyer with the full address / full name of their target.
+</div>
+<div id="EXPLAINER2">HACKER MARKETPLACE</div>
+<div id="CONTRACT-CONTAINER">
+	<div class="CONTRACT">
+		<div class="CONTRACT-TITLE">CONTRACT #1</div>
+		<div class="CONTRACT-TEXT">This little fucker is going to ruin my life. He stole my girlfriend, he seduced her with his flowers and shit whatvere man just kill him please</div>
+		<div class="CONTRACT-LABEL">TARGET INFO</div>
+		<div class="CONTRACT-WRAPPER">
+			<div class="CONTRACT-INFO">
+				Username
+			</div>
+			<div class="CONTRACT-INFO-2">
+				(Accept to show)
+			</div>
+		</div>
+		<div class="CONTRACT-LABEL-2">Reward: $55000</div>
+		<input type="button" onclick="onClickedTake(this)" value="Save contract" class="BUTTONTAKE">
+		<div style="display:none" class="CONTRACT-SECRET">secret</div>
+	</div>
+</div>
+</body>

@@ -1,0 +1,178 @@
+<head>
+<style>
+@font-face {
+  font-family: Noir;
+  src: url(CSS/Fonts/Noir_regular.otf);
+}
+
+@font-face {
+  font-family: NoirBold;
+  src: url(CSS/Fonts/Noir_bold.otf);
+}
+
+body {
+	background-color: rgb(34, 34, 34);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: Noir;
+	margin: 0px;
+	color: rgb(239, 239, 239);
+	background: linear-gradient(rgb(183, 85, 85), rgb(96, 55, 55), rgb(34, 34, 34));
+}
+
+
+
+#MAIN {
+	width: 100%;
+}
+
+#MAIN-UP {
+	background-color: rgb(97, 94, 90);
+	padding: 15px;
+	background-image: url(CSS/Images/cafeteria.jpg);
+	background-size: 100% auto;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-position: center;
+	text-align: center;
+	text-shadow: 0 0 3px rgb(0, 0, 0);
+	
+}
+
+.title1 {
+	text-shadow: 0 0 0px rgb(0, 0, 0);
+	font-size: 66px;
+	font-weight: bold;
+	display: block;
+	font-family: Noir;
+	text-align: center;
+	color: rgb(255, 110, 110);
+	margin-bottom: 20px;
+	user-select: none;
+}
+
+.warning {
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	background-color: rgb(255, 255, 210);
+	color: black;
+}
+
+
+#MIDDLE-TEXT {
+	margin-top: 50px;
+	width: 100%;
+	text-align: center;
+	font-size: 41px;
+}
+
+#TABLE-WRAPPER {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+}
+
+table, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+td {
+	padding: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 24px;
+	width: 350px;
+	text-align: center;
+}
+
+#CONFIRM-WRAPPER {
+	display: flex;
+	margin-top: 40px;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+.CONFIRM-BUTTON {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	width: 200px;
+	font-size: 18px;
+	background-color: rgb(229, 77, 37);
+	cursor: pointer;
+	border-radius: 8px;
+}
+
+.CONFIRM-BUTTON:hover {
+	filter: brightness(1.2);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function goContinue() {
+	window.location = 'digital_intelligence_main.html'
+}
+
+</script>
+<div id="MAIN">
+	<div id="MAIN-UP">
+		<span class="title1">Digital Intelligence</span>
+	</div>
+	<span class="warning">⚠️Warning: You're visiting the .onion mirror of the webpage, which might break unexpectedly or contain outdated information. For best performance, visit our main page.</span>
+	<div id="MIDDLE-TEXT">
+		<span style="font-family:NoirBold;text-decoration:underline;">Logged in as #Lucas Timothy [CEO]</span>
+		<br>Is this data still accurate?
+	</div>
+	<div id="TABLE-WRAPPER">
+		<table>
+			<tr>
+				<td>Company Name</td>
+				<td>RatVPN</td>
+			</tr>
+			<tr>
+				<td>Company Number</td>
+				<td>2310944</td>
+			</tr>
+			<tr>
+				<td>Company type</td>
+				<td>Corporation</td>
+			</tr>
+			<tr>
+				<td>Jurisdiction</td>
+				<td>Egypt</td>
+			</tr>
+			<tr>
+				<td>Company Address</td>
+				<td>Kornish Al Nile (Al Thawra), An Nasereyah, Egypt</td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td>Cybersecurity software, VPN services</td>
+			</tr>
+			<tr>
+				<td>Subscription status</td>
+				<td>Expired (last active: Q1 2019)<br>Pay per access (PPA)</td>
+			</tr>
+		</table>
+	</div>
+	<div id="CONFIRM-WRAPPER">
+		<div class="CONFIRM-BUTTON" onclick="goContinue()">Check later</div>
+		<div style="width: 100px;"></div>
+		<div class="CONFIRM-BUTTON" onclick="goContinue()">Confirm</div>
+	</div>
+</div>
+</body>

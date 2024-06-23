@@ -1,0 +1,137 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: #ff006f;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function insertHack() {
+	let elements = document.getElementsByTagName("p");
+	let random_element = elements[Math.floor(Math.random() * elements.length)];
+	let element_html = random_element.innerHTML;
+	let indices_array = [];
+
+	//find all ". " in paragraph
+	for (let i = 0; i < element_html.length; i++) {
+		if (
+			(element_html[i] === "." && element_html[i + 1] === " ") ||
+			(element_html[i + 1] == undefined && element_html[i + 1] !== "." && element_html[i - 1] !== ".")
+		) {
+			indices_array.push(i);
+		}
+	}
+
+	//choose random sentence in paragraph
+	let sentence_end_index = Math.floor(Math.random() * indices_array.length);
+	let sentence_start_index = sentence_end_index - 1;
+
+	if (sentence_end_index == 0) {
+		var slice_start = 0;
+	} else {
+		var slice_start = indices_array[sentence_start_index] + 2;
+	}
+
+	let sentence = element_html.slice(slice_start, indices_array[sentence_end_index]) + ".";
+	console.log(sentence);
+	console.log(slice_start);
+	console.log(indices_array[sentence_end_index]);
+	console.log(indices_array);
+
+	let replaced = element_html.replace(sentence, "<span id='HiddenSpan'>" + sentence + "</span>");
+	random_element.innerHTML = replaced;
+	document.getElementById("HiddenSpan").onclick = blogHacked;
+}
+
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan");
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + counter1.toFixed(1) + "%";
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%";
+			window.ue.webbrowser.hacked_blog(blogID);
+		}
+	}
+}
+
+window.onload = function () {
+	insertHack();
+	let anxiety = Number(window.location.search.substring(1));
+	blogID = 4;
+	window.ue.webbrowser.visited_blog(blogID, anxiety);
+};
+
+</script>
+<div id="MAIN">
+<p>I was just a young girl from India when I was lured away from my home by the promise of a better life. I was living in a small, poor village, and I had always dreamed of escaping to a place where I could have more opportunities and a brighter future.</p>
+
+<p>One day, a woman came to my village and told me that she could help me achieve my dreams. She said that she had connections in the city, and that she could get me a job as a housekeeper in a wealthy household. She promised me that I would have a warm bed to sleep in, plenty of food to eat, and a chance to earn my own money.</p>
+
+<img src="CSS/Images/Anxiety/Blog4_1.png" class="IMAGE">
+
+<p>I was desperate to escape my poverty-stricken life, and I was easily swayed by the woman's promises. I packed my bags and left with her, leaving my family and my home behind.</p>
+
+<p>But as it turned out, the woman was not who she claimed to be. She was a trafficker, and she had tricked me into leaving with her. I was taken to a different city and forced into a life of abuse and exploitation. I was never given the job that I had been promised, and I was never allowed to leave.</p>
+
+<p>I was trapped with my traffickers for years, always at their mercy. I was beaten, starved, and forced to do things that no person should ever have to endure But despite all of this, I never lost hope. I knew that one day, I would find a way to escape and start a new life.</p>
+
+<img src="CSS/Images/Anxiety/Blog4_2.png" class="IMAGE">
+
+<p>And finally, that day came. It was a risky move, and I knew that if I was caught, I would face severe consequences. But I was desperate, and I was willing to take the risk.</p>
+
+<p>One night, while my traffickers were distracted, I made my move. I gathered up whatever belongings I had and sneaked out of the house. I ran as fast as I could, not looking back until I was sure that I was far enough away.</p>
+
+<p>I had no idea where I was going, or how I would survive. All I knew was that I had to get as far away from my traffickers as possible. I walked for hours, following the road wherever it led.</p>
+
+<p>Finally, I stumbled upon a small town. I was starving and exhausted, but I was also relieved to have found someplace safe. I found a police station and begged for help. The officers there took me in and called my family, who had been searching for me for years.</p>
+
+<img src="CSS/Images/Anxiety/Blog4_3.png" class="IMAGE">
+
+<p>I was finally free, and I knew that I had to do something to help other victims like myself. That's when I dedicated my life to hunting down traffickers and killing them. And kill them slowly, too. Torture them the same as they tormented me. Make them beg for their life. Make them gain hope, and then take it away from them. Slowly cut off their limbs, one after another... till they bleed out, stained with their blood and fecal matter...</p>
+</div>
+</body>

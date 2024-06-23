@@ -1,0 +1,22 @@
+<head>
+<style>
+</style>
+<link rel="stylesheet" href="CSS/Anxiety.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+window.onload = function() {
+	window.ue.webbrowser.visited_bomb().then(function(ReturnValue) {
+		document.getElementById("IMG").style.filter = 'blur(' + ReturnValue + 'px)'
+	})
+}
+</script>
+<div id="MAIN">
+	<div id="SHADOW">
+		<img src="CSS/Images/Anxiety/Image2.png" id="IMG">
+	</div>
+	<div id="DESCR" contenteditable=false>	
+		<div><font color="#ff0000"><span style="font-size: 38px;">IT'S FAR TOO LATE TO DO ANYTHING ABOUT CLIMATE CHANGE</span></font></div><div>GREED. GREED. GREED. That's all humans care about. They want to devour. They want to exploit. They want to get rich, and they want to get rich quick. We have destroyed our Earth to the point of no return and guess what? If we had two Earths, we would destroy them too. No matter how many planets, no matter how many chances we would have... we would devour it all. That's all we can do. That's all we know. That's human nature.</div><div><br></div><div><span style="color: rgb(255, 0, 0); font-size: 28px;">NAIVE CHILDREN</span></div><div>Do you really think people will change anything? That they will help combat climate change? Tell that to a wokie in US or Europe, and he'll be like "Yeah! We can gain energy from nuclear or wind or sun! We are investing a lot of money in it!". Oh sweet summer child... You really think using paper straws will solve anything? People in third world countries are just dumping tons of trash into their rivers. And what can you do about it? Will you walk up to some dude in a ruined house, struggling to survive with his 3 goats and 2 chickens, and then you'll tell him he shouldn't burn old car tires? He doesn't give a fuck. He has nothing to lose. He has better things to do.</div><div><br></div><div>Maybe go to president? Tell him he should ditch coal mines for nuclear or solar? And then what? Collapse his economy? He'll laugh at you. He'll say it's not fair. Because it isn't fair. Western economies have aggressively exploited the planet and got rich. And now when third world countries want to follow the same path, suddenly it's not okay anymore. Suddenly it's a tragedy. A threat. Suddenly they're the ones being blamed for being greedy. How can you chop your own forests? It's bad for the planet! – says the guy who chopped his forests two decades ago and now shows up in an expensive suit.</div><div><br></div><div><div><span style="color: rgb(255, 0, 0); font-size: 28px;">DOOM OF CIVILIZATIONS</span></div><div>Have you ever wondered why is cosmos so empty? There are so many planets we've discovered, and while most of them are unhabitable, that wasn't always the case, right? Some millions, billions year ago they'd make a fine home. And once populated with an intelligent form of life, they would surely develop enough to escape their doom. Explore some other planets or at least leave some remnants behind them.</div><div><br></div><div>But that's not the case, is it? No, we are all alone. The space is empty. No signs of former life. You know why? Because self destruction is encoded in every form of intelligent life. At some point of time as their civilizations develops, they encounter a "tragedy of the X" problem, whether it's climate change or something else. And of course, all it takes to erase them from the world is one maniac with access to nuclear bombs.</div><div><br></div><div>Civlizations are so fragile.</div></div>
+	</div>
+</div>
+</body>

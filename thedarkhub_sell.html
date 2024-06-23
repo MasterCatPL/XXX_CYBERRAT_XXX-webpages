@@ -1,0 +1,195 @@
+<head>
+<link rel="stylesheet" href="CSS\TheDarkHub.css">
+<style>
+#ACCOUNTSS {
+	width: 100%;
+	height: 40px;
+	background-color: white;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+}
+
+#MODULES {
+	width: 100%;
+	height: 40px;
+	background-color: white;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+	function setOnline(first_time=false) {
+		if (first_time == true) {
+			var online = Math.trunc(Math.random() * (55000 - 45000) + 45000);
+			console.log(online)
+		} else {
+			var online = (Number(document.getElementById("users").innerText) + ((Math.random() - 0.5) * 300)).toFixed(0)
+		}
+		let members = (online * 0.06).toFixed(0);
+		let guests = (online - members).toFixed(0);
+		document.getElementById("users").innerText = online + ' ';
+		document.getElementById("members").innerText = ' ' + members + ' ';
+		document.getElementById("guests").innerText = ' ' + guests + ' ';
+	}
+	
+	let ModuleCounter = 0;
+	let ModuleList;
+	
+	function clickedSold() {
+		let module = document.getElementById("MODULES").innerText;
+		let etherTotal = Number(document.getElementById("PAYOUT").innerText.replace(" ETH", ""));
+		let unitsSold = Number(document.getElementById("ENTRY-AMOUNT").innerText);
+		window.ue.webbrowser.sell_accounts(module, etherTotal, unitsSold).then(function(ReturnValue) {
+			if (ReturnValue) {
+				window.location.reload();
+			} else {
+				document.getElementById("SELLBUTTON").innerText = "ERROR: Transaction failed"
+				document.getElementById("SELLBUTTON").style.backgroundColor = "red";
+				setTimeout(() => {
+					window.location.reload();
+				}, 1000)
+			}
+		})
+
+	}
+	
+	function selectedService() {
+		ModuleCounter++;
+		if (ModuleCounter + 1 > ModuleList.length) {
+			ModuleCounter = 0;
+		}
+		document.getElementById("MODULES").innerText = ModuleList[ModuleCounter].split("|")[0];
+		let selected_module = document.getElementById("MODULES").innerText;
+		for (let i = 0; i < ModuleList.length; i++) {
+			if (ModuleList[i].split("|")[0] == selected_module) {
+				document.getElementById("ENTRY-AMOUNT").innerText = ModuleList[i].split("|")[1];
+				document.getElementById("PAYOUT").innerText = (Number(ModuleList[i].split("|")[2]) * Number(ModuleList[i].split("|")[1])).toFixed(5) + " ETH";
+				break
+			}
+		}
+		
+	}
+	
+	function update() {
+		window.ue.webbrowser.get_stuff_to_sell().then(function(ReturnValue) {
+			ModuleList = ReturnValue.substring(2).split("<>");
+			selectedService();
+		})
+	}
+	
+	function populate() {
+		window.ue.webbrowser.get_stuff_to_sell().then(function(ReturnValue) {
+			ModuleList = ReturnValue.substring(2).split("<>");
+			let attr_array = ModuleList[0].split("|")
+			let module_select = document.getElementById("MODULES")
+			module_select.innerText = attr_array[0]
+			selectedService();
+		})
+	}
+	
+	window.onload = function() {
+		populate();
+		setOnline(true);
+		setInterval(setOnline, 5000);
+		//setInterval(update, 3000);
+		let buttons = document.getElementsByClassName("ITEM-BUTTON")
+		for (let i = 0; i < buttons.length; i++) {
+			buttons[i].onclick = function() {window.location.replace("thedarkhub.html")}
+		}
+		buttons[2].onclick = function() {window.location.replace("thedarkhub_sell.html")}
+		buttons[3].onclick = function() {window.location.replace("thedarkhub_vips.html")}
+		buttons[4].onclick = function() {window.location.replace("thedarkhub_announce.html?domains")}
+	}
+	</script>
+	<div id="TOP">
+		<div id="LOGO">
+			<a href="thedarkhub.html"><img src="CSS/Images/trTheHubLogo.png"></a>
+		</div>
+	</div>
+	<div id="LIST">
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				LEAKS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				ACCOUNTS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON" onclick="window.location='thedarkhub_sell.html'">
+				SELLER'S BAY
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				VIP LOUNGE
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				DOMAINS
+			</div>
+		</div>
+	</div>
+	<div style="padding: 0px;border-radius:16px" class="CONTAINER">
+		<div style="min-height: 50px;" class="LABEL">SELLER'S MARKETPLACE</div>
+	</div>
+	<div class="CONTAINER">
+		<div style="display:flex;flex-direction:column;width:50%;margin-right:15px;">
+			<div class="LABEL">What do you want to sell?</div>
+				<div id="ACCOUNTSS">Accounts</div>
+			<div class="LABEL SELL-LABEL">What service does the account belong to?</div>
+				<div id="MODULES" onclick="selectedService()"></div>
+			<div class="LABEL SELL-LABEL">Entries amount</div>
+				<div style="background-color:white;text-align:center;display:flex;flex-direction:column;">
+					<div id="ENTRY-AMOUNT">0</div>
+					<div>
+						<input style="margin:0" id="test" type="checkbox" checked=true disabled=true>
+						<label for="test" style="color:grey;font-size:14px;">Only unsold entries</label>
+					</div>
+				</div>
+			<div class="LABEL SELL-LABEL">Calculated pricing</div>
+			<div id="PAYOUT">0.00 ETH</div>
+		</div>
+		<div style="display:flex;flex-direction:column;width:50%;margin-left:15px;">
+			<div class="LABEL">YOUR SALES</div>
+			<div style="background-color: white;width:100%;text-align:center;color:grey;height:40px;display: flex;justify-content: center;align-items: center;">History not available</div>
+			<div class="LABEL" style="margin-top:30px;">POST YOUR OFFER</div>
+			<div id="SELLBUTTON" onclick="clickedSold()">SELL</div>
+		</div>
+	</div>
+	<div class="CONTAINER" style="margin-top:30px;">
+		<div id="FOOTER">
+			<div class="LABEL" style="border-radius:0px;">
+				<span id="users" style="white-space: pre"></span> users online | <span id="members" style="white-space: pre"></span> members and <span id="guests" style="white-space: pre"></span> guests
+			</div>
+			<div class="LABEL" style="border-radius:0px;background-color:rgba(0,0,0,0.5);color:white">
+				<div class="FOOTER-BOX">
+					18.70M<br>Posts
+				</div>
+				<div class="FOOTER-BOX">
+					611k<br>Threads
+				</div>
+				<div class="FOOTER-BOX">
+					3.31M<br>Users
+				</div>
+				<div class="FOOTER-BOX">
+					<a href="thedarkhub_user.html?Guest">Guest</a><br>Newest member
+				</div>
+				<div class="FOOTER-BOX">
+					60.76K<br>Most Online
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

@@ -1,0 +1,189 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	font-family: Unifont;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: rgb(0, 255, 0);
+}
+
+#TITLE {
+	font-size: 50px;
+	text-align: center;
+}
+
+#MAIN {
+	border: 1px solid rgb(0, 255, 0);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 700px;
+	margin-top: 40px;
+}
+
+.ITEM {
+	border-bottom: 1px solid rgb(0, 255, 0);
+	font-size: 21px;
+	text-align: center;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	display: none;
+}
+
+#EXPLAINER {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 18px;
+}
+
+#INPUT {
+	outline: none;
+	border: 1px solid rgb(0, 255, 0);
+	width: 80%;
+	margin: 0 auto;
+	font-size: 21px;
+	font-family: Unifont;
+	background-color: black;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 40px;
+	color: rgb(0, 255, 0);
+	text-align: center;
+}
+
+#INPUT-BUTTON {
+	background-color: black;
+	outline: none;
+	border: 1px solid rgb(0, 255, 0);
+	height: 35px;
+	width: 200px;
+	color: rgb(0, 255, 0);
+	font-family: Unifont;
+	font-size: 18px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+
+
+#INPUT-BUTTON:hover {
+	background-color: rgb(0, 30, 0);
+}
+
+#ITEMS {
+	display: flex;
+	flex-direction: column;
+	border-top: 1px solid rgb(0, 255, 0);
+	width: 100%;
+	overflow-y: auto;
+	max-height: 600px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 200, 0);
+  border-radius: 10px;
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function spawnRandomItems() {
+	let address_range = new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f")
+	let template = document.getElementsByClassName("ITEM")[0]
+	let mainlist = document.getElementById("ITEMS")
+	window.ue.webbrowser.get_random_usernames(20).then(function(ReturnValue) {		
+		let usernames = ReturnValue.split("|")
+		for (let i = 0; i < usernames.length; i++) {
+			address = "0x"
+			for (let x = 0; x < 40; x++) {
+				address = address + address_range[Math.trunc(Math.random() * 16)]
+			}
+			let copy = template.cloneNode(true)
+			copy.children[0].innerText = usernames[i]
+			copy.children[1].innerText = address
+			copy.style.display = "block";
+			mainlist.appendChild(copy);
+		}
+		
+	})
+	
+}
+
+function executeSearch(service) {
+	let username = document.getElementById("INPUT").value;
+	//	ID | CONTENT (e.g selfie.png) | TYPE
+	window.ue.webbrowser.get_infosec_by_name(username, service).then(function(ReturnValue) {
+		if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+			let button = document.getElementById("INPUT-BUTTON")
+			button.value = "Username not found"
+			button.style.color = "rgb(255, 0, 0)"
+			button.style.border = "1px solid rgb(255, 0, 0)"
+			setTimeout(() => {
+				button.value = "Search"
+				button.style.color = "rgb(0, 255, 0)"
+				button.style.border = "1px solid rgb(0, 255, 0)"
+			}, 2000)
+			return
+		}
+
+		
+		let template = document.getElementsByClassName("ITEM")[0]
+		let copy = template.cloneNode(true)
+		copy.children[0].innerText = username
+		copy.children[1].innerText = ReturnValue.split("|")[1]
+		copy.style.display = "block";
+		copy.style.color = "rgb(255, 0, 0)";
+		let main = document.getElementById("ITEMS")
+		for (let i = main.children.length; i > 0; i--) {
+			main.removeChild(main.children[i - 1]);
+		}
+		document.getElementById("ITEMS").appendChild(copy);
+		spawnRandomItems();
+	})
+
+}
+
+
+window.onload = function() {
+	let service = "searchCryptoBros"
+	spawnRandomItems();
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+}
+
+</script>
+<div id="TITLE">
+<span style="border-bottom: 3px solid rgb(0, 255, 0);">Crypto Bros</span><br>User Donation List
+</div>
+<div id="MAIN">
+	<div id="EXPLAINER">
+		If you wish to send a donation to some CryptoBros chatters, here's their crypto addresses (It requires the person to have linked their CryptoBros account with their wallet).
+	</div>
+	<input id="INPUT" type="text" placeholder="Search by CryptoBros username">
+	<input id="INPUT-BUTTON" type="button" value="Search">
+	<div id="ITEMS">
+		<div class="ITEM">
+			<div class="ITEM-LEFT">
+				DefaultUsername
+			</div>
+			<div class="ITEM-RIGHT">
+				0xc4c3f4042548499e75d2e42469677b467ae3b51e
+			</div>
+		</div>
+	</div>
+</div>
+</body>

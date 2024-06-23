@@ -1,0 +1,169 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	background-image: url(CSS/Images/CodeBackground.png);
+}
+
+#WRAPPER {
+	border: 1px solid black;
+	display: flex;
+	width: 700px;
+	margin-top: 25px;
+}
+
+#INPUT {
+	width: 50%;
+	text-align: center;
+	outline: none;
+	border: 0px;
+	height: 35px;
+	padding: 5px;
+	border-radius: 8px;
+	font-size: 21px;
+	margin-top: 15px;
+	border: 1px solid black;
+	box-shadow: none;
+}
+
+#INPUT-BUTTON {
+	width: 20%;
+	outline: none;
+	border: 0px;
+	box-shadow: none;
+	padding: 0px;
+	background-color: rgb(200, 200, 200);
+	cursor: pointer;
+	border-left: 1px solid black;
+	height: 35px;
+	border-radius: 8px;
+	background-color: white;
+	font-size: 21px;
+	border: 1px solid black;
+}
+
+#INPUT-BUTTON:hover {
+	filter: brightness(0.9);
+}
+
+#BUY-USE {
+	width: 20%;
+	outline: none;
+	border: 0px;
+	box-shadow: none;
+	padding: 0px;
+	background-color: rgb(200, 200, 200);
+	cursor: pointer;
+	border-left: 1px solid black;
+	height: 35px;
+	border-radius: 8px;
+	background-color: white;
+	font-size: 21px;
+	border: 1px solid black;
+}
+
+#BUY-USE:hover {
+	filter: brightness(0.9);
+}
+
+#LABEL {
+	font-size: 28px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+#DESCR {
+	width: 700px;
+	font-size: 18px;
+}
+
+#UNDER {
+	border: 1px solid white;
+	padding: 15px;
+	box-sizing: border-box;
+	width: 700px;
+	min-height: 400px;
+	margin-top: 40px;
+	word-break: break-all;
+}
+
+#OUTPUT {
+	border: 1px solid white;
+	padding: 15px;
+	box-sizing: border-box;
+	width: 700px;
+	min-height: 30px;
+	margin-top: 40px;
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function executeSearch(service) {
+	let name = document.getElementById("INPUT").value
+	//	ID | CONTENT (e.g selfie.png) | TYPE
+	window.ue.webbrowser.get_infosec_by_name(name, service).then(function(ReturnValue) {
+		get_service_access(service);
+		if (ReturnValue == "NOTTHISSERVICE") {
+			document.getElementById("OUTPUT").innerText = "0 results found. Try another service.";
+			return
+		}
+		if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+			document.getElementById("OUTPUT").innerText = "Error: this domain does not exist."
+			return
+		}
+		document.getElementById("OUTPUT").innerText = "A website with similar code patterns was found:\n" + ReturnValue.split("|")[1];
+		document.getElementById("UNDER").innerText = "const _0x1b458e=_0x2aa7;function _0x5367(){const _0x479273=['228mTGOvt','🧾️','dsasdf3.html','7gWsCbJ','TARGETED','THREAD','10DRdEtS','ULTRA\x20HIGH\x20QUALITY','WORLDWIDE','MAIL\x20ACCESS','aha','then','forsen','childNodes','INSANE\x20AF','length','scrollTop','thedarkhub_product.html?','COMBOLIST','PRIVATE','177827WfmEdX','EMAIL:PASS','FRESH','justifyContent','1604jjZOXM','color','@Guest\x20','split','ööö','center','getElementsByClassName','appendChild','children','shut\x20up','trunc','what?','scroll','PAID','WORKS\x20FOR\x20EVERYTHING','webbrowser','random','FOOTER-BOX','textAlign','PREMIUM','style','rgba(255,\x200,\x200,\x200.3)','key','onload','charCodeAt','4320wdmxkF','thedarkhub_announce.html?domains','COMBO','\x20minutes\x20ago.','resize','backgroundColor','replace','USER:PASS','found_thedarkhub','max','HITS','users','\x0aViews','innerText','flexDirection','onclick','LINES','???','276762mBIvUe','location','textContent','SHOUTBOX-RIGHT','MIXED\x20DOMAINS','href','HIGH\x20QUALITY','SHOUTBOX-CONTENT','5280336autLWy','Guest','4449401aDVpjP','OVO','[UNCHECKED]','\x20ETH','toFixed','alignItems','7550838ffkWrO','Gaming','26891eBeYWP','SocialMedia','PaidServices','????','\x0aReplies','addEventListener','min','Delivery','42xNSZZj','floor','getElementById','thedarkhub_user.html?','value','keypress','VALID','GOOD\x20FOR\x20EVERYTHING','ITEM-BUTTON','MIXED\x20TARGETS','IDEAL','cloneNode','35wGElRN'];_0x5367=function(){return _0x479273;};return _0x5367();}(function(_0x2b85ac,_0x20c83e){const _0x4b4fc7=_0x2aa7,_0x5ed95b=_0x2b85ac();while(!![]){try{const _0x2c89d3=parseInt(_0x4b4fc7(0x1cf))/0x1*(parseInt(_0x4b4fc7(0x1d7))/0x2)+-parseInt(_0x4b4fc7(0x1ab))/0x3*(parseInt(_0x4b4fc7(0x192))/0x4)+parseInt(_0x4b4fc7(0x1e3))/0x5*(parseInt(_0x4b4fc7(0x1bd))/0x6)+parseInt(_0x4b4fc7(0x1e7))/0x7*(-parseInt(_0x4b4fc7(0x1c5))/0x8)+-parseInt(_0x4b4fc7(0x1cd))/0x9*(-parseInt(_0x4b4fc7(0x180))/0xa)+parseInt(_0x4b4fc7(0x1c7))/0xb+-parseInt(_0x4b4fc7(0x1e4))/0xc*(parseInt(_0x4b4fc7(0x18e))/0xd);if(_0x2c89d3===_0x20c83e)break;else _0x5ed95b['push'](_0x5ed95b['shift']());}catch(_0x205140){_0x5ed95b['push'](_0x5ed95b['shift']());}}}(_0x5367,0x9ab5a));let answer_array=['?','??',_0x1b458e(0x1bc),_0x1b458e(0x1d2),_0x1b458e(0x19d),_0x1b458e(0x184),'dude',_0x1b458e(0x186),'spamming',_0x1b458e(0x19b),'who\x20cares'];var sent_msg=0x0,startingIndex=Math[_0x1b458e(0x19c)](Math['random']()*0x1f4);function addMessage(_0x285d17='',_0x33586b=_0x1b458e(0x1c6),_0x3cc459=![],_0x32e439=![]){const _0x235151=_0x1b458e;if(Math[_0x235151(0x1a2)]()<0.3)return;window['ue'][_0x235151(0x1a1)]['add_message'](startingIndex)[_0x235151(0x185)](function(_0x8b1094){const _0x48c2a3=_0x235151;startingIndex++;if(_0x285d17!=''){var _0x5775b7=_0x33586b,_0x1d54d5=_0x285d17;sent_msg+=0x1;if(Math[_0x48c2a3(0x1a2)]()<0.3&&_0x3cc459!=!![]&&sent_msg<=0xf){let _0x559c15=_0x8b1094[_0x48c2a3(0x195)](_0x48c2a3(0x196))[0x0],_0x3f5a24=_0x48c2a3(0x194)+answer_array[Math[_0x48c2a3(0x1d8)](Math[_0x48c2a3(0x1a2)]()*answer_array[_0x48c2a3(0x189)])];setTimeout(addMessage(_0x3f5a24,_0x559c15,!![],!![]),0x1f4);}}else var _0x5775b7=_0x8b1094[_0x48c2a3(0x195)](_0x48c2a3(0x196))[0x0],_0x1d54d5=_0x8b1094[_0x48c2a3(0x195)]('ööö')[0x1];let _0x4cf1cd=document['getElementById'](_0x48c2a3(0x1c4)),_0x105ab9=_0x4cf1cd[_0x48c2a3(0x19a)][0x0][_0x48c2a3(0x1e2)](!![]);_0x105ab9['children'][0x0][_0x48c2a3(0x1b8)]=_0x5775b7+':\x20',_0x105ab9['children'][0x0][_0x48c2a3(0x1a6)][_0x48c2a3(0x193)]='rgb('+charColor(_0x5775b7[0x0])+',\x20'+(0xff-charColor(_0x5775b7[0x1]))+',\x20'+charColor(_0x5775b7[0x2])+')',_0x105ab9[_0x48c2a3(0x19a)][0x1][_0x48c2a3(0x1b8)]=_0x1d54d5,_0x32e439==!![]&&(_0x105ab9['style'][_0x48c2a3(0x1b0)]=_0x48c2a3(0x1a7)),_0x4cf1cd[_0x48c2a3(0x199)](_0x105ab9),_0x4cf1cd[_0x48c2a3(0x19e)](0x0,_0x4cf1cd[_0x48c2a3(0x18a)]+0x64);});}var usernames;function getUsernames(){window['ue']['webbrowser']['get_usernames']()['then'](function(_0xb4f0a){usernames=_0xb4f0a;});}function charColor(_0x4f9c7d){const _0x108da5=_0x1b458e;let _0x5d20b9=_0x4f9c7d['charCodeAt'](0x0),_0x163a04=0x7a-_0x5d20b9,_0x520177=_0x163a04*(0xff/0x39),_0x492fa6=Math[_0x108da5(0x19c)](Math[_0x108da5(0x1d5)](Math[_0x108da5(0x1b4)](_0x520177,0x0),0xff));return _0x492fa6;}function _0x2aa7(_0x24f714,_0x17de07){const _0x536756=_0x5367();return _0x2aa7=function(_0x2aa7ed,_0x7d4bc4){_0x2aa7ed=_0x2aa7ed-0x17f;let _0x114c90=_0x536756[_0x2aa7ed];return _0x114c90;},_0x2aa7(_0x24f714,_0x17de07);}function generateThread(){const _0x2468b1=_0x1b458e;let _0x3f2c97=[_0x2468b1(0x18c),_0x2468b1(0x1ad),_0x2468b1(0x1bb),'MIX',_0x2468b1(0x1b2),_0x2468b1(0x183),_0x2468b1(0x1b5)],_0x38cef1=[_0x2468b1(0x1a5),_0x2468b1(0x190),'JUICY','NEW','HQ','UHQ',_0x2468b1(0x182),_0x2468b1(0x19f),_0x2468b1(0x1e1),_0x2468b1(0x1e0),_0x2468b1(0x18d),'VALID\x20FOR\x20ALL',_0x2468b1(0x1c9),_0x2468b1(0x1c1),_0x2468b1(0x1de),'ALL\x20COUNTRY',_0x2468b1(0x188),_0x2468b1(0x1dd),_0x2468b1(0x1e8),_0x2468b1(0x1a0),_0x2468b1(0x1c3),_0x2468b1(0x181)],_0x170f34=['⭐','🌟','❤','✅','😈','☄','💯','🥇','☢',_0x2468b1(0x1e5),'','','','','','','','','','','','','','','','','','','',''],_0x17bf20=['🔥','',''],_0x43ece7=document[_0x2468b1(0x198)](_0x2468b1(0x17f));for(let _0x2066a0=0x0;_0x2066a0<_0x43ece7[_0x2468b1(0x189)];_0x2066a0++){let _0x1b4fb8=Math[_0x2468b1(0x19c)](Math[_0x2468b1(0x1a2)]()*0x2710),_0x5a0d89=(_0x1b4fb8/0x3e8)['toFixed'](0x1)+'k\x09'+_0x3f2c97[Math[_0x2468b1(0x1d8)](Math['random']()*_0x3f2c97[_0x2468b1(0x189)])]+'\x20'+_0x170f34[Math['floor'](Math[_0x2468b1(0x1a2)]()*_0x170f34['length'])]+'\x20'+_0x38cef1[Math[_0x2468b1(0x1d8)](Math['random']()*_0x38cef1[_0x2468b1(0x189)])]+'\x20'+_0x170f34[Math['floor'](Math[_0x2468b1(0x1a2)]()*_0x170f34[_0x2468b1(0x189)])]+'\x20'+_0x38cef1[Math['floor'](Math['random']()*_0x38cef1['length'])]+'\x20'+_0x170f34[Math[_0x2468b1(0x1d8)](Math['random']()*_0x170f34[_0x2468b1(0x189)])]+'\x20'+_0x38cef1[Math['floor'](Math[_0x2468b1(0x1a2)]()*_0x38cef1['length'])]+'\x20'+_0x170f34[Math['floor'](Math[_0x2468b1(0x1a2)]()*_0x170f34[_0x2468b1(0x189)])];_0x43ece7[_0x2066a0][_0x2468b1(0x19a)][0x1][_0x2468b1(0x19a)][0x0][_0x2468b1(0x1b8)]=_0x5a0d89;let _0x4b098f=_0x17bf20[Math['floor'](Math['random']()*_0x17bf20[_0x2468b1(0x189)])];if(_0x4b098f=='')var _0xd90404=0x1;else var _0xd90404=0x5;_0x43ece7[_0x2066a0][_0x2468b1(0x19a)][0x0][_0x2468b1(0x1b8)]=_0x4b098f;let _0x515acc=usernames[Math['floor'](Math[_0x2468b1(0x1a2)]()*usernames[_0x2468b1(0x189)])],_0x2cfbc2=usernames[Math[_0x2468b1(0x1d8)](Math[_0x2468b1(0x1a2)]()*usernames[_0x2468b1(0x189)])];_0x43ece7[_0x2066a0]['children'][0x1][_0x2468b1(0x19a)][0x1]['children'][0x0][_0x2468b1(0x1b8)]=_0x515acc,_0x43ece7[_0x2066a0][_0x2468b1(0x19a)][0x1][_0x2468b1(0x19a)][0x1][_0x2468b1(0x19a)][0x0][_0x2468b1(0x1c2)]='thedarkhub_user.html?'+_0x515acc,_0x43ece7[_0x2066a0][_0x2468b1(0x19a)][0x1][_0x2468b1(0x19a)][0x1]['childNodes'][0x2][_0x2468b1(0x1bf)]='\x20'+(_0x2066a0*0x4+Math[_0x2468b1(0x19c)](Math[_0x2468b1(0x1a2)]()*0x4))+_0x2468b1(0x1ae);let _0x5b466f=Math[_0x2468b1(0x19c)](Math['random']()*0x3e8*_0xd90404);_0x43ece7[_0x2066a0]['children'][0x3][_0x2468b1(0x1b8)]=_0x5b466f+_0x2468b1(0x1b7),_0x43ece7[_0x2066a0][_0x2468b1(0x19a)][0x2][_0x2468b1(0x1b8)]=Math[_0x2468b1(0x19c)](_0x5b466f/0x4e)+_0x2468b1(0x1d3),_0x43ece7[_0x2066a0]['children'][0x4]['children'][0x0][_0x2468b1(0x1b8)]=_0x2cfbc2,_0x43ece7[_0x2066a0][_0x2468b1(0x19a)][0x4][_0x2468b1(0x19a)][0x0][_0x2468b1(0x1c2)]=_0x2468b1(0x1da)+_0x2cfbc2;let _0x1bdbe1=0x1,_0x534b93=(_0x1b4fb8*0.00001*_0x1bdbe1)[_0x2468b1(0x1cb)](0x5)+_0x2468b1(0x1ca),_0x1f0927=Math[_0x2468b1(0x19c)](Math['min'](0x7a-_0x515acc[_0x2468b1(0x1aa)](0x2)-12.5,0x5ea)*0x79),_0xac413=Math[_0x2468b1(0x19c)](Math['random']()*0x12c),_0x3abb66=_0x2468b1(0x18f),_0x449bc0='Combolist';var _0x1e9099=Math[_0x2468b1(0x1a2)]();if(_0x1e9099<0.16)var _0x7f2b1=_0x2468b1(0x1ce);else{if(_0x1e9099<0.32)var _0x7f2b1=_0x2468b1(0x1d0);else{if(_0x1e9099<0.48)var _0x7f2b1='Financial';else{if(_0x1e9099<0.64)var _0x7f2b1=_0x2468b1(0x1d1);else{if(_0x1e9099<0.8)var _0x7f2b1=_0x2468b1(0x1d6);else{if(_0x1e9099<0x1)var _0x7f2b1='Dating';}}}}}let _0x3a233e=_0x2468b1(0x18b)+_0x5a0d89+'OVO'+_0x534b93+'OVO'+_0x1f0927+_0x2468b1(0x1c8)+_0x3abb66+_0x2468b1(0x1c8)+_0x449bc0+_0x2468b1(0x1c8)+_0x7f2b1+_0x2468b1(0x1c8)+_0x1b4fb8+_0x2468b1(0x1c8)+_0x515acc;_0x43ece7[_0x2066a0][_0x2468b1(0x1ba)]=function(){window['location']=_0x3a233e;};}}function resizer(){const _0x21fe28=_0x1b458e;if(window['innerWidth']<0x31f){let _0x53451f=document[_0x21fe28(0x198)](_0x21fe28(0x17f));for(let _0x30a993=0x0;_0x30a993<_0x53451f[_0x21fe28(0x189)];_0x30a993++){_0x53451f[_0x30a993][_0x21fe28(0x1a6)][_0x21fe28(0x1a4)]=_0x21fe28(0x197),_0x53451f[_0x30a993][_0x21fe28(0x1a6)][_0x21fe28(0x1cc)]=_0x21fe28(0x197),_0x53451f[_0x30a993][_0x21fe28(0x1a6)][_0x21fe28(0x191)]=_0x21fe28(0x197),_0x53451f[_0x30a993][_0x21fe28(0x1a6)][_0x21fe28(0x1b9)]='column';}}else{let _0xbd57d7=document[_0x21fe28(0x198)](_0x21fe28(0x17f));for(let _0x1db0db=0x0;_0x1db0db<_0xbd57d7['length'];_0x1db0db++){_0xbd57d7[_0x1db0db]['style'][_0x21fe28(0x1a4)]='',_0xbd57d7[_0x1db0db][_0x21fe28(0x1a6)][_0x21fe28(0x1cc)]='',_0xbd57d7[_0x1db0db]['style'][_0x21fe28(0x191)]='',_0xbd57d7[_0x1db0db][_0x21fe28(0x1a6)][_0x21fe28(0x1b9)]='';}}}addEventListener(_0x1b458e(0x1af),resizer);function setOnline(_0x4eec1f=![]){const _0x561aae=_0x1b458e;if(_0x4eec1f==!![])var _0x44a09c=Math[_0x561aae(0x19c)](Math[_0x561aae(0x1a2)]()*(0xd6d8-0xafc8)+0xafc8);else var _0x44a09c=(Number(document[_0x561aae(0x1d9)](_0x561aae(0x1b6))[_0x561aae(0x1b8)])+(Math[_0x561aae(0x1a2)]()-0.5)*0x12c)[_0x561aae(0x1cb)](0x0);let _0x5697fb=(_0x44a09c*0.06)[_0x561aae(0x1cb)](0x0),_0x25156a=(_0x44a09c-_0x5697fb)[_0x561aae(0x1cb)](0x0);document[_0x561aae(0x1d9)](_0x561aae(0x1b6))[_0x561aae(0x1b8)]=_0x44a09c+'\x20',document[_0x561aae(0x1d9)]('members')['innerText']='\x20'+_0x5697fb+'\x20',document[_0x561aae(0x1d9)]('guests')['innerText']='\x20'+_0x25156a+'\x20';let _0x3c7a20=usernames[Math[_0x561aae(0x1d8)](Math[_0x561aae(0x1a2)]()*usernames['length'])];document[_0x561aae(0x198)](_0x561aae(0x1a3))[0x3]['childNodes'][0x1]['innerText']=_0x3c7a20,document[_0x561aae(0x198)](_0x561aae(0x1a3))[0x3][_0x561aae(0x187)][0x1]['href']='thedarkhub_user.html?'+_0x3c7a20;}window[_0x1b458e(0x1a9)]=function(){const _0xbd6c7e=_0x1b458e;window['ue'][_0xbd6c7e(0x1a1)][_0xbd6c7e(0x1b3)](),resizer(),document[_0xbd6c7e(0x1d9)](_0xbd6c7e(0x1c0))[_0xbd6c7e(0x1d4)](_0xbd6c7e(0x1dc),function(_0x3ed837){const _0x153613=_0xbd6c7e;_0x3ed837[_0x153613(0x1a8)]==='Enter'&&addMessage(document['getElementById'](_0x153613(0x1c0))[_0x153613(0x1db)]);}),getUsernames(),setTimeout(function(){setOnline(!![]),generateThread(),setInterval(setOnline,0x1388),setInterval(addMessage,0x4b0);},0x32);let _0x76b689=document[_0xbd6c7e(0x198)](_0xbd6c7e(0x1df));for(let _0x258780=0x0;_0x258780<_0x76b689['length'];_0x258780++){_0x76b689[_0x258780]['onclick']=function(){const _0x4e60e6=_0xbd6c7e;window[_0x4e60e6(0x1be)][_0x4e60e6(0x1b1)](_0x4e60e6(0x1e6));};}_0x76b689[0x2]['onclick']=function(){const _0x112bbb=_0xbd6c7e;window['location'][_0x112bbb(0x1b1)]('thedarkhub_sell.html');},_0x76b689[0x3][_0xbd6c7e(0x1ba)]=function(){const _0x29c587=_0xbd6c7e;window[_0x29c587(0x1be)][_0x29c587(0x1b1)]('thedarkhub_vips.html');},_0x76b689[0x4]['onclick']=function(){const _0x2e3d61=_0xbd6c7e;window['location'][_0x2e3d61(0x1b1)](_0x2e3d61(0x1ac));};};"
+	})
+}
+
+window.onload = function() {
+	let service = 'CodeReuse'
+	get_static_npc_username(service);
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("PRICE").innerText = price;
+	})
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div style="margin-top:50px;margin-bottom:50px;background-color: rgb(53 0 18);border:5px solid white;color:white;font-family:Calibri;border-radius:8px;padding:15px;box-sizing:border-box;">
+<div id="LABEL">CHECK WEBSITES FOR CODE REUSE</div>
+<div id="DESCR">This webpage will allow you to search websites by their source code. Every web developer has his own way of solving problems or a favorite syntax. Parts of the code will almost always be reused between their projects. As front-end code of a website is generally public, services like mine will use it to their advantage and make some sort of source code search engine. When you search a domain name in the fields below, our server will download its source code and compare it to our >1 million database of scraped webpages. If it finds any similarities between another webpage, it can usually be assumed it was made by the same person.<br><br>Well, of course because doing this requires a shitton of work, mainly because of some common modules / frameworks / other stuff i dont care to explain, I don't give it to you for free. To use the services, you must first pay <span id="PRICE">X</span> ETH.<br><br>According to the cookie in your browser, you have <span id="USES"></span> uses available.</div>
+<input id="INPUT" type="text" placeholder="Domain e.g fireproxies.wtf"></input>
+<input id="INPUT-BUTTON" type="button" value="Check"></input>
+<input id="BUY-USE" type="button" value="Buy use"></input>
+
+<div id="OUTPUT">Program output will appear here.</div>
+<div id="UNDER">HTML code of checked website will appear here.</div>
+<br>
+Made by <span id="OWNER-NAME">DefaultUsername</span>
+</div>
+</body>

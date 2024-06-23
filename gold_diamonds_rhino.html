@@ -1,0 +1,199 @@
+<head>
+<style>
+:root {
+	--backgroundColor: rgb(0, 0, 0);
+	--textColor: rgb(0, 0, 0);
+	--marginNav: 50px;
+	--font: Manrope;
+	--fontSize: 18px;
+	--highlight: bold;
+	
+	--upperColor: #ffffff;
+}
+
+body {
+	margin: 0;
+	background-color: var(--backgroundColor);
+	color: var(--textColor);
+	font-family: var(--font);
+	font-size: var(--fontSize);
+	margin-top: 30px;
+	background-image: url('CSS/Images/GemsBackground.jpg');
+
+}
+
+@font-face {
+  font-family: Manrope;
+  src: url(Fonts/Manrope.otf);
+}
+@font-face {
+  font-family: ManropeBold;
+  src: url(Fonts/ManropeBold.otf);
+}
+
+.PICTURE {
+	width: auto;
+	height: 150px;
+}
+
+#UPPER {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--upperColor);
+	font-weight: bold;
+	font-size: 24px;
+	color: green;
+	border: 3px solid black;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+#MAIN {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.OBJECT {
+	width: 100%;
+	border: 3px solid var(--upperColor);
+	max-height: 150px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	color: white;
+	display: flex;
+	background-color: black;
+}
+
+.OBJ-TITLE {
+	background-color: var(--upperColor);
+	text-align: center;
+	margin: 6px;
+	color: black;
+	height: 15%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+
+}
+
+.OBJ-DESCR {
+	text-align: center;
+	margin: 10px;
+	height: calc(70% - 40px);
+	box-sizing: border-box;
+}
+
+.OBJ-UNDER {
+	float: right;
+	height: 15%;
+	box-sizing: border-box;
+	margin-right: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.BUYBUTTON {
+	border: 0;
+	padding: 5px;
+	padding-right: 15px;
+	padding-left: 15px;
+	outline: 0;
+	margin-left: 15px;
+	cursor: pointer;
+}
+
+#UPTEXT {
+	width: 100%;
+	background-color: var(--upperColor);
+	margin-top: 15px;
+	margin-bottom: 15px;
+	display: flex;
+	padding: 10px;
+	flex-direction: column;
+	border: 3px solid black;
+	box-sizing: border-box;
+}
+
+</style>
+</head>
+<body>
+<div id="UPPER">
+	THE COLLECTOR – BIGGEST EXOTIC ANIMAL / GEMS MARKETPLACE !!!<br> --- BEST PRICES ---
+</div>
+
+<div id="MAIN">
+	<div id="UPTEXT">
+		<div style="font-weight:bold;font-size:21px;color:green;text-decoration:underline">MARKETPLACE RULES</div>
+		<div>[INFO] TO LIST YOUR ITEM, CONTACT ME ON IRC "SemperVII"<br><br>1. Only actual items (NO SCAMS!).<br><br>2. You buy everything as-is.<br><br>3. THERE IS A 5% FEE WHICH MUST BE PAID TO ME (eth: 0xea674fdde714fe979de3edf0f56aa9716b898ec8)<br><br>4. You can use me as middleman if seller is not trustworthy. This equals an additional 5% fee BUT ENSURES NOBODY IS SCAMMED.<br><br>5. For contact, use only encrypted messengers and CARE FOR YOUR OPSEC SO YOU DON'T GET CAUGHT.</div>
+	</div>
+	<div class="OBJECT">
+		<div class="OBJ-LEFT">
+			<img class="PICTURE" src="CSS/Images/Diamond.jpg">
+		</div>
+		<div>
+			<div class="OBJ-TITLE">
+				DIAMONDS - TUNISIA
+			</div>
+			<div class="OBJ-DESCR">
+				High quality diamonds from Tunisia. Sourced from jewerly samples. ALL DOCUMENTATION IS GONE, YOU BUY AS-IS. If you plan to sell in Tunisia, DO NOT BUY. Safe for US or EU based. GLGS
+			</div>
+			<div class="OBJ-UNDER">
+				PRICE: 0.3 ETH <input type="button" class="BUYBUTTON" value="BUY ITEM">
+			</div>
+		</div>
+	</div>
+	<div class="OBJECT">
+		<div class="OBJ-LEFT">
+			<img class="PICTURE" src="CSS/Images/Parrot.jpg">
+		</div>
+		<div>
+			<div class="OBJ-TITLE">
+				NEW ZEALAND - KAKAPO
+			</div>
+			<div class="OBJ-DESCR">
+				New zealand endangered species; parrot Kakapo. Not much of these in this world. Want one? Get one. Only 0.1 ETH.
+			</div>
+			<div class="OBJ-UNDER">
+				PRICE: 0.1 ETH <input type="button" class="BUYBUTTON" value="BUY ITEM">
+			</div>
+		</div>
+	</div>
+		<div class="OBJECT">
+		<div class="OBJ-LEFT">
+			<img class="PICTURE" src="CSS/Images/Gold.jpg">
+		</div>
+		<div>
+			<div class="OBJ-TITLE">
+				Stolen gold for sale.
+			</div>
+			<div class="OBJ-DESCR">
+				10 oz PAMP Suisse Fortuna Veriscan Gold Bar (New w/ Assay). Your cheap price: $8000 (~8 ETH). Buy now: most reputable seller. You can see us at other marketplace too.
+			</div>
+			<div class="OBJ-UNDER">
+				PRICE: 8.45 ETH <input type="button" class="BUYBUTTON" value="BUY ITEM">
+			</div>
+		</div>
+	</div>
+	<div class="OBJECT">
+		<div class="OBJ-LEFT">
+			<img class="PICTURE" src="CSS/Images/Horn.png">
+		</div>
+		<div>
+			<div class="OBJ-TITLE">
+				Rhino horn
+			</div>
+			<div class="OBJ-DESCR">
+				Hello we have rhino horns to sale. Great for decoration or healthy. WARNING the picture is only sample!!! we have tens of rhino horns, contact us and we will get you which one you want. thanks
+			</div>
+			<div class="OBJ-UNDER">
+				PRICE: 0.15 ETH <input type="button" class="BUYBUTTON" value="BUY ITEM">
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>

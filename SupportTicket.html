@@ -1,0 +1,284 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+@font-face {
+  font-family: CalibriBold;
+  src: url(CSS/Fonts/CalibriBold.ttf);
+}
+
+body {
+	background-image: url(CSS/Images/Bitcoin.jpg);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0px;
+	font-family: Calibri;
+}
+
+#MAIN {
+	width: 100%;
+	max-width: 700px;
+	background-color: #fff2c5;
+	background-color: rgba(227, 218, 179, 0.95);
+	border-radius: 16px;
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 80px;
+	margin-bottom: 100px;
+}
+
+#TITLE {
+	font-size: 40px;
+	color: #e0aa2c;
+	margin-top: 20px;
+	text-shadow: 2px 2px black;
+}
+
+#MINITITLE {
+	font-size: 30px;
+	color: #e0aa2c;
+	text-shadow: 2px 2px black;
+}
+
+.LABEL {
+	color: black;
+	margin-top: 30px;
+	font-size: 18px;
+}
+
+#INPUT {
+	outline: none;
+	border: 0px;
+	width: 300px;
+	border-radius: 8px;
+	border: 2px solid black;
+	text-align: center;
+	margin-top: 5px;
+	font-size: 18px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#CHATBOX {
+	width: 500px;
+	background-color: white;
+	border-radius: 8px;
+	margin-top: 10px;
+	height: 600px;
+	border: 2px solid black;
+	padding: 15px;
+	font-size: 18px;
+	box-sizing: border-box;
+}
+
+#WRAPPER {
+	display: flex;
+	width: 500px;
+}
+
+#MESSAGE {
+	outline: none;
+	border: 0px;
+	width: calc(80% - 20px);
+	border-radius: 8px;
+	border: 2px solid black;
+	text-align: center;
+	margin-top: 5px;
+	font-size: 18px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-right: 20px;
+	background-color: white;
+}
+
+#INPUT-BUTTON {
+	background-color: white;
+	outline: none;
+	border: 0px;
+	width: 20%;
+	border-radius: 8px;
+	border: 2px solid black;
+	text-align: center;
+	margin-top: 5px;
+	font-size: 18px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	cursor: pointer;
+
+}
+
+#INPUT-BUTTON:hover {
+	filter: brightness(1.1);
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+let msg1 = "Hello, I'm afraid I'll run out of my withdrawal limit and would like to upgrade my verification status."
+
+let newDiv5;
+let counter = 0
+let gigaInt;
+let idontknowhowtocode = true
+let counter2 = 0
+function postedMsg() {
+	function isWriting() {
+		idontknowhowtocode = false
+		let divv = newDiv5;
+		if (counter == 0 ) {
+			divv.innerText = "Mark is writing"
+		} else if (counter == 1) {
+			divv.innerText = "Mark is writing."
+		} else if (counter == 2) {
+			divv.innerText = "Mark is writing.."
+		} else if (counter == 3) {
+			divv.innerText = "Mark is writing..."
+		} else if (counter == 4) {
+			divv.innerText = "Mark is writing"
+		} else if (counter == 5) {
+			divv.innerText = "Mark is writing."
+		} else if (counter == 6) {
+			divv.innerText = "Mark is writing.."
+		} else if (counter == 7) {
+			divv.innerText = "Mark is writing..."
+		} else if (counter == 8) {
+			if (counter2 < 2) {
+				counter = 0;
+				counter2++;
+				return
+			}
+			divv.innerText = ""
+			clearInterval(gigaInt);
+			sendMsg2()
+		}
+		counter++;
+	}
+	
+	if (document.getElementById("MESSAGE").value != msg1) {
+		document.getElementById("INPUT-BUTTON").style.backgroundColor = "red";
+		setTimeout(function () {document.getElementById("INPUT-BUTTON").style.backgroundColor = "white"}, 200)
+	} else {
+	
+		if (idontknowhowtocode) {
+			let newDiv4 = document.createElement("div");
+			newDiv4.innerText = "Customer" + document.getElementById("INPUT").value;
+			newDiv4.style.fontSize = "21px"
+			newDiv4.style.fontFamily = "CalibriBold";
+			document.getElementById("CHATBOX").appendChild(newDiv4);
+			let newDiv3 = document.createElement("div");
+			newDiv3.innerText = msg1
+			document.getElementById("CHATBOX").appendChild(newDiv3);
+			setInterval(isWriting, 300)
+			
+			newDiv5 = document.createElement("div");
+			newDiv5.setAttribute("id", "AAA");
+			newDiv5.style.fontWeight = "bold";
+			document.getElementById("CHATBOX").appendChild(newDiv5);
+			document.getElementById("INPUT-BUTTON").style.backgroundColor = "lightgreen";
+			setTimeout(function () {document.getElementById("INPUT-BUTTON").style.backgroundColor = "white"}, 200)
+			
+		}
+		}
+	function sendMsg2() {
+		let service = "SupportTicket"
+		let username = document.getElementById("INPUT").value;
+		//	ID | CONTENT (e.g selfie.png) | TYPE
+		window.ue.webbrowser.get_infosec_by_name(username, service).then(function(ReturnValue) {
+			if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+				var resultMsg = "Dear customer, unfortunately we are not able to associate your support ID with any accounts."
+				return
+			} else {
+				var resultMsg = "Dear customer, in accordance to the US KYC regulations we require our customers to verify their physical address for the final verification tier which will allow you to withdraw up to $500k daily. To verify your physical address, you can use one of the following documents:\na) Bank statement\nb) Utility bill\n\nThe document must clearly show the address associated with your CryptoExchange account, " + ReturnValue.split("|")[1] + ". Do you wish to send the documents now?"
+			}
+			let newDiv2 = document.createElement("div");
+			newDiv2.innerText = "Mark from CryptoExchange.com"
+			newDiv2.style.fontSize = "21px"
+			newDiv2.style.fontFamily = "CalibriBold";
+			document.getElementById("CHATBOX").appendChild(newDiv2);
+			let newDiv = document.createElement("div");
+			newDiv.innerText = resultMsg;
+			document.getElementById("CHATBOX").appendChild(newDiv);
+			
+		
+		})
+	}
+}
+
+
+window.onload = function() {
+
+	let inputEle = document.getElementById("INPUT");
+	inputEle.addEventListener('input', function (evt) {
+		if (this.value.length < 15) {
+			document.getElementById("INPUT-BUTTON").disabled = true
+			document.getElementById("INPUT-BUTTON").value = "----"
+			document.getElementById("MESSAGE").disabled = true
+			document.getElementById("MESSAGE").placeholder = "Enter your support ID first"
+			document.getElementById("MESSAGE").value = ""
+		} else {
+			document.getElementById("INPUT-BUTTON").disabled = false
+			document.getElementById("INPUT-BUTTON").value = "Post"
+			document.getElementById("MESSAGE").disabled = false
+			document.getElementById("MESSAGE").placeholder = "Your message"
+		}
+	});
+
+	let ReturnValue = "asdasd|asdasd|asdasd"
+	let msg2 = "Dear customer, in accordance to the US KYC regulations we require our customers to verify their physical address for the final verification tier which will allow you to withdraw up to $500k daily. To verify your physical address, you can use one of the following documents:\na) Bank statement\nb)Utility bill\n\nThe document must clearly show the address associated with your CryptoExchange account, " + ReturnValue.split("|")[1] + ". Do you wish to send the documents now?"
+
+	let msgEle = document.getElementById("MESSAGE");
+	msgEle.addEventListener('input', function (evt) {
+		console.log(this.value.length);
+		msgEle.value = msg1.substring(0, this.value.length)
+	});
+	
+	let service = "SupportTicket"
+	//document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="MAIN">
+	<div id="TITLE">
+		CryptoExchange.com
+	</div>
+	<div id="MINITITLE">
+		Support Centre
+	</div>
+	<div class="LABEL">
+		Your support ID can be found in your account's details.
+	</div>
+	<input type="text" id="INPUT" placeholder="Your support ID"><br>
+	<div class="LABEL" style="margin-top:20px;font-size: 21px;font-family: CalibriBold;">
+		Chat with our support.
+	</div>
+	<div id="CHATBOX">
+	</div>
+	<div id="WRAPPER">
+		<input type="text" id="MESSAGE" disabled=true placeholder="Enter your support ID first"><br>
+		<input id="INPUT-BUTTON" type="button" onclick="postedMsg()" disabled=true value="----">
+	</div>
+</div>
+
+</body>

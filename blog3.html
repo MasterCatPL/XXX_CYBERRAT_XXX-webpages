@@ -1,0 +1,137 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: rgb(0, 255, 0);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function insertHack() {
+	let elements = document.getElementsByTagName("p");
+	let random_element = elements[Math.floor(Math.random() * elements.length)];
+	let element_html = random_element.innerHTML;
+	let indices_array = [];
+
+	//find all ". " in paragraph
+	for (let i = 0; i < element_html.length; i++) {
+		if (
+			(element_html[i] === "." && element_html[i + 1] === " ") ||
+			(element_html[i + 1] == undefined && element_html[i + 1] !== "." && element_html[i - 1] !== ".")
+		) {
+			indices_array.push(i);
+		}
+	}
+
+	//choose random sentence in paragraph
+	let sentence_end_index = Math.floor(Math.random() * indices_array.length);
+	let sentence_start_index = sentence_end_index - 1;
+
+	if (sentence_end_index == 0) {
+		var slice_start = 0;
+	} else {
+		var slice_start = indices_array[sentence_start_index] + 2;
+	}
+
+	let sentence = element_html.slice(slice_start, indices_array[sentence_end_index]) + ".";
+	console.log(sentence);
+	console.log(slice_start);
+	console.log(indices_array[sentence_end_index]);
+	console.log(indices_array);
+
+	let replaced = element_html.replace(sentence, "<span id='HiddenSpan'>" + sentence + "</span>");
+	random_element.innerHTML = replaced;
+	document.getElementById("HiddenSpan").onclick = blogHacked;
+}
+
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan");
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + counter1.toFixed(1) + "%";
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%";
+			window.ue.webbrowser.hacked_blog(blogID);
+		}
+	}
+}
+
+window.onload = function () {
+	insertHack();
+	let anxiety = Number(window.location.search.substring(1));
+	blogID = 3;
+	window.ue.webbrowser.visited_blog(blogID, anxiety);
+};
+
+</script>
+<div id="MAIN">
+<p>I developed my obsession with cryptocurrencies around three years ago. As soon as I stumbled upon the world of cryptocurrencies, I was draw in by the decentralized nature of them. I imagined a world where power was distributed evenly among the people, rather than being concentrated in the hands of a few powerful institutions.</p>
+
+<p>As I delved deeper into the topic, I spent hours upon hours learning everything I could about them. I read articles and forum posts, watched videos and podcasts, and even joined online communities of like-minded individuals.</p>
+
+<img src="CSS/Images/Anxiety/Blog3_1.png" class="IMAGE">
+
+<p>Eventually, I became so obsessed that it consumed my every waking thought I spent all my free time thinking about the different coins and projects out there, and I even started trading a little bit on my own. I was convinced that this was the future of money, and I was determined to be a part of it.</p>
+
+<p>It was this obsession that led me to convince my family to invest in the blockchain project. I sweet talked them about how this is going to be the future. The ultra sound money. I was sure it was a solid investment, and I was excited to share my enthusiasm with my family. They trusted me, and they agreed to invest a significant portion of their retirement fund into the project.</p>
+
+<img src="CSS/Images/Anxiety/Blog3_2.png" class="IMAGE">
+
+<p>At first, things seemed to be going well. The value of the coin we had invested in was going up, and we were all making a profit. I was hailed as a financial genius by my family, and I couldn't have been more proud.</p>
+
+<p>But then... The LUNA collapse happened, and It turned out that the project we had invested in was just a scam. The APY they were promising were just to attract naive idiots like me. All of my parents' money was gone, and we were left with nothing. It was... so hard... to get out of the room and to tell them what happened...</p>
+
+<img src="CSS/Images/Anxiety/Blog3_3.png" class="IMAGE">
+
+<p>When I finally told them, they were furious with me. They accused me of being irresponsible and naive, and they blamed me for leading them down this path.</p>
+
+<p>I could understand why they were so angry. After all, I had convinced them to invest a significant portion of their retirement fund in this project, and now all of that money was gone. They had trusted me, and I had let them down.</p>
+
+<p>They yelled and screamed at me, telling me that I had ruined their financial future. They said that I had been reckless and irresponsible, and that I had jeopardized their entire way of life. I tried to apologize and explain that I had truly believed in the project, but they weren't interested in hearing it.</p>
+
+<p>In the end, they threw me out of the house and told me that I was no longer welcome there.</p>
+</div>
+</body>

@@ -1,0 +1,20 @@
+<head>
+<style>
+</style>
+<link rel="stylesheet" href="CSS/Anxiety.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+window.onload = function() {
+	window.ue.webbrowser.visited_bomb().then(function(ReturnValue) {
+		document.getElementById("IMG").style.filter = 'blur(' + ReturnValue + 'px)'
+	})
+}
+</script>
+<div id="MAIN">
+	<img src="CSS/Images/Anxiety/Image3.jpeg" id="IMG">
+	<div id="DESCR" contenteditable=true>	
+		<i>HIGHLIGHT</i><strong>COLORED</strong><b>TITLE</b><br><em>THE MYSTERY OF DEATH</em><br>NormalText	
+	</div>
+</div>
+</body>

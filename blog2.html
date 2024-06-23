@@ -1,0 +1,142 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: violet;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>
+window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function insertHack() {
+	let elements = document.getElementsByTagName("p");
+	let random_element = elements[Math.floor(Math.random() * elements.length)];
+	let element_html = random_element.innerHTML;
+	let indices_array = [];
+
+	//find all ". " in paragraph
+	for (let i = 0; i < element_html.length; i++) {
+		if (
+			(element_html[i] === "." && element_html[i + 1] === " ") ||
+			(element_html[i + 1] == undefined && element_html[i + 1] !== "." && element_html[i - 1] !== ".")
+		) {
+			indices_array.push(i);
+		}
+	}
+
+
+	//choose random sentence in paragraph
+	let sentence_end_index = Math.floor(Math.random() * indices_array.length);
+	let sentence_start_index = sentence_end_index - 1;
+
+	if (sentence_end_index == 0) {
+		var slice_start = 0;
+	} else {
+		var slice_start = indices_array[sentence_start_index] + 2;
+	}
+
+	let sentence = element_html.slice(slice_start, indices_array[sentence_end_index]) + ".";
+	console.log(sentence);
+
+	let replaced = element_html.replace(sentence, "<span id='HiddenSpan'>" + sentence + "</span>");
+	random_element.innerHTML = replaced;
+	document.getElementById("HiddenSpan").onclick = blogHacked;
+}
+
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan");
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + counter1.toFixed(1) + "%";
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%";
+			window.ue.webbrowser.hacked_blog(blogID);
+		}
+	}
+}
+
+window.onload = function () {
+	insertHack();
+	let anxiety = Number(window.location.search.substring(1));
+	blogID = 2;
+	window.ue.webbrowser.visited_blog(blogID, anxiety);
+};
+
+</script>
+<div id="MAIN">
+<p>I had always been fascinated by animals and the weird feelings they ignited in my heart. I loved the way they looked and the way they moved, and I was drawn to the sense of freedom and wildness that seemed to radiate from them. So when I discovered the world of furries, I was immediately hooked.</p>
+
+<img src="CSS/Images/Anxiety/Blog2_6.png" class="IMAGE">
+
+<p>At first, I was content just to watch the videos and look at the pictures. But as my fascination grew, I found myself wanting more. I started spending hours on the cam sites, chatting with the furry e-girls and learning everything I could about them. They were just so cute, so nice, so innocent and playful...</p>
+
+<p>As I spent more and more time on the cam sites, I became increasingly desperate for the attention and affection of the furry girls. I would do anything to get them to notice me, including spending all of my money on donations. But no matter how much I gave, it never seemed to be enough.</p>
+
+<img src="CSS/Images/Anxiety/Blog2_7.png" class="IMAGE">
+
+<p>Some of the girls were more responsive than others, but even the ones who seemed to be interested in me would eventually lose interest and move on to other users. It was always the same story - I would get a brief flicker of attention and then be cast aside, left to watch as the girls lavished their attention on other users.</p>
+
+<p>I became bitter and resentful, convinced that there was something wrong with me. I couldn't understand why the furry e-girls wouldn't give me the time of day, no matter how much I begged and pleaded. I was desperate for their affection, and I couldn't stand the thought of being ignored and rejected</p>
+
+<img src="CSS/Images/Anxiety/Blog2_5.png" class="IMAGE">
+
+<p>I found myself spending all of my money on these activities. I donated hundreds of dollars to the girls, hoping to get their attention and affection. But no matter how much I spent, it never seemed to be enough. I became completely consumed by the fantasy, and I would do whatever it took to keep it alive.</p>
+
+<p>When I ran out of money, I started stealing from my friends. At first, it was just small amounts, but as my addiction worsened, I took larger and larger sums. My friends noticed the missing cash, but they had no idea where it was going.</p>
+
+<img src="CSS/Images/Anxiety/Blog2_4.png" class="IMAGE">
+
+<p>Finally, one of my friends confronted me about the stolen money. I tried to deny it, but the evidence was too damning. My friend threatened to beat me up if I didn't give the money back, and I knew I had to come up with the cash fast.</p>
+
+<p>As I always do, I joined the webcam chat of my favourite furry girl and spilled out all of my emotions there in a series of posts, hoping to get her affection, maybe just a little bit of compassion...</p>
+
+<img src="CSS/Images/Anxiety/Blog2_1.png" class="IMAGE">
+
+<p>After the show, she has messaged me. But she didn't do it ouf of sympathy. She offered me money for... sexual favors. Sexual favors that I felt disgusted with and that I didn't want to do. But I needed the money... I feel ashamed and embarrased. My porn addiction had cost me everything - my friends, my family, and now, finally, my dignity...</p>
+
+<p>This is my confession. I hope it'll help you learn something.</p>
+</div>
+</body>

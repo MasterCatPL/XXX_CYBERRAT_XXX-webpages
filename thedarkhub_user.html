@@ -1,0 +1,371 @@
+<head>
+	<link rel="stylesheet" href="CSS\TheDarkHub.css">
+</head>
+<body>
+	<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+		var admin_array = new Array('KappaMeister', 'DoxGuru', 'XXX_CYBERRAT_XXX', 'BlueEyes', 'Luka Tim')
+		var emote_array = ['💗', '❣️', '🔕', '💞', '💭', '🔊', '🔇', '🖤', '🔔', '💘', '♣️', '♥️', '♠️', '🧡', '🔈', '📣', '💚', '♦️', '💔', '🔉', '💜', '📢', '💛', '💟', '💬', '💕', '💝', '❤️', '🗯', '💓', '💙', '💖']
+	
+		function setAdmin(username) {
+			document.getElementsByClassName("USERTITLE2")[0].style.display = "block";
+			if (username == 0) {
+				document.getElementsByClassName("USERTITLE")[0].innerText = "KappaMeister";
+				document.getElementsByClassName("STAT")[8].innerText = "POSTS:\n334";
+				document.getElementsByClassName("STAT")[9].innerText = "THREADS:\n54";
+				document.getElementsByClassName("STAT")[10].innerText = "VOUCHES:\n87";
+				document.getElementById("DESCR").innerHTML = "Admin since 2020. The best hacker in the world. Andrew Tate is a GIGACHAD. For any administrative inquires, ask X̶X̶X̶_̶C̶Y̶B̶E̶R̶R̶A̶T̶_̶X̶X̶X̶   first <span style='color:red'>(edit: i guess not cause he's dead LOL).</span> I'm a spammer god and if you ask nicely <span style='color:red'>(give me money)</span> i can help you with socials; promote, scam, do smth for fun or whatever.<br><br>2022-09-05: <span style='color: red'>My matix account was deleted due to 'ToS violations'</span> (WHICH ONE OF YOU REPORTED ME?) so i moved to new homeserver. <span style='color: red'>Click the link below to update my username host</span> (transition should be seamless if you're using the Chatter app)"
+				let contents = document.getElementsByClassName("STAT-CONTENT");
+				contents[0].innerText = 'online';
+				contents[1].innerText = '+1323';
+				contents[2].innerText = '2019';
+				contents[3].innerText = '< 1 min ago';
+				contents[4].innerText = '65';
+				contents[5].innerText = '3';
+				contents[6].innerText = '344';
+				contents[1].style.color = 'green'
+				contents[3].style.color = 'green'
+				contents[0].style.color = 'green'
+				document.getElementById("REVEAL").innerHTML = '<span>Click <span style="color:blue">this link</span> to update my username.</span>'
+				document.getElementById("REVEAL").style.cursor = "pointer";
+				document.getElementById("REVEAL").onclick = function() {window.ue.webbrowser.found_kappameister();document.getElementById("REVEAL").innerHTML = "<span>Username updated</span>"}
+				let emote_number = 8;
+				let starting_index = 2
+				for (let i = starting_index; i < emote_number; i++) {
+					console.log('dsad')
+					let copy = document.getElementsByClassName("AWARD")[0].cloneNode(true)
+					copy.innerText = emote_array[i];
+					document.getElementById("AWARDS").appendChild(copy);
+				}
+			return
+			}
+			if (username == 1) {
+				document.getElementsByClassName("USERTITLE")[0].innerText = "DoxGuru";
+				document.getElementsByClassName("STAT")[8].innerText = "POSTS:\n134";
+				document.getElementsByClassName("STAT")[9].innerText = "THREADS:\n14";
+				document.getElementsByClassName("STAT")[10].innerText = "VOUCHES:\n33";
+				document.getElementById("DESCR").innerHTML = "Admin since 2020. HMU for business. No forum support."
+				let contents = document.getElementsByClassName("STAT-CONTENT");
+				contents[0].innerText = 'offline';
+				contents[1].innerText = '+412';
+				contents[2].innerText = '2019';
+				contents[3].innerText = '8 days ago';
+				contents[4].innerText = '0';
+				contents[5].innerText = '0';
+				contents[6].innerText = '0';
+				contents[1].style.color = 'green'
+				contents[3].style.color = 'red'
+				contents[0].style.color = 'red'
+				document.getElementById("REVEAL").innerHTML = 'DoxGuru (matix)'
+				let emote_number = 2;
+				let starting_index = 0
+				for (let i = starting_index; i < emote_number; i++) {
+					console.log('dsad')
+					let copy = document.getElementsByClassName("AWARD")[0].cloneNode(true)
+					copy.innerText = emote_array[i];
+					document.getElementById("AWARDS").appendChild(copy);
+				}
+			return
+			}
+			if (username == 2) {
+				document.getElementsByClassName("USERTITLE")[0].innerText = "XXX_CYBERRAT_XXX";
+				document.getElementsByClassName("STAT")[8].innerText = "POSTS:\n897";
+				document.getElementsByClassName("STAT")[9].innerText = "THREADS:\n114";
+				document.getElementsByClassName("STAT")[10].innerText = "VOUCHES:\n230";
+				document.getElementById("DESCR").innerHTML = "Owner of TheDarkHub. I don't accept ad / promotion offers. If you have a question about the forum or need help resolving a issue / unfair ban / scammer, hit me up."
+				let contents = document.getElementsByClassName("STAT-CONTENT");
+				contents[0].innerText = 'BANNED';
+				contents[1].innerText = '+3412';
+				contents[2].innerText = '2017';
+				contents[3].innerText = '1 year ago';
+				contents[4].innerText = '101';
+				contents[5].innerText = '230';
+				contents[6].innerText = '0';
+				contents[1].style.color = 'green'
+				contents[3].style.color = 'red'
+				contents[0].style.color = 'red'
+				document.getElementById("REVEAL").innerHTML = 'XXX_CYBERRAT_XXX (matix)'
+				let emote_number = 10;
+				let starting_index = 0
+				for (let i = starting_index; i < emote_number; i++) {
+					console.log('dsad')
+					let copy = document.getElementsByClassName("AWARD")[0].cloneNode(true)
+					copy.innerText = emote_array[i];
+					document.getElementById("AWARDS").appendChild(copy);
+				}
+			return
+			}
+			if (username == 3) {
+				document.getElementsByClassName("USERTITLE")[0].innerText = "BlueEyes";
+				document.getElementsByClassName("STAT")[8].innerText = "POSTS:\n327";
+				document.getElementsByClassName("STAT")[9].innerText = "THREADS:\n24";
+				document.getElementsByClassName("STAT")[10].innerText = "VOUCHES:\n23";
+				document.getElementById("DESCR").innerHTML = "Forum admin. I don't mind helping newbies. If you need help, just send me a message.<br><br>Also, I'm a she. Yes, a female. No, I don't date. If you send me a dick pic, I'll find your socials and send the pic to your mother to show her what a piece of shit you are."
+				let contents = document.getElementsByClassName("STAT-CONTENT");
+				contents[0].innerText = 'BANNED';
+				contents[1].innerText = '+512';
+				contents[2].innerText = '2019';
+				contents[3].innerText = '3 months ago';
+				contents[4].innerText = '341';
+				contents[5].innerText = '402';
+				contents[6].innerText = '31';
+				contents[1].style.color = 'green'
+				contents[3].style.color = 'red'
+				contents[0].style.color = 'red'
+				document.getElementById("REVEAL").innerHTML = 'BlueEyes (matix)'
+				let emote_number = 10;
+				let starting_index = 4
+				for (let i = starting_index; i < emote_number; i++) {
+					console.log('dsad')
+					let copy = document.getElementsByClassName("AWARD")[0].cloneNode(true)
+					copy.innerText = emote_array[i];
+					document.getElementById("AWARDS").appendChild(copy);
+				}
+			return
+			}
+			if (username == 4) {
+				document.getElementsByClassName("USERTITLE")[0].innerText = "Luka Tim";
+				document.getElementsByClassName("STAT")[8].innerText = "POSTS:\n527";
+				document.getElementsByClassName("STAT")[9].innerText = "THREADS:\n84";
+				document.getElementsByClassName("STAT")[10].innerText = "VOUCHES:\n0";
+				document.getElementById("DESCR").innerHTML = "SHEEEEEEEEEEEEESHHHHHHH"
+				let contents = document.getElementsByClassName("STAT-CONTENT");
+				contents[0].innerText = 'online';
+				contents[1].innerText = '-212';
+				contents[2].innerText = '2020';
+				contents[3].innerText = '<1 min ago';
+				contents[4].innerText = '341';
+				contents[5].innerText = '402';
+				contents[6].innerText = '31';
+				contents[1].style.color = 'red'
+				contents[3].style.color = 'green'
+				contents[0].style.color = 'green'
+				document.getElementById("REVEAL").innerHTML = 'LukaTim (matix)'
+				let emote_number = 10;
+				let starting_index = 4
+				for (let i = starting_index; i < emote_number; i++) {
+					console.log('dsad')
+					let copy = document.getElementsByClassName("AWARD")[0].cloneNode(true)
+					copy.innerText = emote_array[i];
+					document.getElementById("AWARDS").appendChild(copy);
+				}
+			return
+			}
+		}
+	
+		function setUser() {
+			let username = decodeURI(window.location.search.substring(1));
+			const result = admin_array.findIndex(element => {
+			  return element.toLowerCase() === username.toLowerCase();
+			});
+			if (result != -1) {
+				setAdmin(result);
+				return
+			}
+			//48 –> 122 with numbers 65-122 without
+			if (username.charCodeAt(0) < 90) {
+				var status = 'offline'
+				var last_visit = Math.min(Math.trunc(username.charCodeAt(1) / 10), 23) + ' hours ago'
+			} else {
+				var status = 'online'
+				var last_visit = '< 1 min ago'
+			}
+			// 0–>74
+			let registration = 2022 - Math.min(Math.trunc((122 - username.charCodeAt(1)) / 20), 6)
+			let likes = Math.trunc(Math.min((122 - username.charCodeAt(2)) * 11, 989))
+			let referrals = Math.trunc(likes / 99)
+			let reported = Math.trunc(referrals / 9)
+			let posts = Math.trunc(likes / 9)
+			let threads = Math.trunc(posts / 9)
+			let vouches = Math.trunc((122 - username.charCodeAt(4)) / 10)
+			//second character so probably small case = 97 �> 122 (25)
+			let reputation = Math.trunc(Math.min((122 - username.charCodeAt(2)) - 12.5, 1514) * 121) //-12.5 �> 12.5  * 
+			
+			let contents = document.getElementsByClassName("STAT-CONTENT");
+			contents[0].innerText = status;
+			if (status == 'offline') {
+				contents[0].style.color = 'darkred';
+				contents[3].style.color = 'darkred';
+			} else {
+				contents[0].style.color = 'green'
+				contents[3].style.color = 'green';
+			}
+			
+			if (reputation < 0) {
+				contents[1].style.color = 'red'
+			} else {
+				contents[1].style.color = 'green'
+			}
+			
+			contents[1].innerText = reputation;
+			contents[2].innerText = registration;
+			contents[3].innerText = last_visit;
+			contents[4].innerText = likes;
+			contents[5].innerText = referrals;
+			contents[6].innerText = reported;
+			document.getElementsByClassName("USERTITLE")[0].innerText = username;
+			document.getElementsByClassName("STAT")[8].innerText = "POSTS: " + posts;
+			document.getElementsByClassName("STAT")[9].innerText = "THREADS: " + threads;
+			document.getElementsByClassName("STAT")[10].innerText = "VOUCHES: " + vouches;
+			
+			let emote_number = Math.trunc(username.charCodeAt(3) / 10);
+			let starting_index = Math.trunc(Math.min(Math.random() * emote_number.length, emote_number.length - emote_number))
+			for (let i = starting_index; i < emote_number; i++) {
+				let copy = document.getElementsByClassName("AWARD")[0].cloneNode(true)
+				copy.innerText = emote_array[i];
+				document.getElementById("AWARDS").appendChild(copy);
+			}
+		}
+	
+		function setOnline(first_time=false) {
+			if (first_time == true) {
+				var online = Math.trunc(Math.random() * (55000 - 45000) + 45000);
+				console.log(online)
+			} else {
+				var online = (Number(document.getElementById("users").innerText) + ((Math.random() - 0.5) * 300)).toFixed(0)
+			}
+			let members = (online * 0.06).toFixed(0);
+			let guests = (online - members).toFixed(0);
+			document.getElementById("users").innerText = online + ' ';
+			document.getElementById("members").innerText = ' ' + members + ' ';
+			document.getElementById("guests").innerText = ' ' + guests + ' ';
+		}
+	
+		window.onload = function(){
+			if (!window.location.search.startsWith('?')) {
+				window.location.replace("thedarkhub.html");
+			}
+			setOnline(true);
+			setUser();
+			setInterval(setOnline, 5000)
+			let buttons = document.getElementsByClassName("ITEM-BUTTON")
+			for (let i = 0; i < buttons.length; i++) {
+				buttons[i].onclick = function() {window.location.replace("thedarkhub.html")}
+			}
+			buttons[2].onclick = function() {window.location.replace("thedarkhub_sell.html")}
+			buttons[3].onclick = function() {window.location.replace("thedarkhub_vips.html")}
+			buttons[4].onclick = function() {window.location.replace("thedarkhub_announce.html?domains")}
+		}
+	</script>
+	<div id="TOP">
+		<div id="LOGO">
+			<a href="thedarkhub.html"><img src="CSS/Images/trTheHubLogo.png"></a>
+		</div>
+	</div>
+	<div id="LIST">
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				LEAKS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				ACCOUNTS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON" onclick="window.location='thedarkhub_sell.html'">
+				SELLER'S BAY
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				VIP LOUNGE
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				DOMAINS
+			</div>
+		</div>
+	</div>
+	<div class="CONTAINER">
+		<div id="USER-LEFT">
+			<a id="ANNOUNCER-LINK">
+				<img src="CSS/Images/Icon_Identity.svg" id="AVATAR">
+			</a>
+			<div class="STAT">
+				<div style="float: left">Status:</div><div class="STAT-CONTENT" style="float: right;">Offline</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">Reputation:</div><div class="STAT-CONTENT" style="float: right;">0</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">Registration:</div><div class="STAT-CONTENT" style="float: right;">2020</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">Last visit:</div><div class="STAT-CONTENT" style="float: right;">2 days ago</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">Likes given:</div><div class="STAT-CONTENT" style="float: right;">20</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">Referrals:</div><div class="STAT-CONTENT" style="float: right;">21</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">Reported posts:</div><div class="STAT-CONTENT" style="float: right;">12</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">ETH Address:</div><div class="STAT-CONTENT" style="float: right;">Unknown</div>
+			</div>
+		</div>
+		<div id="USER-MIDDLE">
+			<div class="USER-MIDDLE-STAT">
+				<div class="LABEL USERTITLE2" style="margin-bottom:10px;"><span style="z-index:233">ADMIN ACCOUNT</span></div>
+			</div>
+			<div class="USER-MIDDLE-STAT">
+				<div class="LABEL USERTITLE" style="margin-bottom:0px;"><span style="z-index:233">BlueEyes</span></div>
+			</div>
+			<div id="DESCR" style="padding-left:30px;padding-right:30px;color: white;text-align:center;margin-top:10px;margin-bottom:10px;">
+				<span>No profile description.</span>
+			</div>
+			<div class="USER-MIDDLE-STAT">
+				<div class="LABEL" style="border-radius:0px;">Statistics</div>
+				<div id="USER-STATS">
+					<div style="padding: 5px 0px 0px 5px;width:33.33%;background-color:rgba(0, 0, 0, 0.5);color:white" class="STAT">
+						POSTS: 3233
+					</div>
+					<div style="padding: 5px 0px 0px 5px;width:33.33%;background-color:rgba(0, 0, 0, 0.5);color:white" class="STAT">
+						THREADS: 432
+					</div>
+					<div style="padding: 5px 0px 0px 5px; width:33.33%;background-color:rgba(0, 0, 0, 0.5);color:white" class="STAT">
+						VOUCHES: 32
+					</div>
+				</div>
+			</div>
+			<div class="USER-MIDDLE-STAT">
+				<div class="LABEL" style="margin-top:15px;border-radius:0px;">Contact</div>
+				<div id="REVEAL">Unknown</div>
+			</div>
+		</div>
+		<div id="USER-RIGHT">
+			<div class="LABEL">Awards</div>
+			<div id="AWARDS">
+				<div class="AWARD">❤️</div>
+			</div>
+		</div>
+	</div>
+	<div class="CONTAINER" style="margin-top:30px;">
+		<div id="FOOTER">
+			<div class="LABEL" style="border-radius:0px;">
+				<span id="users" style="white-space: pre"></span> users online | <span id="members" style="white-space: pre"></span> members and <span id="guests" style="white-space: pre"></span> guests
+			</div>
+			<div class="LABEL" style="border-radius:0px;background-color:rgba(0,0,0,0.5);color:white">
+				<div class="FOOTER-BOX">
+					18.70M<br>Posts
+				</div>
+				<div class="FOOTER-BOX">
+					611k<br>Threads
+				</div>
+				<div class="FOOTER-BOX">
+					3.31M<br>Users
+				</div>
+				<div class="FOOTER-BOX">
+					<a href="thedarkhub_user.html?Guest">Guest</a><br>Newest member
+				</div>
+				<div class="FOOTER-BOX">
+					60.76K<br>Most Online
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

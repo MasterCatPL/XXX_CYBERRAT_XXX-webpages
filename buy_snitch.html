@@ -1,0 +1,144 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+@font-face {
+  font-family: CalibriBold;
+  src: url(CSS/Fonts/CalibriBold.ttf);
+}
+
+body {
+	margin: 0px;
+	background-color: #DBA8A3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Calibri;
+	font-size: 21px;
+	background-image: url(CSS/Images/SnitchPattern.webp);
+}
+
+#MAIN {
+	border-radius: 16px;
+	background-color: white;
+	padding: 20px;
+	border: 10px solid rgba(150, 78, 70, 0.6);
+	background-clip: padding-box;
+	width: 100%;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	margin-left: 40px;
+	margin-right: 40px;
+	max-width: 700px;
+	text-align: justify;
+}
+
+
+.LABEL {
+	text-align: center;
+	width: 100%;
+	font-size: 32px;
+	background-color: #BC655C;
+	border-radius: 8px;
+}
+
+.highlight {
+	background-color: rgba(188, 101, 92, 0.3);
+	border-radius: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-family: CalibriBold;
+}
+
+#BUY {
+	outline: none;
+	border: 3px solid rgba(0, 0, 0, 0.3);
+	background-color: #DBA8A3;
+	width: 250px;
+	height: 35px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#BUY:hover {
+	filter: brightness(0.8);
+}
+
+#EXPLAINER {
+	margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+let buttonEl;
+let counter = 0;
+let interval;
+
+function loadLoop() {
+	buttonEl.value = "chkr.exe => " + (counter).toFixed(1) + "%";
+	counter = counter + 0.3;
+	if (counter >= 100) {
+		clearInterval(interval)
+		window.ue.webbrowser.buy_module("Snitch.tv").then(function(ReturnValue) {
+			if (ReturnValue == "Downloaded") {
+				play_sound(true)
+				buttonEl.value = "DOWNLOADED";
+				buttonEl.style.backgroundColor = "lightgreen";
+			} else {
+				play_sound(false)
+				buttonEl.value = "INSUFFICIENT FUNDS";
+				buttonEl.style.backgroundColor = "#de3f3c"
+			}
+		})
+	}
+}
+
+function clickBuy() {
+	counter = 0;
+	clearInterval(interval);
+	interval = setInterval(loadLoop, 200)
+}
+
+window.onload = function () {
+	buttonEl = document.getElementById("BUY");
+	get_static_npc_username("SellSnitch");
+	getPrice("Snitch.tv");
+}
+
+
+</script>
+<div id="MAIN">
+	<div class="LABEL">
+		CHECKER MODULE: SNITCH.TV
+	</div>
+	<div id="EXPLAINER">
+		<br>Yo guys,<br>I'm maitaining my own module for CheckerV4. <span class="highlight">If you feed it a combolist of username:password, it will check whether it fits a valid account on Snitch.tv</span>. Keep in mind it requires to try every login with a different IP address, cause <span class="highlight">Snitch.tv will blacklist IPs for login spam abusing.</span> But it doesn't do much more than that, so regular paid residential proxies should work.<br><br>
+		
+		NGL this module is kinda pog. It <span class="highlight">supports saving login cookies</span>, so if you want to access stolen account after initial round of checking, you can just insert it into your browsing and bam, <span class="highlight">no login page required.</span><br><br>
+		
+		It also supports proxy history for a given account, to avoid geolocation checks; if you access an account <span class="highlight">using a proxy from India and later login from a US proxy, Snitch.tv might flag you as sus.</span> Saving proxy history for an account allows you to use same origin proxies and avoid this.<br><br>
+		
+		AND thats not even the pog part. The pog part is that <span class="highlight">its actually not just a CheckerV4 module, but a whole fucking client, integrated with Snitch.tv systems!</span> You can command your botted account to <span class="highlight">claim SnitchPrime</span>, to <span class="highlight">view a specific Snitch channel</span> for specified time, to <span class="highlight">spam whatever you want in chat</span>, to <span class="highlight">claim watching rewards</span>, to <span class="highlight">connect your Stim account</span> and send them there, to <span class="highlight">subscribe using cc</span> (in case you got some fresh stolen/leaked credit cards) (you need them for SnitchPrime too).<br><br>
+		
+		One use of this module are the <span class="highlight">Elon Musk scams</span> you might've seen. You can create some channel where you put a video of someone doing a "giveway", and then <span class="highlight">you can use this module to command your stolen Snitch.tv accounts to watch it.</span> It will boost up the viewership quite a lot, so it will be <span class="highlight">on top of the list when regular users browse the site.</span> This way you will get organic traffic and <span class="highlight">attract potential victims.</span> GL.<br><br>
+		
+		And if you're not a scammer, <span class="highlight">you can always just sell the accounts somewhere.</span> In case you don't know, TheDarkHub is back online since some time. They're one of the biggest marketplaces for stolen accs / credentials / porn. You won't get any sales selling individual accounts, but <span class="highlight">if you sell the accounts in batches, you might get some money.</span><br><br>
+		<div style="text-align: center;">
+			<input type="button" id="BUY" onclick="clickBuy()" value="PURCHASE"><br>
+			<span>The module costs <span id="PRICE">X.XX</span> ETH</span>
+			<div>For problems, contact <span id="OWNER-NAME">DefaultUsername</span></div>
+		</div>
+	</div>
+</div>
+</body>

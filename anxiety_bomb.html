@@ -1,0 +1,122 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	font-family: Unifont;
+	margin: 0px;
+	overflow-y: hidden;
+	text-align: center;
+}
+
+#MAIN {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 21px;
+	word-break: break-all;
+	flex-wrap: wrap;
+	position: absolute;
+}
+
+#WRITING {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 138px;
+	font-weight: bold;
+	user-select: none;
+	text-shadow: 0 5px yellow;
+	color: red;
+	animation-name: writing;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes writing {
+  0%   {color: red;}
+  25%  {color: blue;}
+  50%  {color: green;}
+  100% {color: red;}
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+window.onload = function () {
+	Array.prototype.random = function () {
+		return this[Math.floor(Math.random() * this.length)];
+	};
+
+	let alphabet = new Array(
+		"You are worth nothing. ",
+		"You have achieved nothing. ",
+		"Your life is a failure. ",
+		"Nobody likes you. ",
+		"You will be alone forever. ",
+		"There is no god. ",
+		"Everyone hates you. ",
+		"You are useless. ",
+		"You are stupid. ",
+		"You will never achieve your goals. ",
+		"You are too lazy to ever achieve your goals. ",
+		"You are too stupid to ever achieve your goals. ",
+		"You are not enough. ",
+		"You haven't done enough. ",
+		"You underperform. ",
+		"You are lying to yourself. ",
+		"Nobody loves you. ",
+		"You don't have real friends. ",
+		"You are getting old. ",
+		"You are going to die. ",
+		"You have no future. ",
+		"You've already given up. ",
+		"You can't help yourself. ",
+		"You are a bad person. ",
+		"You should have known better. ",
+		"You have lost. ",
+		"You are a terrible person. ",
+		"There is something wrong with you. ",
+		"You will never achieve anything important. ",
+		"You will never achieve anything. ",
+		"You will stay poor. ",
+		"You will fail. ",
+		"You have missed all your opportunities. ",
+		"There is nothing ahead of you. ",
+		"Your life is boring. "
+	);
+	let backString = "";
+	for (let i = 0; i < 300; i++) {
+		let test = "";
+		let test2 = "";
+		if (Math.random() < 0.35) {
+			let r = [0, 255].random();
+			let g = [0, 255].random();
+			let b = [0, 255].random();
+			test = '<span style="color: rgb(' + r + ", " + g + ", " + b + ')">';
+			test2 = "</span>";
+		}
+		backString += test + alphabet.random() + test2;
+	}
+	document.getElementById("MAIN").innerHTML = "<span>" + backString + "</span>";
+
+	let anxietyHit = Number(window.location.search.substring(1));
+	window.ue.webbrowser.visited_bomb(anxietyHit);
+};
+
+</script>
+<div id="MAIN">
+</div>
+</body>

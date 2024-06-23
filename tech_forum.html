@@ -1,0 +1,188 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+:root {
+	--hueRotate: 0deg
+}
+
+body {
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: Calibri;
+	padding-bottom: 70px;
+}
+
+#backgroundImage {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	filter: hue-rotate(var(--hueRotate));
+	z-index: -1;
+	user-select: none;
+}
+
+#MAIN {
+	background-color: rgb(220, 220, 220);
+	margin-top: 70px;
+	border-radius: 8px;
+	width: 700px;
+	display: flex;
+	flex-direction: column;
+}
+
+#LABEL {
+	display: flex;
+	border-bottom: 3px solid black;
+}
+
+#LABEL-IMG {
+	height: 100px;
+	width: auto;
+	background-color: rgb(35, 97, 160);
+	margin: 15px;
+	filter: hue-rotate(var(--hueRotate));
+	border-radius: 8px;
+	padding: 5px;
+}
+
+#LABEL-LABEL {
+	font-size: 61px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+}
+
+#MENU {
+	display: flex;
+	justify-content: center;
+}
+
+#CHAT {
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.1);
+	min-height: 500px;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+.MESSAGE {
+	padding-left: 30px;
+}
+
+#UPLOAD {
+	width: 500px;
+	height: 200px;
+	border: 3px dotted black;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	font-size: 28px;
+	align-items: center;
+	cursor: pointer;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+#UPLOAD:hover {
+	background-color: rgba(35, 97, 160, 0.3);
+}
+
+#CHAT-TITLE {
+	font-size: 31px;
+	width: 100%;
+	font-weight: bold;
+	text-align: center;
+}
+
+.USERNAME {
+	font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function setPointer() {
+	window.ue.webbrowser.set_chat_pointer()
+}
+
+function addMessage() {
+	if (Math.random() < 0.3) {
+		return
+	}
+	window.ue.webbrowser.add_chat_message().then(function(ReturnValue) {
+		let username = ReturnValue.split('|')[0] + ':';
+		let message = ReturnValue.split('|')[1]
+		let parent = document.getElementById("CHAT")
+		let template = document.getElementsByClassName("MESSAGE")[0];
+		let copied = template.cloneNode(true);
+		copied.children[0].innerText = username
+		copied.children[1].innerText = message
+		parent.appendChild(copied);
+		if (parent.children.length > 25) {
+			parent.removeChild(parent.firstElementChild)
+		}
+	})
+	
+}
+
+window.onload = function() {
+	setPointer();
+	setInterval(addMessage, 1000);
+}
+
+</script>
+<img src="CSS/Images/Geometric.jpg" id="backgroundImage">
+</div>
+<div id="MAIN">
+	<div id="LABEL">
+		<img src="CSS/Images/Monitor.png" id="LABEL-IMG">
+		<div id="LABEL-LABEL">
+			The TechGuys Forum
+		</div>
+	</div>
+	<div id="MENU">
+		<ul>
+			<li>
+				<a href="">newest downloads</a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="">newest tutorials</a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="">newest posts</a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="">newest members</a>
+			</li>
+		</ul>
+	</div>
+	<div id="CHAT-TITLE">
+		PUBLIC CHAT
+	</div>
+	<div id="CHAT">
+		<div class="MESSAGE">
+			<span class="USERNAME">Regex:</span>
+			<span class="MESSAGE-CONTENT">i wish one day a car runs me over</span>
+		</div>
+	</div>
+	<div id="UPLOAD">
+		UPLOAD FILE
+	</div>
+</body>

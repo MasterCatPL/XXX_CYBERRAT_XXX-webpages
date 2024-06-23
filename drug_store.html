@@ -1,0 +1,286 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	background-color: rgb(200, 200, 200);
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	color: #ff8800;
+	background-image: url(CSS/Images/AlphaPattern.webp);
+	font-family: Calibri;
+}
+
+#UPPER {
+	height: 100px;
+	width: 100%;
+	background-color: #4a5c77;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 48px;
+	text-shadow: 2px 2px black;
+}
+
+#SHOP {
+	display: flex;
+	width: 100%;
+	min-height: calc(100% - 100px);
+}
+
+#HELP {
+	height: calc(100% - 20px);
+	width: 30%;
+	max-width: 200px;
+	background-color: #4a5c77;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 8px;
+	word-break: break-all;
+	min-width: 100px;
+	padding-top: 50px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#ITEM-WRAPPER {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#CATEGORIES {
+	margin: 10px;
+	background-color: white;
+	min-height: 50px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: calc(100% - 20px);
+	flex-wrap: wrap;
+	border-radius: 8px;
+}
+
+.CATEGORY {
+	background-color: #4a5c77;
+	border-radius: 8px;
+	height: 30px;
+	font-size: 18px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.CATEGORY:hover {
+	filter: brightness(1.1);
+}
+
+#ITEMS {
+	width: calc(100% - 20px);
+	margin: 10px;
+	color: black;
+	margin-top: 0px;
+}
+
+.ITEM {
+	background-color: white;
+	height: 110px;
+	border-radius: 8px;
+	display: flex;
+	font-size: 21px;
+	word-break: break-all;
+	display: none;
+	margin-top: 15px;
+}
+
+.ITEM-IMG {
+	height: 100px;
+	margin: 5px;
+}
+
+.DESCR {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 25%;
+	flex-direction: column;
+}
+
+.BUY-BUTTON {
+	background-color:#ff8800;
+	border-top-right-radius:8px;
+	border-bottom-right-radius:8px;
+	cursor:pointer;
+}
+
+.BUY-BUTTON:hover {
+	filter: brightness(1.1);
+}
+
+#UPPER-IMG {
+	height: calc(100% - 20px);
+	width: auto;
+	margin-right: 20px;
+}
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+
+function displayAlert(message) {
+	document.getElementById("ALERT-TEXT").innerText = message;
+	document.getElementById("ALERT-CONTAINER").style.visibility = 'visible';
+}
+
+function createDrug(name, quantity, price, type) {
+	var template = document.getElementsByClassName("ITEM")[0];
+	var copied = template.cloneNode(true);
+	copied.style.display = 'flex';
+	copied.children[1].childNodes[1].textContent = name;
+	copied.children[2].childNodes[1].textContent = quantity;
+	copied.children[4].childNodes[1].textContent = price;
+	copied.children[6].textContent = type;
+	document.getElementById("ITEMS").appendChild(copied);
+}
+
+function createDrugFake(name, quantity, price, filepath) {
+	var template = document.getElementsByClassName("ITEM")[0];
+	var copied = template.cloneNode(true);
+	copied.style.display = 'flex';
+	copied.children[1].childNodes[1].textContent = name;
+	copied.children[2].childNodes[1].textContent = "OUT OF STOCK";
+	copied.children[2].style.color = "red";
+	copied.children[5].innerText = "Out of stock"
+	copied.children[5].onclick = function ttt() {console.log("fake")}
+	copied.children[4].childNodes[1].textContent = price;
+	copied.children[0].src = filepath;
+	document.getElementById("ITEMS").appendChild(copied);
+}
+
+
+function buyDrug(element) {
+	let quantity = element.parentElement.children[2].childNodes[1].textContent;
+	let cost = Number(element.parentElement.children[4].childNodes[1].textContent.replace(' ETH', ''));
+	let type = element.parentElement.children[6].innerText;
+	let name = element.parentElement.children[1].childNodes[1].textContent
+	if (Number(quantity) <= 0) {
+		displayAlert("The seller has run out of stock.")
+		element.parentElement.children[2].childNodes[1].textContent = '0'
+		return
+	}
+	window.ue.webbrowser.bought_drug(name).then(function(ReturnValue) {
+		if (ReturnValue) {
+			displayAlert("Bought successfully. You will receive a package shortly. It will arrive according to your 'delivery note'")
+		} else {
+			displayAlert("You don't have enough funds to buy this item.")
+		}
+		get_drug_balance();
+		populate_drugs();
+	})
+}
+
+function get_drug_balance() {
+	window.ue.webbrowser.get_drug_balance().then(function(ReturnValue) {
+		document.getElementById("FUNDS").innerText = (ReturnValue).toFixed(4);
+	})
+}
+
+function populate_drugs() {
+	//delete prev mess in case repopulating after buying drug
+	let items = document.getElementsByClassName("ITEM")
+	for (let i = items.length - 1; i > 0; i--) {
+		items[i].remove();
+	}
+	window.ue.webbrowser.populate_drugs().then(function(ReturnValue) {
+		let drugs1 = ReturnValue.split('<')
+		let drugs = drugs1.filter(e => e);
+		for (let i = 0; i < drugs.length; i++) {
+			let drug = drugs[i].split('|')
+			let name = drug[0]
+			let quantity = drug[1]
+			let price = drug[2] + ' ETH'
+			let type = drug[3]
+			createDrug(name, quantity, price, type);
+		}
+	})
+	
+	//just random whatever
+	createDrugFake("Averol Extra", 0, "0.3 ETH", "CSS/Images/Pills2.png");
+	createDrugFake("Benfentyl", 0, "0.6 ETH", "CSS/Images/Pills3.png");
+	createDrugFake("Lacyne", 0, "0.15 ETH", "CSS/Images/Pills4.png");
+}
+
+
+window.onload = function() {
+	populate_drugs();
+	get_drug_balance();
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-LABEL">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">OK</div>
+	</div>
+</div>
+<div id="UPPER">
+	<img src="CSS/Images/Medicine.png" id="UPPER-IMG">
+	AlphaMedicine
+</div>
+<div id="SHOP">
+	<div id="HELP">
+		<div style="font-size:28px;font-weight:bold">Login info</div>
+		<div style="color:white;">You are logged in as<br>XXX_CYBERRAT_XXX.</div><br>
+		<div style="font-weight: bold;font-size:18px;">Your delivery note:</div>
+		<div style="color:white;word-break:break-word;">don't be sus. just leave it at the corner of the motel, there are some other empty boxes there. It'll blend in. I'll pick it up after you are gone. I don't meet face to face.</div><br>
+		<div style="font-weight: bold;font-size:18px;">Your funds:</div>
+		<div style="color:white;"><span id="FUNDS">0.00</span> ETH</div><br>
+		</div>
+	<div id="ITEM-WRAPPER">
+		<div id="CATEGORIES">
+			<div class="CATEGORY"><span>Best drugs for best prices! These will <span style="color:orange">lower your anxiety</span></span></div>
+		</div>
+		<div id="ITEMS">
+			<div class="ITEM">
+				<img src="CSS/Images/Pills1.png" class="ITEM-IMG">
+				<div class="DESCR"><b>Name:</b>Rivotrail Clonazepam</div>
+				<div class="DESCR"><b>Quantity:</b>1</div>
+				<div style="display:none" class="DESCR"><b>Ships:</b>worldwide</div>
+				<div class="DESCR"><b>Price:</b>0.1032 ETH</div>
+				<div class="DESCR BUY-BUTTON" onclick="buyDrug(this)">Buy<br>now</div>
+				<div style="display:none">Weak</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>

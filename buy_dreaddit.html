@@ -1,0 +1,147 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+@font-face {
+  font-family: CalibriBold;
+  src: url(CSS/Fonts/CalibriBold.ttf);
+}
+
+body {
+	margin: 0px;
+	background-color: #524db0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Calibri;
+	font-size: 21px;
+	background-image: url(CSS/Images/DreadditPattern.webp);
+}
+
+#MAIN {
+	border-radius: 16px;
+	background-color: white;
+	padding: 20px;
+	border: 10px solid rgba(0, 0, 0, 0.2);
+	background-clip: padding-box;
+	width: 100%;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	margin-left: 40px;
+	margin-right: 40px;
+	max-width: 700px;
+	text-align: justify;
+}
+
+
+.LABEL {
+	text-align: center;
+	width: 100%;
+	font-size: 32px;
+	background-color: #7d8a99;
+	border-radius: 8px;
+}
+
+.highlight {
+	background-color: rgba(125, 138, 153, 0.3);
+	border-radius: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-family: CalibriBold;
+}
+
+#BUY {
+	outline: none;
+	border: 3px solid rgba(0, 0, 0, 0.3);
+	background-color: rgb(125, 138, 153);
+	width: 250px;
+	height: 35px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#BUY:hover {
+	filter: brightness(0.8);
+}
+
+#EXPLAINER {
+	margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+let buttonEl;
+let counter = 0;
+let interval;
+
+function loadLoop() {
+	buttonEl.value = "chkr.exe => " + (counter).toFixed(1) + "%";
+	counter = counter + 0.3;
+	if (counter >= 100) {
+		clearInterval(interval)
+		window.ue.webbrowser.buy_module("Dreaddit").then(function(ReturnValue) {
+			if (ReturnValue == "Downloaded") {
+				play_sound(true)
+				buttonEl.value = "DOWNLOADED";
+				buttonEl.style.backgroundColor = "lightgreen";
+			} else {
+				play_sound(false)
+				buttonEl.value = "INSUFFICIENT FUNDS";
+				buttonEl.style.backgroundColor = "#de3f3c"
+			}
+		})
+	}
+}
+
+function clickBuy() {
+	counter = 0;
+	clearInterval(interval);
+	interval = setInterval(loadLoop, 200)
+}
+
+window.onload = function () {
+	buttonEl = document.getElementById("BUY");
+	get_static_npc_username("SellDreaddit");
+	getPrice("Dreaddit");
+}
+
+
+</script>
+<div id="MAIN">
+	<div class="LABEL">
+		CHECKER MODULE: DREADDIT
+	</div>
+	<div id="EXPLAINER">
+		<br>Welcome frens,<br>
+		I am the maintainer of the <span class="highlight">Dreaddit module for CheckerV4.</span> You may know me as <span id="OWNER-NAME">DefaultUsername</span>. The Dreaddit module supports most common CheckerV4 API calls. It allows you to <span class="highlight">check thousands of accounts</span> for building your social media botting empire. The combolist format you'll need to feed to the module is username:password<br><br>
+		
+		So as a starting point, you must know that new, fresh Dreaddit accounts don't have much power by themselves. They're flagged by Dreaddit as newly registered and their posts are <span class="highlight">VERY LIKELY</span> to be hidden / shadowbanned by default.<br><br>
+		
+		There is also an <span class="highlight">upvote shadowban.</span> From your client it will seem as though your upvote increased post's score, but that is not true. As a flagged user, your <span class="highlight">upvotes don't count.</span><br><br>
+		
+		So as you can see, <span class="highlight">it's quite hard to bot Dreaddit.</span> You can register thousands of accounts using some generator, but what does it matter, if they can't do anything? Sure, you can program the bots to create some fake organic content, by e.g making them copy & paste high ranking comments and hope to harvest some upvotes, but it's so much work...<br><br>
+		
+		<span class="highlight">That's why you need this module.</span> Instead of messing around with useless fresh accounts and trying to make them unflagged, you can just check some combolists and get a list of stolen Dreaddit accounts with <span class="highlight">ACTUALLY ORGANIC</span> content. So they'll <span class="highlight">NEVER</span> be flagged or banned or shadowbanned or anything and you're basically good to do whatever you want.<br><br>
+		
+		You can spam, upvote your own posts, upvote your comments, nuke someone's dms, make some politcal statements, hateful content, bully someone until he gives up on life, etc. etc.<br><br>
+		
+		<span class="highlight">Don't we all want to be heard?</span> With this module, people will be forced to listen to your shitty opinions whenever you feel like it!<br><br>
+		
+		<div style="text-align: center;">
+			<input type="button" id="BUY" onclick="clickBuy()" value="PURCHASE"><br>
+			<span>The module costs <span id="PRICE">X.XX</span> ETH</span>
+		</div>
+	</div>
+</div>
+</body>

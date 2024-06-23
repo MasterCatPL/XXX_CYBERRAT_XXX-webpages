@@ -1,0 +1,22 @@
+<head>
+<style>
+</style>
+<link rel="stylesheet" href="CSS/Anxiety.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+window.onload = function() {
+	window.ue.webbrowser.visited_bomb().then(function(ReturnValue) {
+		document.getElementById("IMG").style.filter = 'blur(' + ReturnValue + 'px)'
+	})
+}
+</script>
+<div id="MAIN">
+	<div id="SHADOW">
+		<img src="CSS/Images/Anxiety/Image3.png" id="IMG">
+	</div>
+	<div id="DESCR" contenteditable=false>	
+		<em>CHILD LABOUR</em><br>In the world's poorest countries, around 25% of children are engaged in child labour. In Mali, Benin, Chad and Guinea-Bissau, there are over 50% of children aged 5-14 working. Children are predominantly employed by their parents, rather than factories, and work predominetly in agriculture.<div><br></div><div>There are estimated 168 million children worldwide involved in child labour.</div><div><br></div><div><span style="color: rgb(255, 0, 0); font-size: 28px;">CHILDREN IN COLONIES</span></div><div>Systematic use of child labour was common place in the colonies of European powers between 1650 and 1950. Sometimes they were used to punish disobedient slaves. When a worker didn't gather the required amount of cotton, the hand of his son or daughter might have been cut off as punishment.</div><div><br></div><div><span style="color: rgb(255, 0, 0); font-size: 28px;">COCOA PRODUCTION</span></div><div>In 1998, the Ivory Coast farmers used enslaved children in the production of cocoa – the main ingredient of chocolate. There were around 15 000 trafficked child slaves working at cocoa, cotton and coffee farms. These children were often from poor families or the slums and sold to work in other countries. Their parents were told the children would find work and send money home. Sometimes, children begging for food were lured from bus stations and sold as slaves.</div><div><br></div><div>In 2000, cocoa prices had dropped to a 10-year low and some farmers stopped paying their employees. This resulted in even worse condition for child labourers.</div>
+	</div>
+</div>
+</body>

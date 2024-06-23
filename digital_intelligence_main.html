@@ -1,0 +1,314 @@
+<head>
+<style>
+@font-face {
+  font-family: Noir;
+  src: url(CSS/Fonts/Noir_regular.otf);
+}
+
+@font-face {
+  font-family: NoirBold;
+  src: url(CSS/Fonts/Noir_bold.otf);
+}
+
+body {
+	background-color: rgb(34, 34, 34);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: Noir;
+	margin: 0px;
+	color: rgb(239, 239, 239);
+	background: linear-gradient(rgb(183, 85, 85), rgb(96, 55, 55), rgb(34, 34, 34));
+}
+
+#MAIN {
+	width: 100%;
+}
+
+#MAIN-UP {
+	background-color: rgb(97, 94, 90);
+	padding: 15px;
+	background-image: url(CSS/Images/cafeteria.jpg);
+	background-size: 100% auto;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-position: center;
+	text-align: center;
+	text-shadow: 0 0 3px rgb(0, 0, 0);
+	
+}
+
+.title1 {
+	text-shadow: 0 0 0px rgb(0, 0, 0);
+	font-size: 66px;
+	font-weight: bold;
+	display: block;
+	font-family: Noir;
+	text-align: center;
+	color: rgb(255, 110, 110);
+	margin-bottom: 20px;
+	user-select: none;
+}
+
+.warning {
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	background-color: rgb(255, 255, 210);
+	color: black;
+}
+
+
+#MIDDLE-TEXT {
+	margin-top: 150px;
+	width: 100%;
+	text-align: center;
+	font-size: 41px;
+}
+
+#TABLE-WRAPPER {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+}
+
+table, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+td {
+	padding: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 24px;
+	width: 350px;
+	text-align: center;
+}
+
+.CONFIRM-BUTTON {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	width: 200px;
+	font-size: 18px;
+	background-color: rgb(229, 77, 37);
+	cursor: pointer;
+	border-radius: 8px;
+}
+
+.CONFIRM-BUTTON:hover {
+	filter: brightness(1.2);
+}
+
+#SEARCH-WRAPPER {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top: 50px;
+	position: relative;
+}
+
+.SEARCH-INPUT {
+	outline: none;
+	border: 0px;
+	box-shadow: none;
+	padding: 0px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	font-size: 18px;
+	padding: 5px;
+	border-radius: 8px;
+}
+
+#ACCESS-INFO {
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+#TOPUP {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0px;
+	position: fixed;
+	z-index: 99;
+	visibility: hidden;
+}
+
+#TOPUP-CONTENT {
+	background-color: rgb(229, 77, 37);
+	border-radius: 8px;
+	color: white;
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+}
+
+#CLOSE {
+	position: absolute;
+	right: 0;
+	background-image: url(CSS/Images/Icon_X.png);
+	width: 15px;
+	height: 15px;
+	background-size: 100% 100%;
+	cursor: pointer;
+}
+
+td {
+	height: 45px;
+}
+
+#INPUT-BUTTON {
+	border: 0px;
+	outline: 0px;
+	box-shadow: 0px;
+	color: white;
+}
+
+</style>
+<script src="CSS/InfoSec.js"></script>
+<script src="CSS/Common.js"></script>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function randomNumber(min, max) { 
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+function executeSearch(service) {
+	if (document.getElementById("PasswordInput").value != "") {
+		var name = document.getElementById("PasswordInput").value
+	} else if (document.getElementById("IPInput").value != "") {
+		var name = document.getElementById("IPInput").value
+	} else {
+		displayAlert("Input fields are empty.")
+		return
+	}
+	//	ID | CONTENT (e.g selfie.png) | TYPE
+	window.ue.webbrowser.get_infosec_by_name(name, service).then(function(ReturnValue) {
+		get_service_access(service);
+		if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+			document.getElementById("OUTPUT").innerText = "Could not provide timestamp. The input you provided seems invalid.";
+			return
+		}
+		let id = ReturnValue.split('|')[0]
+		let translated = ReturnValue.split('|')[1]
+		let type = ReturnValue.split('|')[2]
+		
+		let rows = document.getElementsByClassName("INFO");
+		rows[0].innerText = translated
+		rows[1].innerText = type
+		//TODO you can make it deterministic with charCodeAt but who'll notice anyways
+		let year = randomNumber(2008, 2022);
+		let month = randomNumber(1, 12);
+		let day = randomNumber(1, 30);
+		rows[2].innerText = year + '-' + month + '-' + day
+		let source_array = new Array("Leak", "Web scraping", "Private chats", "Outsourced")
+		rows[3].innerText = source_array[Math.floor(Math.random()*source_array.length)];
+		rows[4].innerText = id;
+	})
+}
+
+
+window.onload = function() {
+	let service = 'DigitalIntelligence'
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("PRICE").innerText = price;
+	})
+}
+</script>
+<div id="MAIN">
+	<div id="MIDDLE-TEXT">
+		<span style="font-family:NoirBold;text-decoration:underline;">Database Search</span>
+		<br>Search by <span style="color:rgb(229, 77, 37)">password</span> or by <span style="color:rgb(229, 77, 37)">ip address</span>
+	</div>
+	<div id="ACCESS-INFO">
+		Your license has expired in Q3 2019. It was automatically converted to a Pay Per Access sublicense.<br>Renew your original license to get a premium plan and special discounts. It will cost <span id="PRICE">X</span> ETH per every query.<br>Your API key has <span id="USES">X</span> queries available.
+	</div>
+	<div id="SEARCH-WRAPPER">
+		<div style="margin-right:30px" class="CONFIRM-BUTTON" id="BUY-USE">Buy query</div>
+		<input id="IPInput" class="SEARCH-INPUT" type="text" placeholder="IP Address"></input>
+		<input id="PasswordInput" style="margin-left: 30px;" class="SEARCH-INPUT" type="text" placeholder="Password"></input>
+		<input type="button" style="margin-left: 30px;" id="INPUT-BUTTON" class="CONFIRM-BUTTON" onclick="search()" value="Search"></input>
+	</div>
+	<div id="TABLE-WRAPPER">
+		<table>
+			<tr>
+				<th>Data</th>
+				<th>Type</th>
+				<th>Date</th>
+				<th>Source</th>
+				<th>Metadata</th>
+			</tr>
+			<tr>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+			</tr>
+			<tr>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+			</tr>
+			<tr>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+			</tr>
+			<tr>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+			</tr>
+			<tr>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+			</tr>
+			<tr>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+				<td class="INFO"></td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+

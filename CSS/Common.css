@@ -1,0 +1,127 @@
+/* ALERT CSS */
+
+#ALERT-CONTAINER {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	top: 0px;
+	visibility: collapse;
+}
+
+#ALERT-X {
+	font-size:21px;
+	font-family: Calibri;
+	font-weight: bold;
+}
+
+#ALERT-X-2 {
+	display: flex;
+	margin-top: auto;
+}
+
+#ALERT {
+	font-family: Calibri;
+	background-color: rgb(41, 42, 45);
+	min-height: 130px;
+	padding: 10px;
+	width: 400px;
+	color: white;
+	text-align: center;
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+#ALERT-OK {
+	background-color: green;
+	padding: 5px;
+	border-radius: 16px;
+	width: 80px;
+	font-size: 14px;
+	cursor: pointer;
+	margin-top: auto;
+	float: right;
+	margin-left: auto;
+	margin-right: 5px;
+}
+
+#ALERT-OK:hover {
+	filter: brightness(1.2);
+}
+
+#ALERT-TEXT {
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+#ALERT-LABEL {
+	font-size:21px;
+	font-family: Calibri;
+	font-weight: bold;
+}
+
+#ALERT-NO {
+	background-color: tomato;
+	padding: 5px;
+	border-radius: 16px;
+	width: 80px;
+	font-size: 14px;
+	cursor: pointer;
+	margin-top: auto;
+	margin-left: 5px;
+}
+
+
+
+/* ALERT CSS */
+
+/* CUSTOM SELECT CSS (<select> bugs out on ue chrome version)*/
+#MYSELECT {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	cursor: default;
+	user-select: none;
+	position: absolute;
+}
+
+.MYSELECT-OPTION {
+	border: 1px solid black;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9;
+	background-color: white;
+	color: black;
+	display: none;
+	cursor: pointer;
+}
+
+.MYSELECT-OPTION:hover {
+	filter: brightness(0.8);
+}
+
+.MYSELECT-OPTION:first-child {
+	display: flex
+}
+
+#MYSELECT-ARROW {
+	position: absolute;
+	transform: rotate(180deg);
+	color: black;
+	z-index: 99;
+	font-size: 21px;
+	right: 0;
+	font-weight: bold;
+	margin-right: 10px;
+	pointer-events: none;
+}
+
+/* CUSTOM SELECT CSS */
+
+

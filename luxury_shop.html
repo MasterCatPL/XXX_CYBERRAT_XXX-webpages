@@ -1,0 +1,366 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+@font-face {
+  font-family: Noir;
+  src: url(CSS/Fonts/Noir_regular.otf);
+}
+
+@font-face {
+  font-family: NoirBold;
+  src: url(CSS/Fonts/Noir_bold.otf);
+}
+
+:root {
+  --fontColor: rgb(203, 160, 55);
+  --backgroundColor: rgb(3, 4, 5);
+}
+
+body {
+	margin: 0px;
+	display: flex;
+	align-items: center;
+	background-color: var(--backgroundColor);
+	font-family: Noir;
+	flex-direction: column;
+}
+
+#TITLE {
+	width: 500px;
+	height: 300px;
+	background-image: url(CSS/Images/LuxuryShop.png);
+	background-position: center;
+}
+
+#EXPLAINER {
+	color: var(--fontColor);
+	font-size: 21px;
+	text-align: center;
+	width: 500px;
+}
+
+#ITEMS {
+	width: 500px;
+	margin-top: 40px;
+}
+
+.ITEM {
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+	background-color: rgba(255, 255, 255, 0.1);
+	color: var(--fontColor);
+	border-radius: 8px;
+	margin-bottom: 40px;
+}
+
+.ITEM-UP {
+	height: 100px;
+	padding: 15px;
+	display: flex;
+	border: 1px solid var(--fontColor);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.ITEM-IMG {
+	height: 100%;
+	width: auto;
+	border-radius: 4px;
+}
+
+.ITEM-INFO {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding-left: 15px;
+}
+
+.ITEM-NAME {
+	font-family: NoirBold;
+	font-size: 24px;
+}
+
+.ITEM-DOWN {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.ITEM-TABLE {
+	display: flex;
+	text-align: center;
+	border: 1px solid var(--fontColor);
+}
+
+.ITEM-LEFT {
+	padding-bottom: 15px;
+	padding-top: 15px;
+	width: 50%;
+}
+
+.ITEM-RIGHT {
+	padding-bottom: 15px;
+	padding-top: 15px;
+	width: 50%;
+}
+
+.BUY-ITEM {
+	background-color: var(--fontColor);
+	width: auto;
+	padding-left: 45px;
+	padding-right: 45px;
+	user-select: none;
+	padding-bottom: 0px;
+	padding-top: 7px;
+	color: black;
+	border-radius: 4px;
+	font-family: NoirBold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+}
+
+.BUY-ITEM2 {
+	background-color: var(--fontColor);
+	width: 120px;
+	box-sizing: border-box;
+	overflow-x: hidden;
+	padding-left: 45px;
+	padding-right: 45px;
+	user-select: none;
+	padding-bottom: 0px;
+	padding-top: 7px;
+	color: black;
+	border-radius: 4px;
+	font-family: NoirBold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	outline: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	outline: none;
+	border: 0px;
+	font-size: 16px;
+}
+
+.BUY-ITEM:hover {
+	filter: brightness(1.2);
+}
+
+.BUY-RIGHT {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function visited_shop(shopName) {
+	window.ue.webbrowser.visited_shop(shopName).then(function(ReturnValue) {
+	
+	})
+}
+
+function displayAlert(message) {
+	document.getElementById("ALERT-TEXT").innerText = message;
+	document.getElementById("ALERT-CONTAINER").style.visibility = 'visible';
+}
+
+function boughtItem(element) {
+	let price = Number(element.parentElement.parentElement.parentElement.children[0].children[1].innerText.replace(' ETH', ''));
+	let postBox = element.parentElement.parentElement.parentElement.children[1].children[1].children[0].value;
+	let productName = element.parentElement.parentElement.parentElement.parentElement.children[0].children[1].children[0].innerText;
+	window.ue.webbrowser.bought_item(price, postBox, productName).then(function(ReturnValue) {
+		if (!ReturnValue) {
+			displayAlert("You don't have sufficient funds to buy this product.");
+		} else {
+			displayAlert("Item was shipped. You'll receive a shipping proof per Email");
+		}
+	})
+}
+
+function fillItems(shopName) {
+	let htmlItems = document.getElementsByClassName("ITEM")
+	window.ue.webbrowser.get_items(shopName).then(function(ReturnValue) {
+		let items1 = ReturnValue.split('<')
+		let items = items1.filter(e => e);
+		for (let i = 0; i < items.length; i++) {
+			let item = items[i].split('|');
+			let imagePath = item[0];
+			let productName = item[1];
+			let price = item[2];
+			let description = item[3];
+			htmlItems[i].children[0].children[1].children[0].innerText = productName;
+			htmlItems[i].children[1].children[0].children[1].innerText = price + ' ETH';
+			htmlItems[i].children[0].children[0].src = 'CSS/Images/Products/' + imagePath;
+			htmlItems[i].children[0].children[1].children[1].innerText = description;
+		}
+	
+	})
+}
+
+window.onload = function() {
+	visited_shop("LuxuryShop");
+	fillItems("LuxuryShop");
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-LABEL">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">OK</div>
+	</div>
+</div>
+<div id="TITLE">
+</div>
+<div id="MAIN">
+	<div id="EXPLAINER">
+		The Luxury Shop is a trusted, secure marketplace being run by the same people since 2019. This isn't a public marketplace. We only allow approved sellers with long-lasting relationships to post their offers. This is to ensure you will always get the best quality product, fitting the exact description provided by the seller. 
+	</div>
+	<div id="ITEMS">
+		<div class="ITEM">
+			<div class="ITEM-UP">
+				<img src="CSS/Images/Products/Diamond.jpg" class="ITEM-IMG">
+				<div class="ITEM-INFO">
+					<div class="ITEM-NAME">
+						X
+					</div>
+					<div class="ITEM-DESCR">
+						X
+					</div>
+				</div>
+			</div>
+			<div class="ITEM-DOWN">
+				<div class="ITEM-TABLE">
+					<div class="ITEM-LEFT">
+						Price
+					</div>
+					<div class="ITEM-RIGHT">
+						X
+					</div>
+				</div>
+				<div class="ITEM-TABLE">
+					<div class="ITEM-LEFT">
+						Enter your Post box ID
+					</div>
+					<div class="ITEM-RIGHT BUY-RIGHT">
+						<input type="text" class="BUY-ITEM2" placeholder="Post Box ID">
+						</input>
+					</div>
+				</div>
+				<div class="ITEM-TABLE" style="border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;">
+					<div class="ITEM-LEFT">
+						Buy the product
+					</div>
+					<div class="ITEM-RIGHT BUY-RIGHT">
+						<div class="BUY-ITEM" onclick="boughtItem(this)">
+							BUY
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-UP">
+				<img src="CSS/Images/Products/Diamond.jpg" class="ITEM-IMG">
+				<div class="ITEM-INFO">
+					<div class="ITEM-NAME">
+						X
+					</div>
+					<div class="ITEM-DESCR">
+						X
+					</div>
+				</div>
+			</div>
+			<div class="ITEM-DOWN">
+				<div class="ITEM-TABLE">
+					<div class="ITEM-LEFT">
+						Price
+					</div>
+					<div class="ITEM-RIGHT">
+						X
+					</div>
+				</div>
+				<div class="ITEM-TABLE">
+					<div class="ITEM-LEFT">
+						Enter your Post box ID
+					</div>
+					<div class="ITEM-RIGHT BUY-RIGHT">
+						<input type="text" class="BUY-ITEM2" placeholder="Post Box ID">
+						</input>
+					</div>
+				</div>
+				<div class="ITEM-TABLE" style="border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;">
+					<div class="ITEM-LEFT">
+						Buy the product
+					</div>
+					<div class="ITEM-RIGHT BUY-RIGHT">
+						<div class="BUY-ITEM" onclick="boughtItem(this)">
+							BUY
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-UP">
+				<img src="CSS/Images/Products/Diamond.jpg" class="ITEM-IMG">
+				<div class="ITEM-INFO">
+					<div class="ITEM-NAME">
+						X
+					</div>
+					<div class="ITEM-DESCR">
+						X
+					</div>
+				</div>
+			</div>
+			<div class="ITEM-DOWN">
+				<div class="ITEM-TABLE">
+					<div class="ITEM-LEFT">
+						Price
+					</div>
+					<div class="ITEM-RIGHT">
+						X
+					</div>
+				</div>
+				<div class="ITEM-TABLE">
+					<div class="ITEM-LEFT">
+						Enter your Post box ID
+					</div>
+					<div class="ITEM-RIGHT BUY-RIGHT">
+						<input type="text" class="BUY-ITEM2" placeholder="Post Box ID">
+						</input>
+					</div>
+				</div>
+				<div class="ITEM-TABLE" style="border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;">
+					<div class="ITEM-LEFT">
+						Buy the product
+					</div>
+					<div class="ITEM-RIGHT BUY-RIGHT">
+						<div class="BUY-ITEM" onclick="boughtItem(this)">
+							BUY
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>

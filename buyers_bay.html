@@ -1,0 +1,263 @@
+<head>
+<style>
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	margin: 0px;
+	background-color: rgb(80, 80, 80);
+	background-image: url(CSS/Images/Blackpattern.png);
+	font-family: Calibri;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+#TITLE {
+	margin-top: 50px;
+	font-size: 81px;
+	color: white;
+	text-shadow: 0px 0px 15px #ceeaff;
+}
+
+#MAIN {
+	margin-top: 70px;
+	width: 100%;
+	max-width: 700px;
+}
+
+#EXPLAINER {
+	padding: 15px;
+	background-color: white;
+	box-shadow: 0px 0px 15px 1px #ceeaff;
+	font-size: 21px;
+	color: rgb(40, 40, 40);
+	text-align: center;
+}
+
+.highlight {
+	color: #bd26b5;
+	font-weight: bold;
+}
+
+#LABEL {
+	padding: 15px;
+	background-color: white;
+	box-shadow: 0px 0px 15px 1px #ceeaff;
+	font-size: 21px;
+	color: rgb(40, 40, 40);
+	margin-top: 40px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.OFFER {
+	font-size: 21px;
+	color: rgb(40, 40, 40);
+	display: flex;
+	height: 100px;
+}
+
+.OFFER-IMG {
+	height: 100%;
+	width: auto;
+}
+
+.OFFER-DESCR {
+	display: flex;
+	flex-direction: column;
+	width: 33%;
+	text-align: center;
+}
+
+.OFFER2 {
+	display: flex;
+	width: 100%;
+}
+
+.OFFER-BOLD {
+	font-weight: bold;
+}
+
+.GIGAOFFER {
+	display: flex;
+	display: none;
+	flex-direction: column;
+	
+	padding: 15px;
+	background-color: white;
+	box-shadow: 0px 0px 15px 1px #ceeaff;
+	font-size: 21px;
+	color: rgb(40, 40, 40);
+	margin-top: 40px;
+}
+
+.OFFER-BELOW {
+	display: flex;
+	margin-top: 15px;
+	text-align: center;
+}
+
+.OFFER-GIVER {
+	background-color: rgb(200, 200, 200);
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 6px;
+	
+}
+
+.OFFER-BUTTON {
+	background-color: rgb(100, 200, 100);
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 6px;
+	margin-left: auto;
+	cursor: pointer;
+}
+
+.OFFER-BUTTON:hover {
+	filter: brightness(1.2);
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function displayAlert(message) {
+	document.getElementById("ALERT-TEXT").innerText = message;
+	document.getElementById("ALERT-CONTAINER").style.visibility = 'visible';
+}
+
+function createOffer(imagePath, name, price, address, nickname, timeLeft, fullfill) {
+	let template = document.getElementsByClassName("GIGAOFFER")[0]
+	let copied = template.cloneNode(true)
+	
+	copied.style.display = "flex";
+	copied.children[0].children[0].src = imagePath;
+	copied.children[0].children[1].children[0].children[1].textContent = name;
+	copied.children[0].children[1].children[1].children[1].textContent = address;
+	copied.children[0].children[1].children[2].children[1].textContent = price;
+	copied.children[1].children[0].innerText = 'BUYER: ' + nickname;
+	copied.children[0].children[1].children[2].children[3].children[1].innerText = timeLeft;
+	if (fullfill == 'true') {
+		copied.children[0].children[1].children[2].children[3].children[0].innerText = "Refresh:"
+		copied.children[1].children[1].innerText = 'Send proof of shipment'
+	}
+	
+	document.getElementById("MAIN").appendChild(copied);
+}
+
+function populate_offers() {
+	window.ue.webbrowser.populate_offers().then(function(ReturnValue) {
+		let offers1 = ReturnValue.split('<')
+		let offers = offers1.filter(e => e);
+		for (let i = 0; i < offers.length; i++) {
+			let offer = offers[i].split('|');
+			let imagePath = offer[0];
+			let productName = offer[1];
+			let price = offer[2] + ' ETH';
+			let address = offer[3];
+			let nickname = offer[4];
+			let timeLeft = offer[5];
+			let fullfill = offer[6];
+			createOffer(imagePath, productName, price, address, nickname, timeLeft, fullfill)
+		}
+	
+	})
+}
+
+function checkFulfill(element) {
+	let address = element.parentElement.parentElement.children[0].children[1].children[1].children[1].innerText;
+	window.ue.webbrowser.fulfill_order(address).then(function(ReturnValue) {
+		if (ReturnValue == 0) {
+			displayAlert("This offer has expired.")
+		} else if (ReturnValue == 1) {
+			displayAlert("You don't have a proof of shipment to this address")
+		} else if (ReturnValue == 2) {
+			displayAlert("You already fulfilled this order")
+		} else if (ReturnValue == 3) {
+			displayAlert("Payment for fulfilling order sent successfully")
+		}
+	})
+}
+
+
+function timerExpire() {
+	let offers = document.getElementsByClassName("GIGAOFFER");
+	for (let i = 0; i < offers.length; i++) {
+		let time = (Number(offers[i].children[0].children[1].children[2].children[3].children[1].innerText)).toFixed(0);
+		offers[i].children[0].children[1].children[2].children[3].children[1].innerText = time - 1;
+		if (time - 1 <= 0) {
+			offers[i].remove();
+		} 
+	}
+}
+
+
+
+window.onload = function () {
+	populate_offers();
+	setInterval(timerExpire, 1000);
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-LABEL">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">OK</div>
+	</div>
+</div>
+<div id="TITLE">
+	BUYER'S BAY
+</div>
+<div id="MAIN">
+	<div id="EXPLAINER">
+		<div style="width: 100%;text-align: center;font-weight:bold;font-size: 28px;">WELCOME TO THE BUYER'S BAY</div><br>
+		The Buyer's Bay is a place for people to ask for... <span class="highlight">uncommon items</span> they want to buy. If you're one of those people, please feel free to post your offer along with the price you're ready to pay. Please beware that <span class="highlight">you'll have to transfer the amount to me first</span> – this is to make sure the <span class="highlight">sellers won't get scammed.</span> If your order is unfilled for 2 weeks, you'll receive the money back.
+		<br><br>As a sidenote, <span class="highlight">you don't have to be the original seller.</span> If you know where to get a specific item, you can act as a middleman & ship it to one of the post boxes here and <span class="highlight">claim the price difference.</span>
+	</div>
+	<div id="LABEL">
+		CURRENT OFFERS
+	</div>
+	<div class="GIGAOFFER">
+		<div class="OFFER">
+			<img src="CSS/Images/Products/Diamond.jpg" class="OFFER-IMG">
+			<div class="OFFER2">
+				<div class="OFFER-DESCR">
+					<div class="OFFER-BOLD">Product Name</div>
+					<div>Diamonds</div>
+				</div>
+				<div class="OFFER-DESCR">
+					<div class="OFFER-BOLD">Post box ID</div>
+					<div>0000</div>
+				</div>
+				<div class="OFFER-DESCR">
+					<div class="OFFER-BOLD">Price</div>
+					<div>0.04 ETH</div>
+					<br>
+					<div style="background-color:rgb(250 142 142);border-radius:8px;user-select:none;display:flex;">
+						<div style="width:60%;height:26px;overflow-y:hidden;overflow-x:hidden;">Expiration:</div>
+						<div style="width:40%;">4324</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="OFFER-BELOW">
+			<div class="OFFER-GIVER">
+				BUYER: XXX_RETROGOD_XXX
+			</div>
+			<div class="OFFER-BUTTON" onclick="checkFulfill(this);">
+				Ship product to receive reward
+			</div>
+		</div>
+	</div>
+</div>
+</body>

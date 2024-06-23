@@ -1,0 +1,208 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	margin: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: rgb(48, 123, 155);
+	font-family: Calibri;
+	color: white;
+}
+
+#UPPER {
+	background-color: rgba(12, 24, 36);
+	height: 100px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#LOWER {
+	height: 270px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#BOTTOM {
+	background-color: rgb(44, 114, 144);
+	height: 100px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#OUTPUT {
+	background-color: rgb(25, 25, 25);
+	width: 100%;
+	min-height: calc(100% - 100px - 100px - 270px);
+	font-size: 30px;
+	text-align: center;
+	padding-top: 50px;
+	padding-left: 100px;
+	padding-right: 100px;
+	box-sizing: border-box;
+	padding-bottom: 100px;
+
+}
+
+#TITLE {
+	border: 5px solid white;
+	border-radius: 30px;
+	font-size: 50px;
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 15px;
+}
+
+#UNDER-TITLE {
+	font-size: 21px;
+}
+
+#WRAPPER {
+	display: flex;
+}
+
+#INPUT {
+	outline: 0px;
+	width: 800px;
+	height: 60px;
+	padding: 15px;
+	border-radius: 10px;
+	border: 1px solid white;
+	font-size: 28px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+#INPUT-BUTTON {
+	outline: 0px;
+	width: 130px;
+	height: 60px;
+	padding: 15px;
+	border-radius: 10px;
+	border: 1px solid white;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	background-color: rgb(43, 87, 102);
+	font-size: 28px;
+	color: white;
+}
+
+#INPUT-BUTTON:hover {
+	filter: brightness(0.8);
+}
+
+#BUY-USE {
+	outline: none;
+	background-color: #244466;
+	color: white;
+	padding: 5px;
+	padding-left: 25px;
+	padding-right: 25px;
+	cursor: pointer;
+	border-radius: 8px;
+	font-size: 21px;
+	font-family: Calibri;
+	border: 1px solid white;
+}
+
+#BUY-USE:hover {
+	filter: brightness(1.2);
+}
+
+#CURRENT {
+	outline: none;
+	background-color: #244466;
+	color: white;
+	padding: 5px;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-radius: 8px;
+	font-size: 21px;
+	font-family: Calibri;
+	border: 1px solid white;
+	margin-right: 20px;
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function executeSearch(service) {
+	let name = document.getElementById("INPUT").value
+	//	ID | CONTENT (e.g selfie.png) | TYPE
+	window.ue.webbrowser.get_infosec_by_name(name, service).then(function(ReturnValue) {
+		get_service_access(service);
+		if (ReturnValue == "NOTTHISSERVICE") {
+			document.getElementById("OUTPUT").innerHTML = "<span style='color:rgb(0,255,0)'>Congratulations!</span><br>The data you entered isn't found in any breaches or pastes!.";
+			return
+		}
+		if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+			document.getElementById("OUTPUT").innerText = "Error: invalid format."
+			return
+		}
+		if (ReturnValue.split("|")[0].startsWith("a")) {
+			document.getElementById("OUTPUT").innerHTML = "<span style='color:rgb(255,0,0)'>Oh no!<br>Your data was found in one ore more data breaches :( </span><br><br>=== CryptoExchange.com ===<br>In November 2014, the CryptoExchange.com exchange led by the CBIGroup suffered a data breach. The data contained 568k unique user email addresses along with their passwords and phone numbers. Your data is included in the set.<br><br>Compromised data: Browser user agent details, Email addresses, IP addresses, Passwords, Purchases, Usernames, Phone numbers, Website activity.<br><br>If you're still using the data which was contained in the breach, please change it immediately!<br><br>The CBIGroup is actively working with victims to reduce any possible consequences of the breach. The ticket ID assigned to your account for support-related tasks is: <span style='color:rgb(255,0,0)'>" + ReturnValue.split("|")[1] + "</span><br>If you haven't done so already, contact CryptoExchange's support usingn this support ticket.";
+		} else if (ReturnValue.split("|")[0].startsWith("u")) {
+			document.getElementById("OUTPUT").innerHTML = "<span style='color:rgb(255,0,0)'>Oh no!<br>Your data was found in one ore more data breaches :( </span><br><br>=== Photostore ===<br>In October 2013, Photostore, subscription-based image-editing software suffered a data breach. The data contained 38M unique usernames, emails and associated phone numbers. The data breach affected 83% of all accounts. Your account, <span style='color:rgb(255,0,0)'>" + ReturnValue.split("|")[1] + "</span>, was included.<br><br>Compromised data: Browser user agent details, Email addresses, IP addresses, Phone numbers, Usernames, App activity.<br><br>If you're still using the data which was contained in the breach, please change it immediately!";
+		}
+	})
+}
+
+window.onload = function() {
+	let service = 'HaveIBeenHacked'
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("BUY-USE").value = "Buy more (" + price + " ETH)"
+	})
+}
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="UPPER">
+	<div id="CURRENT"><span><span id="USES">X </span> queries</span></div>
+	<input id="BUY-USE" type="button" value="Buy more (X ETH)"><br>
+</div>
+<div id="LOWER">
+	<div id="TITLE">
+		Have I Been Hacked?
+	</div>
+	<div id="UNDER-TITLE">
+		Check if your email or phone is in a data breach
+	</div>
+</div>
+<div id="BOTTOM">
+	<div id="WRAPPER">
+		<input type="text" placeholder="email or phone" id="INPUT"></input>
+		<input type="button" id="INPUT-BUTTON" value="Search"></input>
+	</div>
+</div>
+<div id="OUTPUT">
+</div>
+</body>

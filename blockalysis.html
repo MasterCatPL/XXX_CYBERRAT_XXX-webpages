@@ -1,0 +1,409 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+
+@font-face {
+  font-family: CalibriBold;
+  src: url(CSS/Fonts/CalibriBold.ttf);
+}
+
+.bolded {
+	font-family: CalibriBold;
+}
+
+body {
+	margin: 0px;
+	background-color: #1f4b78;
+	display: flex;
+	flex-direction: column;
+	font-family: Calibri;
+	align-items: center;
+	min-height: 100%;
+}
+
+#SEARCH {
+	border-radius: 16px;
+	width: 100%;
+	max-width: 700px;
+	height: 50px;
+	border: 5px solid #15324f;
+	background-color: white;
+	margin-top: 30px;
+}
+
+#RESULTS {
+	width: 100%;
+	max-width: 700px;
+	height: 700px;
+	overflow-y: auto;
+	border-radius: 16px;
+	border: 5px solid #15324f;
+	background-color: white;
+	margin-top: 50px;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+.RESULT {
+	width: 100%;
+	background-color: rgb(250, 250, 250);
+	display: flex;
+	flex-direction: column;
+	border: 3px solid #15324f;
+	border-radius: 8px;
+	padding: 5px;
+	box-sizing: border-box;
+	display: none;
+	margin-bottom: 10px;
+}
+
+#TITLE {
+	font-size: 50px;
+	color: white;
+	margin-top: 30px;
+	text-align: center;
+	text-shadow: 0px 4px black;
+}
+
+.UNDER {
+	display: flex;
+}
+
+.TILE {
+	width: 25%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.ADDR {
+	margin: 0 auto;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.07);
+	border-radius: 4px;
+	margin-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+
+#WRAPPER {
+	display: flex;
+	margin-top: 15px;
+	font-family: CalibriBold;
+}
+
+#INPUT-BUTTON {
+	width: 170px;
+	height: 35px;
+	background-color: lightgreen;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	margin-right: 5px;
+	font-size: 18px;
+	user-select: none;
+	cursor: pointer;
+	border: 0px;
+	font-family: CalibriBold;
+	outline: 0px;
+}
+
+#BUY-USE {
+	width: 170px;
+	height: 35px;
+	background-color: lightgreen;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	margin-left: 5px;
+	font-size: 18px;
+	user-select: none;
+	cursor: pointer;
+}
+
+#BUY-USE:hover {
+	filter: brightness(1.2);
+}
+
+#INPUT-BUTTON:hover {
+	filter: brightness(1.2);
+}
+
+#NUMBER {
+	text-align: center;
+	font-size: 18px;
+	color: white;
+	margin-top: 5px;
+}
+
+.RESULTTITLE {
+	font-size: 26px;
+	text-align: center;
+	margin-bottom: 5px;
+	font-family: CalibriBold;
+	text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(200, 200, 200);
+  border-radius: 10px;
+}
+
+#INPUT {
+	width: 100%;
+	height: 100%;
+	outline: none;
+	border: 0px;
+	padding: 0px;
+	font-family: Calibri;
+	border-radius: 16px;
+	font-size: 21px;
+	text-align: center;
+}
+
+#SHOWMORE {
+	text-align: center;
+	background-color: lightgreen;
+	cursor: pointer;
+	width: 100px;
+	margin: 0 auto;
+	border-radius: 8px;
+	padding-bottom: 3px;
+	padding-top: 3px;
+}
+
+#SHOWMORE:hover {
+	filter: brightness(1.2);
+}
+
+#FOOTER {
+	height: 70px;
+	width: 100%;
+	background-color: rgb(30, 30, 30);
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: rgb(220, 220, 220);
+}
+
+#SPACER {
+	flex: 1;
+}
+
+.REFRESHER:hover {
+}
+
+</style>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script src="CSS/InfoSec.js"></script>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function randomResults() {
+	for (let i = 0; i < 10; i++) {
+		let template = document.getElementsByClassName("RESULT")[0];
+		let copy = template.cloneNode(true);
+		copy.style.display = "flex";
+		let address_range = new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f");
+		let address = "0x";
+		for (let i = 0; i < 40; i++) {
+			address = address + address_range[Math.trunc(Math.random() * 16)];
+		}
+		let ether = (Math.random() * 5).toFixed(4);
+		let nft_array = new Array(
+			"Buttcoiners",
+			"Butterins",
+			"AlphaMOG",
+			"Lizardmen",
+			"CryptoIdiots",
+			"DICKS",
+			"ROCKS",
+			"OMEGAROCKS",
+			"DIRT DELUXE",
+			"CryptoART"
+		);
+		if (Math.random() < 0.3) {
+			var nft = nft_array[Math.trunc(Math.random() * 10)];
+		} else {
+			var nft = "None";
+		}
+		let erc_array = new Array("DOGE", "WBTC", "LDO", "stETH", "rETH", "SHIB", "WADA", "USDC", "USDT", "BUSD");
+		if (Math.random() < 0.3) {
+			var erc = erc_array[Math.trunc(Math.random() * 10)];
+		} else {
+			var erc = "None";
+		}
+		copy.children[0].childNodes[2].textContent = " " + address;
+		copy.children[1].children[0].childNodes[2].textContent = " " + ether + " ETH"; // Ether
+		copy.children[1].children[1].childNodes[2].textContent = " None"; // ENS
+		copy.children[1].children[2].childNodes[2].textContent = " " + nft; // NFT
+		copy.children[1].children[3].childNodes[2].textContent = " " + erc; // ERC-20
+
+		let main = document.getElementById("RESULTS");
+		main.appendChild(copy);
+	}
+	let showmore = document.getElementById("SHOWMORE");
+	document.getElementById("RESULTS").appendChild(showmore);
+}
+
+function executeSearch(service) {
+	
+	let interval;
+	let new_element;
+	let counter = 0;
+	
+	prepareLoading();
+	
+	function prepareLoading() {
+		document.getElementById("RESULTS").style.height = "auto";
+		//delete all #RESULTS except template
+		let main = document.getElementById("RESULTS");
+		for (let i = main.children.length; i > 2; i--) {
+			main.removeChild(main.children[i - 1]);
+		}
+		
+		new_element = document.createElement('div');
+		new_element.setAttribute("class", "RESULTTITLE");
+		new_element.style.textDecoration = "none";
+		new_element.innerText = "Searching blockchain data... 0%"
+		
+		main.appendChild(new_element)
+		interval = setInterval(Loading, 100)
+	}
+	
+	function Loading() {
+		new_element.innerText = "Searching blockchain data... " + counter + "%";
+		counter++;
+		if (counter == 101) {
+			clearInterval(interval)
+			Search()
+		}
+	}
+	
+	function Search () {
+		let name = document.getElementById("INPUT").value;
+		//	ID | CONTENT (e.g selfie.png) | TYPE
+		window.ue.webbrowser.get_infosec_by_name(name, service).then(function (ReturnValue) {
+			get_service_access(service);
+			if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+				new_element.innerText = "Address not found. Check for typos."
+				new_element.style.color = "#de3f3c";
+				return;
+			}
+			
+			//results found
+			document.getElementById("RESULTS").removeChild(new_element);
+			play_sound(true);
+
+			let results = ReturnValue.split("|");
+
+			let template = document.getElementsByClassName("RESULT")[0];
+			let copy = template.cloneNode(true);
+			copy.style.display = "flex";
+			let ether = (Math.random() * 5).toFixed(4);
+			copy.children[0].childNodes[2].textContent = " " + name;
+			copy.children[1].children[0].childNodes[2].textContent = " " + ether + " ETH"; // Ether
+			copy.children[1].children[1].childNodes[2].textContent = " " + results[1] + ".eth"; // ENS
+			copy.children[1].children[1].setAttribute("class", "TILE REFRESHER");
+			copy.children[1].children[2].childNodes[2].textContent = " None"; // NFT
+			copy.children[1].children[3].childNodes[2].textContent = " None"; // ERC-20
+			let main = document.getElementById("RESULTS");
+			main.appendChild(copy);
+
+			let text_div = document.createElement("div");
+			text_div.innerHTML = "<span class='REFRESHER'>Your target seems to have bought an ENS domain: " + results[1] + ".eth</span><br><br>What is an ENS domain?<br><span style='font-family:Calibri'>ENS domains work in a similar way to website domains: they allow people to send you money using the domain name instead of typing the whole 0xfa57cf5cc... address, just as website domains allow you to access google by typing google.com instead of their server's ip address e.g 64.233.191.215<br><br></span>";
+			text_div.style.width = "100%";
+			text_div.style.textAlign = "center";
+			text_div.style.fontFamily = "CalibriBold";
+			text_div.style.fontSize = "18px";
+			document.getElementById("RESULTS").appendChild(text_div);
+			
+			//let refreshers = document.getElementsByClassName("REFRESHER");
+			//for (let i = 0; i < refreshers.length; i++) {
+			//	refreshers[i].onclick = refresh_doxdocs;
+			//}
+		});
+	}
+}
+
+window.onload = function () {
+	let service = "Blockalysis";
+	randomResults();
+	get_static_npc_username(service);
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function () {
+		executeSearch(service);
+	};
+
+	window.ue.webbrowser.get_service_price(service).then(function (ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("PRICE").innerText = price;
+		document.getElementById("BUY-USE").onclick = function () {
+			buyQuery(service, price);
+		};
+	});
+};
+
+</script>
+<div id="TITLE">
+	Cryptocurrency Address<br>Lookup
+</div>
+<div id="SEARCH">
+	<input type="text" placeholder="Enter crypto address here..." id="INPUT">
+</div>
+<div id="WRAPPER">
+	<input type="button" id="INPUT-BUTTON" value="Search">
+	<div id="BUY-USE">
+		<span>Buy query (<span id="PRICE">X.XX</span> ETH)</span>
+	</div>
+</div>
+<div id="NUMBER">
+	<span>Available queries: <span id="USES"> 0</span></span>
+</div>
+<div id="RESULTS">
+	<div class="RESULTTITLE">
+		Search results
+	</div>
+	<div class="RESULT">
+		<div class="ADDR">
+			<span class="bolded">ADDRESS:</span> 0x23124343635324324324
+		</div>
+		<div class="UNDER">
+			<div class="TILE">
+				<span class="bolded">Ether:</span>0.0 ETH
+			</div>
+			<div class="TILE">
+				<span class="bolded">ENS:</span> None
+			</div>
+			<div class="TILE">
+				<span class="bolded">NFT:</span> None
+			</div>
+			<div class="TILE">
+				<span class="bolded">ERC-20:</span> None
+			</div>
+		</div>
+	</div>
+</div>
+<div id="SHOWMORE" onclick="randomResults()">
+	Show more
+</div>
+<div id="SPACER"></div>
+<div id="FOOTER">
+	<span>Created by: <span id="OWNER-NAME">DefaultUsername</span></span>
+</div>
+</body>

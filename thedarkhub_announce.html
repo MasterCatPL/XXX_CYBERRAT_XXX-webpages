@@ -1,0 +1,194 @@
+<head>
+	<link rel="stylesheet" href="CSS\TheDarkHub.css">
+</head>
+<body>
+	<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+	function setOnline(first_time=false) {
+		if (first_time == true) {
+			var online = Math.trunc(Math.random() * (55000 - 45000) + 45000);
+			console.log(online)
+		} else {
+			var online = (Number(document.getElementById("users").innerText) + ((Math.random() - 0.5) * 300)).toFixed(0)
+		}
+		let members = (online * 0.06).toFixed(0);
+		let guests = (online - members).toFixed(0);
+		document.getElementById("users").innerText = online + ' ';
+		document.getElementById("members").innerText = ' ' + members + ' ';
+		document.getElementById("guests").innerText = ' ' + guests + ' ';
+	}
+	
+	function setText() {
+		let id = window.location.search;
+		if (id == '?malware') {
+			document.getElementById("POST-TITLE").innerText = "BEWARE OF BITCOIN CLIPPING MALWARE"
+			document.getElementById("ANNOUNCEMENT").innerText = "BEWARE OF THE BITCOIN CLIPPER MALWARE\n\nDear Members,\nrecently I've noticed some new strains of crypto clipper malware becoming quite popular on the web (some of them bundled in fraudulent combolist/etc. files uploaded by our users). A crypto clipper malware works by detecting a crypto address in your CTRL+C clipboard and then once you try to paste it somewhere, it replaces pasted address with a one belonging to the attacker. This often makes the victim send their funds to the attacker instead of intended recipient.\n\nWhile our reverse engineering team checks every file for any malicious code, sometimes a well concealed virus might slip through. To ensure funds are safu, please make sure to check the correctness of the address everytime you paste it.\n\nIf you notice the address being changed, you've been infected and need to remove the malware from your computer.\n\nGLWS"
+			document.getElementById("NICKNAME").innerText = 'KappaMeister'
+			document.getElementsByClassName("STAT-CONTENT")[0].innerText = '+1323'
+			document.getElementsByClassName("STAT-CONTENT")[1].innerText = '+125'
+			document.getElementsByClassName("STAT-CONTENT")[2].innerText = 'Staff'
+			document.getElementsByClassName("STAT-CONTENT")[3].innerText = '334'
+			document.getElementsByClassName("STAT-CONTENT")[4].innerText = '54'
+			document.getElementsByClassName("STAT-CONTENT")[5].innerText = '2019'
+			document.getElementById("ANNOUNCER-LINK").href = 'thedarkhub_user.html?KappaMeister'
+		} else if (id == "?seizure") {
+			document.getElementById("POST-TITLE").innerText = "Regarding recent forum seizure"
+			document.getElementById("ANNOUNCEMENT").innerText = "Regarding recent forum seizure\n\nHello dear users,\n\nas you know the law enforcement agencies have seized our old domain and servers along with all prepared mirrors of TheDarkHub. There was a lot of disinformation regarding the seizure while TheDarkHub was offline for a few weeks; from rumours about the admin staff being doxxed & put in jail to FUD about the userbase tables being kept unencrypted and now in hands of the authorities. All of these rumours are fake. We keep the credentials of our users encrypted & safe. The seizure of our servers was unfortunate, but merely an inconvenience. As you can see, it only took us a few weeks to get the site going on new servers. None of TheDarkHub staff was compromised / doxxed. While the rumours about the disappearence of XXX_CYBERRAT_XXX are true, they're not related to the seizure; he has his own problems.\n\nGood luck and keep yourselves safe,\n\nDoxGuru"
+			document.getElementById("NICKNAME").innerText = 'DoxGuru'
+			document.getElementsByClassName("STAT-CONTENT")[0].innerText = '+412'
+			document.getElementsByClassName("STAT-CONTENT")[1].innerText = '+509'
+			document.getElementsByClassName("STAT-CONTENT")[2].innerText = 'Staff'
+			document.getElementsByClassName("STAT-CONTENT")[3].innerText = '134'
+			document.getElementsByClassName("STAT-CONTENT")[4].innerText = '14'
+			document.getElementsByClassName("STAT-CONTENT")[5].innerText = '2019'
+			document.getElementById("ANNOUNCER-LINK").href = 'thedarkhub_user.html?DoxGuru'
+		} else if (id == "?awards") {
+			document.getElementById("POST-TITLE").innerText = "New awards available"
+			document.getElementById("ANNOUNCEMENT").innerText = "YO GUYS\n\nNEW AWARDS ARE IN. THEY'RE VERY POG. YOU GET A TURTLE (AAAAAUUUUUUUUUGGGGGHHHHHHHHHH) AFTER COMPLETING 10 NUDE SALES. THERE IS ALSO A GORDON RAMSAY BADGE AND CRISTIANO RONALDO. SIUUUUU\n\nIF YOU'RE REALLY HORNY FOR THE NEW STUFF YOU CAN PAY ME SOME MONEY AND I'LL GIVE IT TO YOU EVEN IF YOU DON'T HAVE THE REQUIREMENTS (DONT TELL XXX_CYBERRAT_XXX).\n\nALSO, BE AWARE THAT IT'S NOT ALLOWED TO SAVE THE NEW BADGES AS PICTURES!!!! WE PLAN ON MAKING THEM AS NFTS!!!!!! IF YOU SAVE IT ON YOUR COMPUTER, IT WILL GET A COPYRIGHT VIRUS (THERE IS A VIRUS HIDDEN IN EVERY BADGE USING STEGANOGRAPHY :O )"
+			document.getElementById("NICKNAME").innerText = 'Luka Tim'
+			document.getElementsByClassName("STAT-CONTENT")[0].innerText = '-212'
+			document.getElementsByClassName("STAT-CONTENT")[1].innerText = '+75'
+			document.getElementsByClassName("STAT-CONTENT")[2].innerText = 'Staff'
+			document.getElementsByClassName("STAT-CONTENT")[3].innerText = '527'
+			document.getElementsByClassName("STAT-CONTENT")[4].innerText = '84'
+			document.getElementsByClassName("STAT-CONTENT")[5].innerText = '2020'
+			document.getElementById("ANNOUNCER-LINK").href = 'thedarkhub_user.html?Luka Tim'
+		} else if (id == "?checker") {
+			document.getElementById("POST-TITLE").innerText = "VOTING: best checker"
+			document.getElementById("ANNOUNCEMENT").innerHTML = "VOTING: best checker<br><br>Hello dear members,<br><br>the results of our latest poll are in. Please note votes were weighted based on member's reputation / external factors. The topic of the vote was the best credentials combolist checker. Here are the results:<br><br><span style='color:#4dffca;'>Place 1</span><br>RATSCANNER V.3.0<br>Made by: XXX_CYBERRAT_XXX<br><br><span style='color:#4dffca;'>PLACE 2</span><br>ProxyGOD<br>Made by: BaltaMaster6969<br><br><span style='color:#4dffca;'>PLACE 3</span><br>PuppetScammer<br>Made by: TRAIN_TROLLER_XD"
+			document.getElementById("NICKNAME").innerText = 'BlueEyes'
+			document.getElementsByClassName("STAT-CONTENT")[0].innerText = '+512'
+			document.getElementsByClassName("STAT-CONTENT")[1].innerText = '+498'
+			document.getElementsByClassName("STAT-CONTENT")[2].innerText = 'Staff'
+			document.getElementsByClassName("STAT-CONTENT")[3].innerText = '327'
+			document.getElementsByClassName("STAT-CONTENT")[4].innerText = '24'
+			document.getElementsByClassName("STAT-CONTENT")[5].innerText = '2019'
+			document.getElementById("ANNOUNCER-LINK").href = 'thedarkhub_user.html?BlueEyes'
+		} else if (id == "?rules") {
+			document.getElementById("POST-TITLE").innerText = "Rules & Penalties"
+			document.getElementById("ANNOUNCEMENT").innerHTML = "Rules & Penalties<br><br>1.Post dox content on external sites like doxtrash.com<br>2. No CP<br>3. No gore<br>4. No scamming (you will get banned).<br>6. No malware (you will get banned)<br>7. No bitching about getting scammed (should've used a middleman, don't be stupid).<br>8. No bitching about getting a virus after downloading smth (only trust members with high reputation, don't download random checkers)<br>9. No crypto bros talk allowed (no, your shitcoin run by a 17 yeard old developer living with his mom won't replace central bank currencies<br>10. No harrasing admins (except for Luka Tim because he is a moron)<br>11. No creeps allowed<br>12. Use your common sense.<br><br>XXX_CYBERRAT_XXX & all of admin staff."
+			document.getElementById("NICKNAME").innerText = 'XXX_CYBERRAT_XXX'
+			document.getElementsByClassName("STAT-CONTENT")[0].innerText = '+3412'
+			document.getElementsByClassName("STAT-CONTENT")[1].innerText = '+187'
+			document.getElementsByClassName("STAT-CONTENT")[2].innerText = 'Staff'
+			document.getElementsByClassName("STAT-CONTENT")[3].innerText = '897'
+			document.getElementsByClassName("STAT-CONTENT")[4].innerText = '114'
+			document.getElementsByClassName("STAT-CONTENT")[5].innerText = '2017'
+			document.getElementById("ANNOUNCER-LINK").href = 'thedarkhub_user.html?XXX_CYBERRAT_XXX'
+		} else if (id == "?domains") {
+			document.getElementById("POST-TITLE").innerText = "List of our domains"
+			document.getElementById("ANNOUNCEMENT").innerHTML = "Dear members,<br><br>here's a quick list of our domains. As you may know, we operate both in Tor and clearnet. The links below should help you to find the forum even if one of our domains/servers gets seized. Law enforcement rarely seizes all of it (its hard to get a warrant), so here you go. You should save this list somewhere on your computer.<br><br>1. TOR<br>http://4tg5rnf2dn6axlsnycrwpbe7rlbist4ll36dhgf2l63zaxpiyawaygid.onion<br>http://f7w34zwxfyhstlmttpo3tji7jnp2tjrktey5emzzzgpwe3ziw7judhgd.onion<br>http://46e2msfba7efgolmfdm2ixr2yeuz2fs4r3gi4o243sua6fc56gr276dd.onion<br>http://2kn73irfhaw7ylx7ikifc2ap4siluflfheh5hl7kp6znimobhafsmhnd.onion<br>http://szyotj7fsr7ccati32lgfo4n43l6ld7iw7dutdg3r2m56h6gpb7p5wxd.onion<br><br>2. Clearnet<br>https://www.thegreyhub.xyz<br>https://www.darkhub.io<br>https://www.thecrimehub.net<br>https://www.thedoxhub.wtf"
+			document.getElementById("NICKNAME").innerText = 'KappaMeister'
+			document.getElementsByClassName("STAT-CONTENT")[0].innerText = '+1323'
+			document.getElementsByClassName("STAT-CONTENT")[1].innerText = '+125'
+			document.getElementsByClassName("STAT-CONTENT")[2].innerText = 'Staff'
+			document.getElementsByClassName("STAT-CONTENT")[3].innerText = '334'
+			document.getElementsByClassName("STAT-CONTENT")[4].innerText = '54'
+			document.getElementsByClassName("STAT-CONTENT")[5].innerText = '2019'
+			document.getElementById("ANNOUNCER-LINK").href = 'thedarkhub_user.html?KappaMeister'
+		}
+	}
+	
+	
+	window.onload = function(){
+		if (!window.location.search.startsWith('?')) {
+			window.location.replace("thedarkhub.html");
+		}
+		setOnline(true)
+		setText()
+		setInterval(setOnline, 5000)
+		let buttons = document.getElementsByClassName("ITEM-BUTTON")
+		for (let i = 0; i < buttons.length; i++) {
+			buttons[i].onclick = function() {window.location.replace("thedarkhub.html")}
+		}
+		buttons[2].onclick = function() {window.location.replace("thedarkhub_sell.html")}
+		buttons[3].onclick = function() {window.location.replace("thedarkhub_vips.html")}
+		buttons[4].onclick = function() {window.location.replace("thedarkhub_announce.html?domains")}
+	}
+	</script>
+	<div id="TOP">
+		<div id="LOGO">
+			<a href="thedarkhub.html"><img src="CSS/Images/trTheHubLogo.png"></a>
+		</div>
+	</div>
+	<div id="LIST">
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				LEAKS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				ACCOUNTS MARKET
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON" onclick="window.location='thedarkhub_sell.html'">
+				SELLER'S BAY
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				VIP LOUNGE
+			</div>
+		</div>
+		<div class="ITEM">
+			<div class="ITEM-BUTTON">
+				DOMAINS
+			</div>
+		</div>
+	</div>
+	<div style="padding: 0px;border-radius:16px" class="CONTAINER">
+		<div style="min-height: 50px;" class="LABEL"><span>ANNOUNCEMENT: <span id="POST-TITLE">BEWARE OF BITCOIN CLIPPING MALWARE</span></span></div>
+	</div>
+	<div class="CONTAINER">
+		<div id="ANNOUNCER">
+			<a id="ANNOUNCER-LINK" href='dasd.html'>
+				<div id="NICKNAME" style="color:white;font-size:21px;margin-bottom: 5px; border-radius:16px;"></div>
+				<img src="CSS/Images/Icon_Identity.svg" id="AVATAR">
+			</a>
+			<div class="STAT">
+				<div style="float: left">REP:</div><div class="STAT-CONTENT" style="float: right;">1716</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">LIKES:</div><div class="STAT-CONTENT" style="float: right;">1716</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">RANK:</div><div class="STAT-CONTENT" style="float: right;color:#bf1900;">1716</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">POSTS:</div><div class="STAT-CONTENT" style="float: right;">1716</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">THREADS:</div><div class="STAT-CONTENT" style="float: right;">1716</div>
+			</div>
+			<div class="STAT">
+				<div style="float: left">JOINED:</div><div class="STAT-CONTENT" style="float: right;">1716</div>
+			</div>
+		</div>
+		<div id="ANNOUNCEMENT"></div>
+	</div>
+	<div class="CONTAINER" style="margin-top:30px;">
+		<div id="FOOTER">
+			<div class="LABEL" style="border-radius:0px;">
+				<span id="users" style="white-space: pre"></span> users online | <span id="members" style="white-space: pre"></span> members and <span id="guests" style="white-space: pre"></span> guests
+			</div>
+			<div class="LABEL" style="border-radius:0px;background-color:rgba(0,0,0,0.5);color:white">
+				<div class="FOOTER-BOX">
+					18.70M<br>Posts
+				</div>
+				<div class="FOOTER-BOX">
+					611k<br>Threads
+				</div>
+				<div class="FOOTER-BOX">
+					3.31M<br>Users
+				</div>
+				<div class="FOOTER-BOX">
+					<a href="thedarkhub_user.html?Guest">Guest</a><br>Newest member
+				</div>
+				<div class="FOOTER-BOX">
+					60.76K<br>Most Online
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

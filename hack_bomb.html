@@ -1,0 +1,91 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	font-family: Unifont;
+	margin: 0px;
+	overflow-y: hidden;
+	text-align: center;
+}
+
+#MAIN {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 21px;
+	word-break: break-all;
+	flex-wrap: wrap;
+	position: absolute;
+}
+
+#WRITING {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 138px;
+	font-weight: bold;
+	user-select: none;
+	text-shadow: 0 5px yellow;
+	color: red;
+	animation-name: writing;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes writing {
+  0%   {color: red;}
+  25%  {color: blue;}
+  50%  {color: green;}
+  100% {color: red;}
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function startHack() {
+	let hackID = Number(window.location.search.substring(1))
+	window.ue.webbrowser.hack_bomb(hackID)
+}
+
+window.onload = function() {
+	let alphabet = new Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+	let backString = ''
+	for (let i = 0; i < 12000; i++) {
+		let test = ''
+		let test2 = ''
+		if (Math.random() < 0.05) {
+			let r = Math.trunc(Math.random() * 255)
+			let g = Math.trunc(Math.random() * 255)
+			let b = Math.trunc(Math.random() * 255)
+			test = '<span style="color: rgb(' + r + ', ' + g + ', ' + b + ')">'
+		}
+		if (Math.random() < 0.15) {
+			test2 = '</span>'
+		}
+		backString = backString + test + alphabet[Math.round(Math.random() * 33)] + test2
+	}
+	document.getElementById("MAIN").innerHTML = backString;
+	startHack()
+
+}
+</script>
+<div id="MAIN">
+</div>
+<div id="WRITING">
+	YOU ARE BEING<br>HACKED.<br><br>LOSER. LOSER. LOSER.
+</div>
+</body>

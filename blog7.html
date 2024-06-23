@@ -1,0 +1,138 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: #0381ff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function insertHack() {
+	let elements = document.getElementsByTagName("p");
+	let random_element = elements[Math.floor(Math.random() * elements.length)];
+	let element_html = random_element.innerHTML;
+	let indices_array = [];
+
+	//find all ". " in paragraph
+	for (let i = 0; i < element_html.length; i++) {
+		if (
+			(element_html[i] === "." && element_html[i + 1] === " ") ||
+			(element_html[i + 1] == undefined && element_html[i + 1] !== "." && element_html[i - 1] !== ".")
+		) {
+			indices_array.push(i);
+		}
+	}
+
+	//choose random sentence in paragraph
+	let sentence_end_index = Math.floor(Math.random() * indices_array.length);
+	let sentence_start_index = sentence_end_index - 1;
+
+	if (sentence_end_index == 0) {
+		var slice_start = 0;
+	} else {
+		var slice_start = indices_array[sentence_start_index] + 2;
+	}
+
+	let sentence = element_html.slice(slice_start, indices_array[sentence_end_index]) + ".";
+	console.log(sentence);
+	console.log(slice_start);
+	console.log(indices_array[sentence_end_index]);
+	console.log(indices_array);
+
+	let replaced = element_html.replace(sentence, "<span id='HiddenSpan'>" + sentence + "</span>");
+	random_element.innerHTML = replaced;
+	document.getElementById("HiddenSpan").onclick = blogHacked;
+}
+
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan");
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + counter1.toFixed(1) + "%";
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%";
+			window.ue.webbrowser.hacked_blog(blogID);
+		}
+	}
+}
+
+window.onload = function () {
+	insertHack();
+	let anxiety = Number(window.location.search.substring(1));
+	blogID = 7;
+	window.ue.webbrowser.visited_blog(blogID, anxiety);
+};
+
+</script>
+<div id="MAIN">
+<p>When I was a young, I was a cold, ruthless man, and I didn't care about the consequences of my actions. The only thing I cared about was completing my missions, getting my paycheck and staying alive. I worked for the russian KGB, the security agency of the Soviet Union.</p>
+
+<p>In my job, I was required to do all sorts of things. Sometimes I had to beat people up, or kidnap them. Other times, I had to torture them, or poison them secretly. I was trained in all sorts of methods of interrogation, and I used them all to extract information from my victims.</p>
+
+<img src="CSS/Images/Anxiety/Blog7_1.png" class="IMAGE">
+
+<p>There was one victim in particular that I remember vividly. I was tasked with extracting information from him, and at first, I tried using more traditional methods of interrogation. I asked him questions, trying to get him to talk. But he was stubborn, and he refused to cooperate. So I had to get more creative.</p>
+
+<p>I began using various methods of torture on him, trying to break him down. I used waterboarding, electric shocks, and then sleep deprivation. But despite all of my efforts, the man still refused to talk. He was a tough one, and I had to admire his strength and his determination. But I couldn't let that stop me. I had a job to do, and I was going to do it no matter what.</p>
+
+<img src="CSS/Images/Anxiety/Blog7_2.png" class="IMAGE">
+
+<p>And so I did. I kept torturing him, this time with more... invasive methods. First I started with his toenails, then I threaten to take his eyes. I tortured him day after day, making sure he doesn't pass out in the process, trying to break him down. And finally, after weeks of this, he cracked He told me everything I wanted to know, and then some more.</p>
+
+<p>Working for the KGB was a tough job. We were constantly under pressure to get results, and there was little room for error. We were expected to be ruthless and efficient, and we were given all the tools we needed to get the job done.</p>
+
+<p>The people I worked with were a mixed bunch. Some of them were true believers, convinced that we were doing the right thing. Others were just in it for the power and the money. And then there were the ones like me, who were just trying to survive.</p>
+
+<p>And me... I didn't feel any remorse at all at that time. I knew that what I was doing was wrong, but I simply didn't care. I was a soldier, following orders, and I didn't think twice about the people I was hurting.</p>
+
+<img src="CSS/Images/Anxiety/Blog7_3.png" class="IMAGE">
+
+<p>But now, as I look back on my life, I see things differently. I can't escape the memories of all the horrible things I've done. I see the faces of the people I've hurt, and I feel their pain. And I know that I can't undo the things I've done, no matter how much I wish I could.</p>
+
+<p>Those are the thoughts I will be dying with. I am an old man now and my sad thoughts are all I have left.</p>
+
+</div>
+</body>

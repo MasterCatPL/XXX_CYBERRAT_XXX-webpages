@@ -1,0 +1,161 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: black;
+	color: rgb(255, 255, 255);
+	font-family: Calibri;
+	text-align: justify;
+	background-image: url(CSS/Images/DarkPatternChecker.webp);
+	background-size: 500px;
+}
+
+#TITLE {
+	width: 100%;
+	text-align: center;
+	font-size: 60px;
+	margin-top: 60px;
+	margin-bottom: 30px;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+.MINITITLE {
+	font-size: 30px;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.NORMALTEXT {
+	font-size: 21px;
+}
+
+
+#MAIN {
+	width: 100%;
+	max-width: 700px;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 20px;
+	border-radius: 16px;
+	box-sizing: border-box;
+}
+
+#BUY {
+	width: 250px;
+	height: 35;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 21px;
+	font-family: Calibri;
+	outline: 0px;
+	border: 1px solid #adc4ff;
+	cursor: pointer;
+	background-color: black;
+	margin: 0 auto;
+	color: #adc4ff;
+	margin-top: 10px;
+}
+
+#BUY:hover {
+	border: 1px solid #8ba8ff;
+	background-color: #161b29;
+}
+
+#OUTPUT {
+	text-align: center;
+	color: red;
+}
+
+.highlight {
+	color: rgb(115, 140, 215);
+}
+
+</style>
+<body>
+<link rel="stylesheet" href="CSS\Common.css">
+<script src="CSS/InfoSec.js"></script>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+let interval;
+
+function clickedButton() {
+	let counter1 = 0;
+	let button = document.getElementById("BUY");
+	clearInterval(interval);
+	interval = setInterval(Loading, 100);
+
+	function Loading() {
+		button.value = "Fetching [" + counter1 + "%]";
+		counter1++;
+		if (counter1 >= 101) {
+			clearInterval(interval);
+			Buy();
+		}
+	}
+
+	function Buy() {
+		window.ue.webbrowser.bought_checker().then(function(ReturnValue) {
+			button.value = ReturnValue;
+			if (ReturnValue == "Downloaded") {
+				play_sound(true);
+				button.style.color = "rgb(0, 255, 0)";
+				button.style.border = "1px solid rgb(0, 255, 0)"
+			} else {
+				play_sound(false);
+				button.style.color = "rgb(255, 0, 0)";
+				button.style.border = "1px solid rgb(255, 0, 0)"
+			}
+		})
+	}
+}
+
+window.onload = function() {
+	get_static_npc_username('CheckerSeller');
+	getPrice("Checker");
+	window.ue.webbrowser.check_if_checker_bought()
+	
+}
+</script>
+<div id="TITLE">
+	Credentials checker by <span id="OWNER-NAME">DefaultUsername</span>
+</div>
+<div id="MAIN">
+	<div class="MINITITLE" style="margin-top: 0px;">
+		Welcome to my website!
+	</div>
+	<div class="NORMALTEXT">
+		Welcome to my website, where I present you with my <span class="highlight">custom made combolist checker</span>, compatible with various websites and services. As you know very well, things in the cyberspace change very fast and blue teams will always try to fuck us over. Every time a website changes something in their register-account flow or ip rules, <span class="highlight">it usually breaks some stuff for our lovely botters.</span> So you know, you can't just a buy a checker and expect it to work forever. And there are so many sites and so many updates pushed every day, how can one keep track of all of them and <span class="highlight">make sure your checkers work?</span> Well, let me introduce you to: modular programming.
+	</div>
+	<div class="MINITITLE">
+		Modular programming
+	</div>
+	<div class="NORMALTEXT">
+		<span class="highlight">It's impossible for me to track every register-account workflow change across thousands of sites</span> you might want to use this checker for. But luckily, I don't have to! I designed the checker to be <span class="highlight">module-based</span> from the beginning. It allows other developers to configure the checker to various websites very easily. <span class="highlight">Then, they can sell their configs as modules.</span> Instead of me needing to keep track of every website, I offload this work on them, and they get a little bit of money as well. Win-win. This means, with the purchases of the software here, <span class="highlight">you'll get only the baseline program.</span> If you need to check accounts for a specific site, you'll need a module for it. You'll find some, surely.
+	</div>
+	<div class="MINITITLE">
+		Purchase
+	</div>
+	<div class="NORMALTEXT" style="text-align:center">
+		The cost is <span id="PRICE">X.XX</span> ETH. You'll get the baseline checker + one module.
+	</div>
+	<input type="button" id="BUY" value="Purchase" onclick="clickedButton()">
+	<div class="MINITITLE">
+		What is a combolist checker?
+	</div>
+	<div class="NORMALTEXT" style="white-space: pre-line;">After breaching a company, <span class="highlight">the hackers usually gain access to a username:password database</span> of company's customers/users. <span class="highlight">But what to do with them?</span> Ideally you'd extract money from all accounts which use the same username:password combo, but you don't know whether the person has <span class="highlight">reused those credentials</span>, and even if he did, at <span class="highlight">what services/sites exactly.</span>
+		You can check the most profitable sites for credentials reuse, like banks. But what if the person is italian? Do you know any italian banks? How do you try to login? How many banks are even in Italy?<br>
+		Most hackers don't bother and just <span class="highlight">sell the whole credentials combolist</span> on a cybercrime forum and enjoy their money.<br>
+		<span class="highlight">That's where you step in.</span> All you need to do is buy a combolist from a marketplace like TheDarkHub.onion, and then use my checker & service modules to <span class="highlight">slowly go over every single credential in the combolist and check whether there exists an account with fitting username:password combo.</span> And whenever you find any, you can just sell it => profit.
+	</div>
+</div>
+</body>

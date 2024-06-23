@@ -1,0 +1,196 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	margin: 0px;
+	background-color: black;
+	font-family: Unifont;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#MAIN {
+	margin-top: 50px;
+	width: 700px;
+	color: rgb(0, 255, 0);
+	font-size: 18px;
+	margin-bottom: 70px;
+}
+
+#TITLE {
+	font-size: 40px;
+	color: rgb(255, 0, 0);
+	text-align: center;
+}
+
+#EXPLAINER {
+	text-align: center;
+	margin-top: 50px;
+	font-size: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.highlight {
+	color: rgb(255, 0, 0);
+	color: orange;
+}
+
+.SMALLTITLE {
+	color: rgb(255, 0, 0);
+	font-size: 28px;
+}
+
+#INPUT {
+	outline: none;
+	border: 1px solid rgb(0, 255, 0);
+	width: 80%;
+	margin: 0 auto;
+	font-size: 21px;
+	font-family: Unifont;
+	background-color: black;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 40px;
+	color: rgb(0, 255, 0);
+	text-align: center;
+}
+
+#INPUT-BUTTON {
+	background-color: black;
+	outline: none;
+	border: 1px solid rgb(0, 255, 0);
+	height: 35px;
+	width: 200px;
+	color: rgb(0, 255, 0);
+	font-family: Unifont;
+	font-size: 18px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+
+
+#BUY-USE {
+	background-color: black;
+	outline: none;
+	border: 1px solid rgb(0, 255, 0);
+	height: 35px;
+	width: 200px;
+	color: rgb(0, 255, 0);
+	font-family: Unifont;
+	font-size: 18px;
+	cursor: pointer;
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+#BUY-USE:hover {
+	background-color: rgba(0, 255, 0, 0.1);
+}
+
+#INPUT-BUTTON:hover {
+	background-color: rgb(0, 30, 0);
+}
+
+</style>
+<script src="CSS/InfoSec.js"></script>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function executeSearch(service) {
+	let counter = 0;
+	let output = document.getElementById("OUTPUT")
+	let intHandle = setInterval(addPercent, 100)
+	function addPercent() {
+		output.innerText = counter + "%"
+		counter++;
+		if (counter >= 101) {
+		clearInterval(intHandle)
+		executeSearch2(service);
+		}
+	}
+	
+	
+	function executeSearch2(service) {
+		let username = document.getElementById("INPUT").value;
+		//	ID | CONTENT (e.g selfie.png) | TYPE
+		window.ue.webbrowser.get_infosec_by_name(username, service).then(function(ReturnValue) {
+			get_service_access(service);
+			if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+				document.getElementById("OUTPUT").innerText = "0 leaks found. Input data might be invalid."
+				return
+			}
+			if (ReturnValue == "NOTTHISSERVICE") {
+				document.getElementById("OUTPUT").innerText = "0 leaks found. You should try another service."
+			}
+			if (ReturnValue.split("|")[0].startsWith("a")) {
+				document.getElementById("OUTPUT").innerText = "1 leak found. Source category: PaidServices. Note: Graphical application. This data is associated with an IRL address: " + ReturnValue.split("|")[1]
+			} else if (ReturnValue.split("|")[0].startsWith("k")) {
+				document.getElementById("OUTPUT").innerText = "1 leak found. Source category: CyberCrime Forum. Note: Carding, refunding. This data is associated with a Password, leaked in cleartext from a database. The password is: " + ReturnValue.split("|")[1]
+			} else if (ReturnValue.split("|")[0].startsWith("x")) {
+				document.getElementById("OUTPUT").innerText = "1 leak found. Source category: IPGrabber. Note: Shoutbox-Spreader. This data is associated with a IP address: " + ReturnValue.split("|")[1]
+			} else if (ReturnValue.split("|")[0].startsWith("u")) {
+				document.getElementById("OUTPUT").innerText = "1 leak found. Source category: WebCrawler. Note: Forum associated with criminal activity. This data is associated with an username: " + ReturnValue.split("|")[1]
+			}
+		})
+	}
+}
+
+window.onload = function() {
+	let service = 'LeakChecker'
+	get_static_npc_username(service);
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("PRICE").innerText = price;
+	})
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="MAIN">
+	<div id="TITLE">
+		Best Leak Scanner on the Dark Web
+	</div>
+	<div id="EXPLAINER">
+		<span class="SMALLTITLE">Welcome!</span><br>
+		<span>I'm <span id="OWNER-NAME">DefaultUsername</span> and this is HellLeaksV4, <span class="highlight">the best leak scanner on the Dark Web.</span> I've amassed a bunch of leaked databases over my cybercriminal years and with HellLeaksV4 service, you can gain access to them too! Compared to other popular leak checkers, <span class="highlight">HellLeaksV4 has the best price-to-service ratio.</span> </span>
+		<br><span class="SMALLTITLE">HellLeaksV4</span>
+		<span>HellLeaksV4 is the fourth iteration of my query-based database application. It's a lightweight MySQL database which is able to provide <span class="highlight">up to 1k records per second.</span> It took me a lot of effort and time to create the perfect architecture: if you combine all the records the HellLeaksV4 software accesses from leaked databases, it would sum up to <span class="highlight">over 24 million different records.</span> It's a lot of data to comb through, and HellLeaksV4 was a major advancement compared to previous iterations. As you understand, my time costs money, so <span class="highlight">it will also cost YOU some money to use it.</span></span>
+		<br><span class="SMALLTITLE">Information about the leaks</span>
+		<span>The HellLeaksV4 interface will allow you to access <span class="highlight">over 120 leaked databases dated from 2012 to 2022.</span> They contain mostly <span class="highlight">ip addresses, passwords and usernames.</span> And the best part: almost all of them are valid, non-trash info. I did my best to separate all the precious gems from the noise of temporary accounts or previous leaks. Premium stuff right here! Of course, <span class="highlight">it has a price.</span></span>
+		<br><span class="SMALLTITLE">INPUT / OUTPUT</span>
+		<span>You can search by <span class="highlight">someone's full, IRL name, or by someone's phone number.</span> As the output you will receive their <span class="highlight">full address, password from a leak, ip address from a leak, or nothing</span> if none of the databases contain your key.</span>
+		<input id="INPUT" type="text" placeholder="Search by Full Name/Phone">
+		<input id="INPUT-BUTTON" type="button" value="Search">
+		<br><span class="SMALLTITLE">Your results:</span>
+		<span id="OUTPUT">If you search for something, the results will appear here!</span>
+		<br><span class="SMALLTITLE">Buy access keys</span>
+		<span>To use HellLeaksV4, you will need to pay <span id="PRICE">X </span>ETH per every access. It took me a lot of effort and time to make all of this, so it's not like I don't deserve it! You currently have <span id="USES">X</span> uses available.</span>
+		<div id="BUY-USE">Buy access key</div>
+	</div>
+</div>
+</body>

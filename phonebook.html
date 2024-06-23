@@ -1,0 +1,351 @@
+<head>
+<style>
+
+@font-face {
+  font-family: Calibri;
+  src: url(CSS/Fonts/Calibri.ttf);
+}
+
+body {
+	background-color: white;
+	background-image: url(CSS/Images/PhonebookPattern.webp);
+	margin: 0px;
+	font-family: Calibri;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	align-items: center;
+}
+
+#TOP {
+	height: 150px;
+	width: 100%;
+	background-color: rgb(0, 88, 160);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-bottom: 10px;
+}
+
+#TITLE {
+	color: white;
+	font-size: 60px;
+}
+
+#PANEL {
+	display: flex;
+	flex-direction: column;
+}
+
+#PANEL-UP {
+	display: flex;
+}
+
+#PANEL-DOWN {
+	display: flex;
+	margin-bottom: 5px;
+}
+
+#PANEL-BOTTOM {
+	display: flex;
+}
+
+#INPUT {
+	border: 0px;
+	outline: none;
+	background-color: white;
+	padding: 5px;
+	border-radius: 8px;
+	width: 300px;
+	font-size: 21px;
+	text-align: center;
+}
+
+#INPUT-BUTTON {
+	margin-left: 20px;
+	width: 100px;
+	font-size: 21px;
+	background-color: rgb(231, 76, 60);
+	outline: none;
+	border: 0px;
+	border-radius: 8px;
+	font-family: Calibri;
+	cursor: pointer;
+	padding: 5px;
+	text-align: center;
+	color: rgb(40, 40, 40);
+}
+
+#INPUT-BUTTON:hover {
+	filter: brightness(1.2);
+}
+
+.PANEL-SWITCH {
+	color: white;
+	width: 33.33%;
+	user-select: none;
+	text-align: center;
+	cursor: pointer;
+}
+
+.PANEL-SWITCH:hover {
+	filter: brightness(0.8);
+}
+
+#QUERIES {
+	background-color: white;
+	border-radius: 8px;
+	padding: 5px;
+	color: rgb(80, 80, 80);
+	padding-left: 24px;
+	padding-right: 24px;
+	user-select: none;
+}
+
+#BUY-USE {
+	background-color: white;
+	border-radius: 8px;
+	padding: 5px;
+	color: rgb(80, 80, 80);
+	margin-left: 20px;
+	padding-left: 24px;
+	padding-right: 24px;
+	cursor: pointer;
+	margin-left: auto;
+	user-select: none;
+}
+
+#BUY-USE:hover {
+	filter: brightness(0.9);
+}
+
+#MAIN {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 700px;
+	width: 100%;
+	margin-bottom: 100px;
+}
+
+#MAINTITLE {
+	color: rgb(0, 88, 160);
+	font-size: 60px;
+	margin-top: 80px;
+	text-decoration: underline;
+}
+
+#INFO {
+	font-size: 21px;
+}
+
+.TEMPLATE {
+	margin-top: 20px;
+	width: 400px;
+	border: 3px solid rgb(0, 88, 160);
+	padding: 20px;
+	border-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(229, 238, 245);
+	border-radius: 4px;
+	text-align: center;
+}
+
+
+.OUTPUT-NAME {
+	color: rgb(0, 88, 160);
+	font-size: 26px;
+	margin-bottom: 10px;
+}
+
+.OUTPUT-PHONE {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#FOOTER {
+	width: 100%;
+	height: 100px;
+	margin-top: auto;
+	background-color: rgb(0, 88, 160);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+}
+
+</style>
+<script src="CSS/InfoSec.js"></script>
+<link rel="stylesheet" href="CSS\Common.css">
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+
+function setAge() {
+	let ages = document.getElementsByClassName("AGE")
+	for (let i = 0; i < ages.length; i++) {
+		ages[i].innerText = 18 + Math.round(Math.random() * 5) 
+	}
+}
+
+function setText(index) {
+	let maintitle = document.getElementById("MAINTITLE");
+	let input = document.getElementById("INPUT")
+	if (index == 0) {
+		maintitle.innerText = "Search by Phone"
+		input.placeholder = "Search by Phone"
+	}
+	if (index == 1) {
+		maintitle.innerText = "Search by Address"
+		input.placeholder = "Search by Address"
+	}
+	if (index == 2) {
+		maintitle.innerText = "Search by Name"
+		input.placeholder = "Search by Name"
+	}
+}
+
+function executeSearch(service) {
+	let name = document.getElementById("INPUT").value
+	//	ID | CONTENT (e.g selfie.png) | TYPE
+	window.ue.webbrowser.get_infosec_by_name(name, service).then(function(ReturnValue) {
+		get_service_access(service);
+		let firstTemplate = document.getElementsByClassName("TEMPLATE")[0]
+		if (ReturnValue == "TRASHINPUT" || ReturnValue == "NORESULTS") {
+			displayAlert("Error: the input you provided seems invalid.");
+			return
+		}
+		if (ReturnValue == "NOTTHISSERVICE") {
+			displayAlert("0 results found. You should try another service.")
+			return
+		}
+		let id = ReturnValue.split("|")[0]
+		if (id.startsWith("f")) {
+			if (name.startsWith("+")) {
+				firstTemplate.children[0].children[0].innerText = ReturnValue.split("|")[1]
+				firstTemplate.children[1].innerText = name;
+			} else {
+				firstTemplate.children[0].children[0].innerText = ReturnValue.split("|")[1]
+				firstTemplate.children[1].innerText = "+" + Math.round(Math.random() * 3724278791884)
+			}
+		} else if (id.startsWith("o")) {
+			firstTemplate.children[0].children[0].innerText = name;
+			firstTemplate.children[1].innerText = ReturnValue.split("|")[1];
+		}
+		firstTemplate.style.border = "3px solid red"
+		firstTemplate.children[0].children[1].innerText = 18 + Math.round(Math.random() * 5)
+		
+		let main = document.getElementById("MAIN")
+		let all_templates = document.getElementsByClassName("TEMPLATE");
+		for (let i = all_templates.length - 1; i > 0; i--) {
+			main.removeChild(all_templates[i]);
+		}
+		document.getElementById("INFO").innerText = "=== RESULTS FOUND ==="
+		
+	})
+
+}
+
+
+window.onload = function() {
+	let service = 'Phonebook'
+	setAge();
+	get_static_npc_username(service);
+	get_service_access(service);
+	document.getElementById("INPUT-BUTTON").onclick = function() {executeSearch(service)}
+	window.ue.webbrowser.get_service_price(service).then(function(ReturnValue) {
+		let price = ReturnValue;
+		document.getElementById("BUY-USE").onclick = function() {buyQuery(service, price)}
+		document.getElementById("PRICE").innerText = price;
+	})
+}
+
+</script>
+<div id="ALERT-CONTAINER">
+	<div id="ALERT">
+		<div id="ALERT-X">ALERT</div>
+		<div id="ALERT-TEXT"></div>
+		<div id="ALERT-X-2">
+		<div id="ALERT-NO" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse'">NO</div>
+		<div id="ALERT-OK" onclick="document.getElementById('ALERT-CONTAINER').style.visibility = 'collapse';">OK</div>
+		</div>
+	</div>
+</div>
+<div id="TOP">
+	<div id="TITLE"><b>World</b>PhoneBook</div>
+	<div id="PANEL">
+		<div id="PANEL-DOWN">
+			<div class="PANEL-SWITCH" style="text-align:right;" onclick="setText(0)">
+				Phone Search
+			</div>
+			<div class="PANEL-SWITCH" onclick="setText(1)">
+				Address Search
+			</div>
+			<div class="PANEL-SWITCH" style="text-align:left;" onclick="setText(2)">
+				Name Search
+			</div>
+		</div>
+		<div id="PANEL-UP">
+			<div id="QUERIES" style="margin-right:20px;display:flex;justify-content:center;align-items:center;font-size:18px;"><span>Queries: <span id="USES">X</span></span></div>
+			<div id="BUY-USE" style="margin-right:20px;display:flex;justify-content:center;align-items:center;font-size:18px;"><span>Buy query (<span id="PRICE">X</span> ETH)</span></div>
+			<input id="INPUT" type="text" placeholder="Search by Name">
+			<input id="INPUT-BUTTON" type="button" value="Search">
+		</div>
+	</div>
+</div>
+<div id="MAIN">
+	<div id="MAINTITLE">
+		Search by Name
+	</div>
+	<div id="INFO">
+		Showing results from previous searches:
+	</div>
+	<div class="TEMPLATE">
+		<div class="OUTPUT-NAME">
+			<span id="OUTPUT-REALNAME">Henry Grey</span>, Age <span class="AGE">XX</span>
+		</div>
+		<div class="OUTPUT-PHONE">
+			+912084422881
+		</div>
+	</div>
+	<div class="TEMPLATE">
+		<div class="OUTPUT-NAME">
+			Elisabeth Oak, Age <span class="AGE">XX</span>
+		</div>
+		<div class="OUTPUT-PHONE">
+			+4915561556157
+		</div>
+	</div>
+	<div class="TEMPLATE">
+		<div class="OUTPUT-NAME">
+			Patrick Acerson, Age <span class="AGE">XX</span>
+		</div>
+		<div class="OUTPUT-PHONE">
+			+528886732311
+		</div>
+	</div>
+	<div class="TEMPLATE">
+		<div class="OUTPUT-NAME">
+			Albert Shaft, Age <span class="AGE">XX</span>
+		</div>
+		<div class="OUTPUT-PHONE">
+			+852138417991132
+		</div>
+	</div>
+	<div class="TEMPLATE">
+		<div class="OUTPUT-NAME">
+			Brian Crabs, Age 50
+		</div>
+		<div class="OUTPUT-PHONE">
+			+1202334221191
+		</div>
+	</div>
+</div>
+<div style="flex:1"></div>
+<div id="FOOTER">
+	<div>For technical help, contact: <span id="OWNER-NAME">DefaultUsername</span></div>
+</div>
+</body>

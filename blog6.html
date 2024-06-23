@@ -1,0 +1,142 @@
+<head>
+<style>
+@font-face {
+  font-family: Unifont;
+  src: url(CSS/Fonts/Unifont.otf);
+}
+
+body {
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 21px;
+	font-family: Unifont;
+}
+
+#MAIN {
+	width: 700px;
+	color: rgb(255, 0, 0);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.IMAGE {
+	height: 500px;
+	margin: 0 auto;
+}
+
+p {
+
+}
+
+#HiddenSpan {
+	cursor: pointer;
+}
+
+#HiddenSpan:hover {
+	color: rgb(255, 0, 255);
+}
+
+</style>
+</head>
+<body>
+<script>window.ue.webbrowser.get_browser_res().then(function(ReturnValue) {document.body.style.transform = 'scale(' + ReturnValue +')';});let scale = 1;let isctrldown = false;document.addEventListener("keyup", (e) => {if (e.key === "Control") {isctrldown = false;}});document.addEventListener("keydown", (e) => {if (e.key === "Control") {isctrldown = true;}});window.onscroll = function (e) {if (isctrldown === false) {return;}console.log(this.oldScroll >= this.scrollY);let scrolling_down = this.oldScroll > this.scrollY;if (scrolling_down) {scale = scale + 0.1;} else {scale = scale - 0.1;}document.body.style.transform = "scale(" + scale + ")";this.oldScroll = this.scrollY;};
+function insertHack() {
+	let elements = document.getElementsByTagName("p");
+	let random_element = elements[Math.floor(Math.random() * elements.length)];
+	let element_html = random_element.innerHTML;
+	let indices_array = [];
+
+	//find all ". " in paragraph
+	for (let i = 0; i < element_html.length; i++) {
+		if (
+			(element_html[i] === "." && element_html[i + 1] === " ") ||
+			(element_html[i + 1] == undefined && element_html[i + 1] !== "." && element_html[i - 1] !== ".")
+		) {
+			indices_array.push(i);
+		}
+	}
+
+	//choose random sentence in paragraph
+	let sentence_end_index = Math.floor(Math.random() * indices_array.length);
+	let sentence_start_index = sentence_end_index - 1;
+
+	if (sentence_end_index == 0) {
+		var slice_start = 0;
+	} else {
+		var slice_start = indices_array[sentence_start_index] + 2;
+	}
+
+	let sentence = element_html.slice(slice_start, indices_array[sentence_end_index]) + ".";
+	console.log(sentence);
+	console.log(slice_start);
+	console.log(indices_array[sentence_end_index]);
+	console.log(indices_array);
+
+	let replaced = element_html.replace(sentence, "<span id='HiddenSpan'>" + sentence + "</span>");
+	random_element.innerHTML = replaced;
+	document.getElementById("HiddenSpan").onclick = blogHacked;
+}
+
+let interval;
+var blogID;
+function blogHacked() {
+	let counter1 = 0;
+	let element = document.getElementById("HiddenSpan");
+	clearInterval(interval);
+	interval = setInterval(loadHack, 100);
+	element.style.color = "rgb(255, 0, 255)";
+	function loadHack() {
+		element.innerText = "Hacking in progress: " + counter1.toFixed(1) + "%";
+		counter1 = counter1 + 0.31;
+		if (counter1 > 100) {
+			clearInterval(interval);
+			element.innerText = "Hacking in progress: 100%";
+			window.ue.webbrowser.hacked_blog(blogID);
+		}
+	}
+}
+
+window.onload = function () {
+	insertHack();
+	let anxiety = Number(window.location.search.substring(1));
+	blogID = 6;
+	window.ue.webbrowser.visited_blog(blogID, anxiety);
+};
+
+</script>
+<div id="MAIN">
+<p>My family had always been involved in the occult, and as their son, they saw me as the perfect recruit. They began indoctrinating me at a very young age, teaching me the ways of their disgusting, satanic cult and encouraging me to participate in their fucked up rituals.</p>
+
+<p>At first, I didn't know what to make of it all. I was just a child, and I couldn't really comprehend the evil of what was happening. To me, it was just a game, a way to pass the time. I didn't realize how wrong it was.</p>
+
+<img src="CSS/Images/Anxiety/Blog6_1.png" class="IMAGE">
+
+<p>I was never sent to a normal school and had a chance to build relationships with normal children of my age. I was always in the cult, with the cult, for the cult. Even at times when I felt something was wrong, I was too afraid of what would happen if I stood up to them. I saw them do terrible things to people.</p>
+
+<p>So I stayed, and I took part in their rituals and ceremonies. I even began recruiting other people to join. I was deeply involved in the cult, and I didn't know anything other than the cult.</p>
+
+<p>But then, one day, the cult demanded something I simply couldn't do. They wanted me to sacrifice a human being, a young woman, in order to prove my loyalty and the summon the goddess of Suni. They gave me a knife and told me to slit her throa, but I... I just couldn't do it. Like some primitive instinct simply rejected the idea. I was fourteen years old at that time.</p>
+
+<img src="CSS/Images/Anxiety/Blog6_2.png" class="IMAGE">
+
+<p>That's when I ran away. That's when I finally broke free.</p>
+
+<p>But of course, they wouldn't simply let me go like that. I disrespected the occult, and in revenge, they wanted my blood.</p>
+
+<p>I've been on the run for weeks now, and the cult members are hot on my heels. They're determined to find me, and I know that they're angry. They want to hurt me for leaving their cult, and I'm terrified of what they'll do to me if they catch me.</p>
+
+<p>I've had to be careful, always watching my back and staying out of sight. I can't stay in one place for too long, because I know that the cult members are looking for me. They've been to every town and village in the area, showing my picture and offering a reward for my capture.</p>
+
+<img src="CSS/Images/Anxiety/Blog6_3.png" class="IMAGE">
+
+<p>I've had to sleep in fields and abandoned houses, always moving from place to place. I'm tired and scared, and I don't know how much longer I can keep running. But I have to keep going, no matter what. I can't let them catch me.</p>
+
+<p>I've heard rumors that the cult members are getting more and more violent in their search for me. They've been attacking people and causing all sorts of chaos in their hunt for me. I'm terrified of what they'll do if they find me, and I'm not sure how much longer I can keep hiding.</p>
+
+<p>But I have to keep trying. I can't let them catch me. I have to find a way to escape and start a new life, far away from the clutches of the cult.</p>
+
+</div>
+</body>
